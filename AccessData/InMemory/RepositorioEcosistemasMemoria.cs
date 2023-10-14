@@ -28,7 +28,7 @@ namespace AccessData.InMemory
 
         public EcosistemaMarino FindById(int id)
         {
-            throw new NotImplementedException();
+            return _ecosistemas.FirstOrDefault();
         }
 
         public void Remove(EcosistemaMarino t)

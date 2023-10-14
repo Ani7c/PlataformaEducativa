@@ -1,4 +1,5 @@
-﻿using EcosistemasMarinos.Entidades;
+﻿using Ecosistemas_Marinos.Entidades;
+using EcosistemasMarinos.Entidades;
 using LogicaAplicacion.InterfaceUseCase;
 using LogicaAplicacion.UseCase;
 using Microsoft.AspNetCore.Http;
@@ -10,11 +11,15 @@ namespace WebApp.Controllers
     {
         private IAddSpecies AddSpeciesUC;
         private IGetSpecies GetSpeciesUC;
+        private IGetEcosystem GetEcosystemUC;
+        private IGetEcosystemById GetEcosystemByIdUC;
 
-        public EspecieController(IAddSpecies addSpeciesUC, IGetSpecies getSpeciesUC)
+        public EspecieController(IAddSpecies addSpeciesUC, IGetSpecies getSpeciesUC, IGetEcosystem getEcosystemUC, IGetEcosystemById getEcosystemByIdUC)
         {
             AddSpeciesUC = addSpeciesUC;
             GetSpeciesUC = getSpeciesUC;
+            GetEcosystemUC = getEcosystemUC;
+            GetEcosystemByIdUC = getEcosystemByIdUC;
         }
 
 
@@ -34,16 +39,26 @@ namespace WebApp.Controllers
         public ActionResult Create(string mensaje)
         {
             ViewBag.Mensaje = mensaje;
+            ViewBag.Ecosistemas = this.GetEcosystemUC.GetEcosystems();
             return View();
         }
 
         // POST: EspecieController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EspecieMarina especie)
+        public ActionResult Create(EspecieMarina especie, List<int> ecoIds)
         {
             try
             {
+                especie._ecosistemas = new List<EcosistemaMarino>();
+                foreach (int ecoId in ecoIds)
+                {
+                    EcosistemaMarino ecosistema = GetEcosystemByIdUC.GetEcosystemById(ecoId);
+                    if (ecosistema != null)
+                    {
+                        especie._ecosistemas.Add(ecosistema);
+                    }
+                }
                 this.AddSpeciesUC.AddSpecies(especie);
                 return RedirectToAction(nameof(Index));
             }

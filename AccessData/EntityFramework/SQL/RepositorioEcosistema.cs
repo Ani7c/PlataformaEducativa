@@ -55,7 +55,7 @@ namespace AccessData.EntityFramework.SQL
 
         public EcosistemaMarino FindById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Ecosistemas.Where(e => e.IdEcosistema.Equals(id)).FirstOrDefault();
         }
 
         public void Remove(EcosistemaMarino t)

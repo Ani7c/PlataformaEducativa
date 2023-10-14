@@ -49,7 +49,7 @@
 
             <div class="form-group">
                 <label for="Pais">Pais</label>
-                <select class="form-control" asp-for="Paises" name="Pais.Codigo">
+                <select multiple="multiple" class="form-control" asp-for="Paises" name="Pais.Codigo">
                     <option disabled>-- Seleccione pais --</option>
                     @foreach (var p in ViewBag.Paises)
                     {

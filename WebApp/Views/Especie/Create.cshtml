@@ -58,6 +58,17 @@
                 <span asp-validation-for="EstadoConservacion.Nombre" class="text-danger"></span>
             </div>
 
+            <div class="form-group">
+                <label for="Ecosistemas">Posibles ecosistemas</label>
+                <select multiple="multiple" class="form-control" asp-for="_ecosistemas" name="Ecosistema.IdEcosistema">
+                    <option disabled>-- Seleccione ecosistemas --</option>
+                    @foreach (var e in ViewBag.Ecosistemas)
+                    {
+                        <option value="@e.IdEcosistema">@e.Nombre</option>
+                    }
+                </select>
+            </div>
+
 
             <div class="form-group pt-3">
                 <input type="submit" value="Create" class="btn btn-primary" />
