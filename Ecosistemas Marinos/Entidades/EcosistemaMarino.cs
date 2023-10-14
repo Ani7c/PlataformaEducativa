@@ -5,6 +5,7 @@ using Ecosistemas_Marinos.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace EcosistemasMarinos.Entidades
 {
-    [Index(nameof(Nombre), IsUnique = true)]
+  //  [Index(nameof(Nombre), IsUnique = true)]
     [PrimaryKey(nameof(IdEcosistema))]
     public class EcosistemaMarino : IValidable
     { 
@@ -22,6 +23,8 @@ namespace EcosistemasMarinos.Entidades
         [Required(ErrorMessage = "El nombre del ecosistema es requerido"), Column("Nombre del ecosistema")]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "Largo del nombre: entre 2 y 50 caracteres")]
         public string Nombre { get; set; }
+
+        [DisplayName("Ubicacion geografica")]
         public UbicacionGeografica UbicacionGeografica { get; set; }
         public double Area { get; set; }
         public string Caracteristicas { get; set; }

@@ -27,7 +27,7 @@ namespace AccessData.EntityFramework.SQL
 
         public IEnumerable<Pais> FindAll()
         {
-            return _context.Paises;
+            return _context.Pais;
         }
 
         public Pais FindById(int id)

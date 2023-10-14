@@ -18,7 +18,7 @@ namespace AccessData.EntityFramework
         public DbSet<EstadoConservacion> EstadosDeConservacion { get; set; }
         public DbSet<Usuario> usuarios { get; set; }
 
-        public DbSet<Pais> Paises { get; set; }
+        public DbSet<Pais> Pais { get; set; }
 
         #endregion
 

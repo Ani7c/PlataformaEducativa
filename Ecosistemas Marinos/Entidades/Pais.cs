@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace Ecosistemas_Marinos.Entidades
 {
@@ -15,6 +16,7 @@ namespace Ecosistemas_Marinos.Entidades
     public class Pais : IValidable
     {
 
+        [DisplayName("Nombre del pais") ]
         public string Nombre { get; set; }
         public string Codigo { get; set; }
 
