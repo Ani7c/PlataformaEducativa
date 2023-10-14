@@ -32,7 +32,7 @@ namespace EcosistemasMarinos.Entidades
         [Key, ForeignKey(nameof(EstadoConservacion))] public int IdEstadoConservacion { get; set; }
         public EstadoConservacion EstadoConservacion { get; set; }
 
-        public Pais Pais { get; set; }
+        public List<Pais> Paises { get; set; }
 
         //public List<Amenaza> _amenazas { get; set; }
 
@@ -42,15 +42,6 @@ namespace EcosistemasMarinos.Entidades
             //_amenazas = new List<Amenaza>();
         }
 
-        public EcosistemaMarino(string nombre, UbicacionGeografica ubicacionGeografica, double area, string caracteristicas, EstadoConservacion estadoConservacion, Pais pais)
-        {
-            Nombre = nombre;
-            UbicacionGeografica = ubicacionGeografica;
-            Area = area;
-            Caracteristicas = caracteristicas;
-            EstadoConservacion = estadoConservacion;
-            Pais = pais;
-        }
 
         public void EsValido()
         {

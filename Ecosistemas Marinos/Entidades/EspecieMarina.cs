@@ -32,27 +32,21 @@ namespace EcosistemasMarinos.Entidades
         public string Descripcion { get; set; }
         //public Peso rangoPeso { get; set; }
         //public Longitud rangoLongitud { get; set; }
+
+        [Key, ForeignKey(nameof(EstadoConservacion))] public int IdEstadoConservacion { get; set; }
         public EstadoConservacion EstadoConservacion { get; set; }
 
         public List<Amenaza> _amenazas { get; set; }
+
+        public List<EcosistemaMarino> _ecosistemas { get; set; }
+
         public EspecieMarina()
         {
 
         }
-        /*public EspecieMarina() 
-        {
-            _amenazas = new List<Amenaza>();
-        }*/
+   
 
-        public EspecieMarina(string nombreCientifico, string nombreVulgar, string descripcion, /*Peso rangoPeso, Longitud rangoLongitud,*/ EstadoConservacion estadoConservacion)
-        {
-            NombreCientifico = nombreCientifico;
-            NombreVulgar = nombreVulgar;
-            Descripcion = descripcion;
-            //this.rangoPeso = rangoPeso;
-            //this.rangoLongitud = rangoLongitud;
-            EstadoConservacion = estadoConservacion;
-        }
+        
 
         public void EsValido()
         {

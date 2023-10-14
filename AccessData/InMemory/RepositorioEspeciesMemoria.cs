@@ -23,7 +23,7 @@ namespace AccessData.InMemory
 
         public IEnumerable<EspecieMarina> FindAll()
         {
-            throw new NotImplementedException();
+            return _especies;
         }
 
         public EspecieMarina FindById(int id)

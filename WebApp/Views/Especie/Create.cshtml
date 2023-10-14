@@ -13,12 +13,12 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="NombreCientifico" class="control-label"></label>
+                <label asp-for="NombreCientifico" class="control-label">Nombre cientifico</label>
                 <input asp-for="NombreCientifico" class="form-control" />
                 <span asp-validation-for="NombreCientifico" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NombreVulgar" class="control-label"></label>
+                <label asp-for="NombreVulgar" class="control-label">Nombre vulgar</label>
                 <input asp-for="NombreVulgar" class="form-control" />
                 <span asp-validation-for="NombreVulgar" class="text-danger"></span>
             </div>
@@ -53,7 +53,7 @@
             </div> *@
 
             <div class="form-group">
-                <label asp-for="EstadoConservacion.Nombre" class="control-label">Estado de coonservacion</label>
+                <label asp-for="EstadoConservacion.Nombre" class="control-label">Estado de conservacion</label>
                 <input asp-for="EstadoConservacion.Nombre" class="form-control" />
                 <span asp-validation-for="EstadoConservacion.Nombre" class="text-danger"></span>
             </div>

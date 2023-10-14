@@ -28,5 +28,20 @@ namespace AccessData.EntityFramework
             optionsBuilder.UseSqlServer(@"SERVER=(localdb)\MsSqlLocalDb;DATABASE=prueba;Integrated Security=true;");
         }
         #endregion
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<EcosistemaMarino>()
+                .HasMany(em => em._especies)
+                .WithMany(ecosistema => ecosistema._ecosistemas)
+                .UsingEntity<Dictionary<string, string>>(
+                    "Ecosistema_Especie",
+                    em => em.HasOne<EspecieMarina>().WithMany().OnDelete(DeleteBehavior.Restrict),
+                    ecosistema => ecosistema.HasOne<EcosistemaMarino>().WithMany().OnDelete(DeleteBehavior.Restrict)
+                );
+        }
+
+       
+       
     }
 }

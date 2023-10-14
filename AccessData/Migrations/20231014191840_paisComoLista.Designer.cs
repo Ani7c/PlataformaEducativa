@@ -4,6 +4,7 @@ using AccessData.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AccessData.Migrations
 {
     [DbContext(typeof(EcosistemaMarinoContext))]
-    partial class EcosistemaMarinoContextModelSnapshot : ModelSnapshot
+    [Migration("20231014191840_paisComoLista")]
+    partial class paisComoLista
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,7 +96,7 @@ namespace AccessData.Migrations
                     b.Property<int?>("EcosistemaMarinoIdEcosistema")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdEstadoConservacion")
+                    b.Property<int>("EstadoConservacionId")
                         .HasColumnType("int");
 
                     b.Property<string>("NombreCientifico")
@@ -112,7 +115,7 @@ namespace AccessData.Migrations
 
                     b.HasIndex("EcosistemaMarinoIdEcosistema");
 
-                    b.HasIndex("IdEstadoConservacion");
+                    b.HasIndex("EstadoConservacionId");
 
                     b.ToTable("Especies");
                 });
@@ -231,7 +234,7 @@ namespace AccessData.Migrations
 
                     b.HasOne("EcosistemasMarinos.Entidades.EstadoConservacion", "EstadoConservacion")
                         .WithMany()
-                        .HasForeignKey("IdEstadoConservacion")
+                        .HasForeignKey("EstadoConservacionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

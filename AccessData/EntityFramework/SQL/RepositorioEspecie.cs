@@ -47,7 +47,7 @@ namespace AccessData.EntityFramework.SQL
 
         public IEnumerable<EspecieMarina> FindAll()
         {
-            throw new NotImplementedException();
+            return _context.Especies;
         }
 
         public EspecieMarina FindById(int id)

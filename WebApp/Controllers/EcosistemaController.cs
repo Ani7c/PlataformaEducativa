@@ -51,11 +51,20 @@ namespace WebApp.Controllers
         // POST: EcosistemaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EcosistemaMarino em)
+        public ActionResult Create(EcosistemaMarino em, List<string> paisesCods)
             {
             try
             {
-                em.Pais = this.ObtenerPaisPorCodigoUC.BuscarPorCodigo(em.Pais.Codigo);
+                em.Paises = new List<Pais>();
+                foreach (string paisCod in paisesCods)
+                {
+                    Pais pais = ObtenerPaisPorCodigoUC.BuscarPorCodigo(paisCod);
+                    if (pais != null)
+                    {
+                       em.Paises.Add(pais);
+                    }
+                }               
+
                 this.AddEcosystemUC.AddEcosystem(em);
                 return RedirectToAction(nameof(Index));
             }

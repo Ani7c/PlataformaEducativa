@@ -26,6 +26,7 @@ builder.Services.AddScoped<ILogin, LoginUC>();
 builder.Services.AddScoped<IGetThreats,  GetThreatsUC>();
 builder.Services.AddScoped<IGetCountries, GetCountriesUC>();
 builder.Services.AddScoped<IObtenerPaisPorCodigo, ObtenerPaisPorCodigoUC>();
+builder.Services.AddScoped<IGetSpecies, GetSpeciesUC>();
 
 var app = builder.Build();
 

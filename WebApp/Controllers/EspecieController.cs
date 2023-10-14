@@ -1,5 +1,6 @@
 ﻿using EcosistemasMarinos.Entidades;
 using LogicaAplicacion.InterfaceUseCase;
+using LogicaAplicacion.UseCase;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,14 +9,19 @@ namespace WebApp.Controllers
     public class EspecieController : Controller
     {
         private IAddSpecies AddSpeciesUC;
+        private IGetSpecies GetSpeciesUC;
 
-        public EspecieController(IAddSpecies addSpeciesUC) => AddSpeciesUC = addSpeciesUC;
+        public EspecieController(IAddSpecies addSpeciesUC, IGetSpecies getSpeciesUC)
+        {
+            AddSpeciesUC = addSpeciesUC;
+            GetSpeciesUC = getSpeciesUC;
+        }
 
 
         // GET: EspecieController
         public ActionResult Index()
         {
-            return View();
+            return View(this.GetSpeciesUC.GetSpecies());
         }
 
         // GET: EspecieController/Details/5
