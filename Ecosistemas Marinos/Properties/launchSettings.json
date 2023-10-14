@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "EcosistemasMarinos": {
+      "commandName": "Project"
+    },
+    "Perfil 1": {
+      "commandName": "Executable"
+    }
+  }
+}

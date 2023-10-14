@@ -1,0 +1,75 @@
+﻿@model EcosistemasMarinos.Entidades.EspecieMarina
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>EspecieMarina</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NombreCientifico" class="control-label"></label>
+                <input asp-for="NombreCientifico" class="form-control" />
+                <span asp-validation-for="NombreCientifico" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreVulgar" class="control-label"></label>
+                <input asp-for="NombreVulgar" class="form-control" />
+                <span asp-validation-for="NombreVulgar" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+
+            @* <div class="form-group">
+                <label asp-for="rangoPeso.PesoMin" class="control-label"></label>
+                <input asp-for="rangoPeso.PesoMin" class="form-control" />
+                <span asp-validation-for="rangoPeso.PesoMin" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="rangoPeso.PesoMax" class="control-label"></label>
+                <input asp-for="rangoPeso.PesoMax" class="form-control" />
+                <span asp-validation-for="rangoPeso.PesoMax" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="rangoLongitud.LongitudMin" class="control-label"></label>
+                <input asp-for="rangoLongitud.LongitudMin" class="form-control" />
+                <span asp-validation-for="rangoLongitud.LongitudMin" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="rangoLongitud.LongitudMax" class="control-label"></label>
+                <input asp-for="rangoLongitud.LongitudMax" class="form-control" />
+                <span asp-validation-for="rangoLongitud.LongitudMax" class="text-danger"></span>
+            </div> *@
+
+            <div class="form-group">
+                <label asp-for="EstadoConservacion.Nombre" class="control-label">Estado de coonservacion</label>
+                <input asp-for="EstadoConservacion.Nombre" class="form-control" />
+                <span asp-validation-for="EstadoConservacion.Nombre" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group pt-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

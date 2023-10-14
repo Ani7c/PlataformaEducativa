@@ -1,0 +1,104 @@
+﻿@using EcosistemasMarinos.Entidades;
+@model EcosistemasMarinos.Entidades.EcosistemaMarino
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>EcosistemaMarino</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @* nombre del ecosistema *@
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+            @* Area en metros cuadrados *@
+            <div class="form-group">
+                <label asp-for="Area" class="control-label">Area en metros cuadrados</label>
+                <input asp-for="Area" class="form-control" />
+                <span asp-validation-for="Area" class="text-danger"></span>
+            </div>
+
+            @* Caracteristicas del ecosistema *@
+            <div class="form-group">
+                <label asp-for="Caracteristicas" class="control-label"></label>
+                <input asp-for="Caracteristicas" class="form-control" />
+                <span asp-validation-for="Caracteristicas" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="Pais">Pais:</label>
+
+                <select asp-for="Pais" asp-items="@(new SelectList(ViewBag.Paises,"Nombre","CodAlpha"))" class="control-label"></select>
+            </div>
+
+
+            @* latitud *@
+            <div class="form-group">
+                <label asp-for="UbicacionGeografica.Latitud" class="control-label"></label>
+                <input asp-for="UbicacionGeografica.Latitud" class="form-control" />
+                <span asp-validation-for="UbicacionGeografica.Latitud" class="text-danger"></span>
+            </div>
+
+            @* longitud *@
+            <div class="form-group">
+                <label asp-for="UbicacionGeografica.Longitud" class="control-label"></label>
+                <input asp-for="UbicacionGeografica.Longitud" class="form-control" />
+                <span asp-validation-for="UbicacionGeografica.Longitud" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EstadoConservacion.Nombre" class="control-label">Estado de conservacion (ej: Vulnerable, En peligro, Extinta)</label>
+                <input asp-for="EstadoConservacion.Nombre" class="form-control" />
+                <span asp-validation-for="EstadoConservacion.Nombre" class="text-danger"></span>
+            </div>
+
+
+
+            @* <div class="form-group">
+                <label for="_amenazas">Amenazas:</label>
+                 <select multiple="multiple" class="form-control" id="_amenazas.Id" name="_amenazas.Descripcion">
+                    @foreach (var amenaza in ViewBag.Amenazas)
+                    {
+                        <option value="@amenaza.Descripcion">@amenaza.Descripcion</option>
+                    }
+                </select> 
+                
+                <select asp-for="_amenazas" asp-items="@(new SelectList(ViewBag.Amenazas,"Id","Descripcion"))" multiple class="control-label"></select>
+            </div>    *@        
+            
+
+            
+
+            <div class="form-group pt-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+@if (!String.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div class="alert alert-danger">
+        @ViewBag.Mensaje
+    </div>
+}
