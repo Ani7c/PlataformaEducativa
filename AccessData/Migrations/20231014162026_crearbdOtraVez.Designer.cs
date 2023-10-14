@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AccessData.Migrations
 {
     [DbContext(typeof(EcosistemaMarinoContext))]
-    [Migration("20231014034955_14-10v6")]
-    partial class _1410v6
+    [Migration("20231014162026_crearbdOtraVez")]
+    partial class crearbdOtraVez
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,9 +80,6 @@ namespace AccessData.Migrations
                     b.HasKey("IdEcosistema");
 
                     b.HasIndex("IdEstadoConservacion");
-
-                    b.HasIndex("Nombre")
-                        .IsUnique();
 
                     b.HasIndex("PaisCodigo");
 
@@ -159,7 +156,7 @@ namespace AccessData.Migrations
 
                     b.HasKey("Codigo");
 
-                    b.ToTable("Paises");
+                    b.ToTable("Pais");
                 });
 
             modelBuilder.Entity("Ecosistemas_Marinos.Entidades.Usuario", b =>
@@ -172,7 +169,7 @@ namespace AccessData.Migrations
 
                     b.Property<string>("Alias")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Contrasenia")
                         .IsRequired()
@@ -185,9 +182,6 @@ namespace AccessData.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Alias")
-                        .IsUnique();
 
                     b.ToTable("usuarios");
                 });

@@ -1,6 +1,7 @@
 ﻿using Ecosistemas_Marinos.Entidades;
 using Ecosistemas_Marinos.Interfaces_Repositorios;
 using EcosistemasMarinos.Entidades;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,11 @@ namespace AccessData.InMemory
         public void Update(Pais t)
         {
             throw new NotImplementedException();
+        }
+
+        public Pais BuscarPorCodigo(string codigoAlfa)
+        {
+            return _paises.FirstOrDefault();
         }
     }
 }

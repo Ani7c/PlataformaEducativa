@@ -35,11 +35,39 @@
                 <span asp-validation-for="Caracteristicas" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+            @* <div class="form-group">
                 <label for="Pais">Pais:</label>
 
-                <select asp-for="Pais" asp-items="@(new SelectList(ViewBag.Paises,"Nombre","CodAlpha"))" class="control-label"></select>
+                <select asp-for="Pais" asp-items="@(new SelectList(ViewBag.Paises,"Nombre","Codigo"))" class="control-label"></select>
+            </div> *@
+
+
+            @* <div class="form-group">
+                <label asp-for="Pais.Codigo" class="control-label">Pais:</label>
+                <select asp-for="Pais.Codigo" asp-items="@(new SelectList(ViewBag.Paises, "Codigo", "Nombre"))" class="form-control"></select>
+            </div> *@
+
+            <div class="form-group">
+                <label for="Pais">Pais</label>
+                <select class="form-control" asp-for="Pais.Nombre" name="Pais.Codigo">
+                    <option disabled>-- Seleccione pais --</option>
+                    @foreach (var p in ViewBag.Paises)
+                    {
+                        <option value="@p.Codigo">@p.Nombre</option>
+                    }
+                </select>
             </div>
+
+            <div class="form-group">
+                <label for="Amenazas">Amenazas:</label>
+                <select multiple="multiple" class="form-control" id="Amenazas.Id" name="Amenazas.Descripcion">
+                    @foreach (var amenaza in ViewBag.Amenazas)
+                    {
+                        <option value="@amenaza.Descripcion">@amenaza.Descripcion</option>
+                    }
+                </select>
+            </div>
+
 
 
             @* latitud *@

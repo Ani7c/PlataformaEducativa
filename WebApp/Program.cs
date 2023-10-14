@@ -14,7 +14,8 @@ builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 builder.Services.AddScoped<IRepositorioEcosistema, RepositorioEcosistema>();
 builder.Services.AddScoped<IRepositorioEspecie, RepositorioEspecie>();
 builder.Services.AddScoped<IRepositorioAmenaza, RepositorioAmenaza>();
-builder.Services.AddScoped<IRepositorioPais, RepositorioPais>();        
+builder.Services.AddScoped<IRepositorioPais, RepositorioPais>();     
+
 
 //inicializacion de casos de uso
 builder.Services.AddScoped<IAddUser, AddUserUC>();
@@ -24,6 +25,7 @@ builder.Services.AddScoped<IGetEcosystem, GetEcosystemsUC>();
 builder.Services.AddScoped<ILogin, LoginUC>();
 builder.Services.AddScoped<IGetThreats,  GetThreatsUC>();
 builder.Services.AddScoped<IGetCountries, GetCountriesUC>();
+builder.Services.AddScoped<IObtenerPaisPorCodigo, ObtenerPaisPorCodigoUC>();
 
 var app = builder.Build();
 

@@ -27,7 +27,7 @@ namespace AccessData.EntityFramework.SQL
 
         public IEnumerable<Pais> FindAll()
         {
-            return _context.Paises;
+            return _context.Pais;
         }
 
         public Pais FindById(int id)
@@ -44,5 +44,25 @@ namespace AccessData.EntityFramework.SQL
         {
             throw new NotImplementedException();
         }
+
+        public Pais BuscarPorCodigo(string codigoAlfa)
+        {
+            return _context.Pais.Where(p => p.Codigo.Equals(codigoAlfa)).FirstOrDefault();
+            /*
+            // Buscar el país en la lista por código alfa.
+            Pais paisEncontrado = Pais.FirstOrDefault(p => p.CodigoAlfa.Equals(codigoAlfa, StringComparison.OrdinalIgnoreCase));
+
+            if (paisEncontrado != null)
+            {
+                // Realizar alguna acción con el país encontrado, como mostrarlo en la vista.
+                return View(paisEncontrado);
+            }
+            else
+            {
+                // Manejar el caso en el que el país no se encontró.
+                return View("PaisNoEncontrado"); // Puedes crear una vista específica para este caso.
+            }*/
+        }
     }
 }
+

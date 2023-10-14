@@ -13,14 +13,18 @@ namespace WebApp.Controllers
         private IGetEcosystem GetEcosystemUC;
         private IGetThreats GetThreatsUC;
         private IGetCountries GetCountriesUC;
+        private IObtenerPaisPorCodigo ObtenerPaisPorCodigoUC;
 
-        public EcosistemaController(IAddEcosystem addEcosystemUC, IGetEcosystem getEcosystemUC, IGetThreats getThreatsUC, IGetCountries getCountriesUC)
+        public EcosistemaController(IAddEcosystem addEcosystemUC, IGetEcosystem getEcosystemUC, IGetThreats getThreatsUC, IGetCountries getCountriesUC, IObtenerPaisPorCodigo obtenerPaisPorCodigoUC)
         {
             AddEcosystemUC = addEcosystemUC;
             GetEcosystemUC = getEcosystemUC;
             GetThreatsUC = getThreatsUC;
             GetCountriesUC = getCountriesUC;
+            ObtenerPaisPorCodigoUC = obtenerPaisPorCodigoUC;
         }
+
+
 
         // GET: EcosistemaController
         public ActionResult Index(string mensaje)
@@ -39,8 +43,8 @@ namespace WebApp.Controllers
         public ActionResult Create(string mensaje)
         {
             ViewBag.Mensaje = mensaje;
-            //ViewBag.Amenazas = this.GetThreatsUC.GetAmenazas();
-            //ViewBag.Pais = this.GetCountriesUC.GetCountries();
+            ViewBag.Amenazas = this.GetThreatsUC.GetAmenazas();
+            ViewBag.Paises = this.GetCountriesUC.GetCountries();
             return View(); 
         }
 
@@ -48,9 +52,10 @@ namespace WebApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(EcosistemaMarino em)
-        {
+            {
             try
             {
+                em.Pais = this.ObtenerPaisPorCodigoUC.BuscarPorCodigo(em.Pais.Codigo);
                 this.AddEcosystemUC.AddEcosystem(em);
                 return RedirectToAction(nameof(Index));
             }

@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ecosistemas_Marinos.Interfaces_Repositorios
+namespace LogicaAplicacion.InterfaceUseCase
 {
-    public interface IRepositorioPais : IRepositorio<Pais>
+    public interface IObtenerPaisPorCodigo
     {
         public Pais BuscarPorCodigo(string codigoAlfa);
-    }   
+    }
 }
