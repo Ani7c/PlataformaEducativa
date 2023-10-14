@@ -5,7 +5,7 @@
 namespace AccessData.Migrations
 {
     /// <inheritdoc />
-    public partial class initv4pcana : Migration
+    public partial class _1410v6 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

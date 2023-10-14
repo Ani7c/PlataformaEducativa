@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Ecosistemas_Marinos.Entidades
 {
-    [PrimaryKey(nameof(CodAlpha))]
+    [PrimaryKey(nameof(Codigo))]
 
     public class Pais : IValidable
     {

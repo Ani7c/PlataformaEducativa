@@ -24,18 +24,15 @@ namespace AccessData.Migrations
 
             modelBuilder.Entity("EcosistemasMarinos.Entidades.Amenaza", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdAmenaza")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdAmenaza"));
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("EcosistemaMarinoId")
-                        .HasColumnType("int");
 
                     b.Property<int?>("EspecieMarinaId")
                         .HasColumnType("int");
@@ -43,9 +40,7 @@ namespace AccessData.Migrations
                     b.Property<int>("Peligrosidad")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("EcosistemaMarinoId");
+                    b.HasKey("IdAmenaza");
 
                     b.HasIndex("EspecieMarinaId");
 
@@ -54,11 +49,11 @@ namespace AccessData.Migrations
 
             modelBuilder.Entity("EcosistemasMarinos.Entidades.EcosistemaMarino", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdEcosistema")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEcosistema"));
 
                     b.Property<double>("Area")
                         .HasColumnType("float");
@@ -67,26 +62,26 @@ namespace AccessData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("IdEstadoConservacion")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("Nombre del ecosistema");
 
-                    b.Property<string>("PaisCodAlpha")
+                    b.Property<string>("PaisCodigo")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("id")
-                        .HasColumnType("int");
+                    b.HasKey("IdEcosistema");
 
-                    b.HasKey("Id");
+                    b.HasIndex("IdEstadoConservacion");
 
                     b.HasIndex("Nombre")
                         .IsUnique();
 
-                    b.HasIndex("PaisCodAlpha");
-
-                    b.HasIndex("id");
+                    b.HasIndex("PaisCodigo");
 
                     b.ToTable("Ecosistemas");
                 });
@@ -103,7 +98,7 @@ namespace AccessData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("EcosistemaMarinoId")
+                    b.Property<int?>("EcosistemaMarinoIdEcosistema")
                         .HasColumnType("int");
 
                     b.Property<int>("EstadoConservacionId")
@@ -123,15 +118,9 @@ namespace AccessData.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EcosistemaMarinoId");
+                    b.HasIndex("EcosistemaMarinoIdEcosistema");
 
                     b.HasIndex("EstadoConservacionId");
-
-                    b.HasIndex("NombreCientifico")
-                        .IsUnique();
-
-                    b.HasIndex("NombreVulgar")
-                        .IsUnique();
 
                     b.ToTable("Especies");
                 });
@@ -158,14 +147,14 @@ namespace AccessData.Migrations
 
             modelBuilder.Entity("Ecosistemas_Marinos.Entidades.Pais", b =>
                 {
-                    b.Property<string>("CodAlpha")
+                    b.Property<string>("Codigo")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CodAlpha");
+                    b.HasKey("Codigo");
 
                     b.ToTable("Paises");
                 });
@@ -202,10 +191,6 @@ namespace AccessData.Migrations
 
             modelBuilder.Entity("EcosistemasMarinos.Entidades.Amenaza", b =>
                 {
-                    b.HasOne("EcosistemasMarinos.Entidades.EcosistemaMarino", null)
-                        .WithMany("_amenazas")
-                        .HasForeignKey("EcosistemaMarinoId");
-
                     b.HasOne("EcosistemasMarinos.Entidades.EspecieMarina", null)
                         .WithMany("_amenazas")
                         .HasForeignKey("EspecieMarinaId");
@@ -213,19 +198,19 @@ namespace AccessData.Migrations
 
             modelBuilder.Entity("EcosistemasMarinos.Entidades.EcosistemaMarino", b =>
                 {
-                    b.HasOne("Ecosistemas_Marinos.Entidades.Pais", "Pais")
-                        .WithMany()
-                        .HasForeignKey("PaisCodAlpha");
-
                     b.HasOne("EcosistemasMarinos.Entidades.EstadoConservacion", "EstadoConservacion")
                         .WithMany()
-                        .HasForeignKey("id")
+                        .HasForeignKey("IdEstadoConservacion")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Ecosistemas_Marinos.Entidades.Pais", "Pais")
+                        .WithMany()
+                        .HasForeignKey("PaisCodigo");
+
                     b.OwnsOne("Ecosistemas_Marinos.ValueObjects.UbicacionGeografica", "UbicacionGeografica", b1 =>
                         {
-                            b1.Property<int>("EcosistemaMarinoId")
+                            b1.Property<int>("EcosistemaMarinoIdEcosistema")
                                 .HasColumnType("int");
 
                             b1.Property<double>("Latitud")
@@ -234,12 +219,12 @@ namespace AccessData.Migrations
                             b1.Property<double>("Longitud")
                                 .HasColumnType("float");
 
-                            b1.HasKey("EcosistemaMarinoId");
+                            b1.HasKey("EcosistemaMarinoIdEcosistema");
 
                             b1.ToTable("Ecosistemas");
 
                             b1.WithOwner()
-                                .HasForeignKey("EcosistemaMarinoId");
+                                .HasForeignKey("EcosistemaMarinoIdEcosistema");
                         });
 
                     b.Navigation("EstadoConservacion");
@@ -254,7 +239,7 @@ namespace AccessData.Migrations
                 {
                     b.HasOne("EcosistemasMarinos.Entidades.EcosistemaMarino", null)
                         .WithMany("_especies")
-                        .HasForeignKey("EcosistemaMarinoId");
+                        .HasForeignKey("EcosistemaMarinoIdEcosistema");
 
                     b.HasOne("EcosistemasMarinos.Entidades.EstadoConservacion", "EstadoConservacion")
                         .WithMany()
@@ -262,57 +247,11 @@ namespace AccessData.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Ecosistemas_Marinos.ValueObjects.Longitud", "rangoLongitud", b1 =>
-                        {
-                            b1.Property<int>("EspecieMarinaId")
-                                .HasColumnType("int");
-
-                            b1.Property<double>("LongitudMax")
-                                .HasColumnType("float");
-
-                            b1.Property<double>("LongitudMin")
-                                .HasColumnType("float");
-
-                            b1.HasKey("EspecieMarinaId");
-
-                            b1.ToTable("Especies");
-
-                            b1.WithOwner()
-                                .HasForeignKey("EspecieMarinaId");
-                        });
-
-                    b.OwnsOne("Ecosistemas_Marinos.ValueObjects.Peso", "rangoPeso", b1 =>
-                        {
-                            b1.Property<int>("EspecieMarinaId")
-                                .HasColumnType("int");
-
-                            b1.Property<double>("PesoMax")
-                                .HasColumnType("float");
-
-                            b1.Property<double>("PesoMin")
-                                .HasColumnType("float");
-
-                            b1.HasKey("EspecieMarinaId");
-
-                            b1.ToTable("Especies");
-
-                            b1.WithOwner()
-                                .HasForeignKey("EspecieMarinaId");
-                        });
-
                     b.Navigation("EstadoConservacion");
-
-                    b.Navigation("rangoLongitud")
-                        .IsRequired();
-
-                    b.Navigation("rangoPeso")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("EcosistemasMarinos.Entidades.EcosistemaMarino", b =>
                 {
-                    b.Navigation("_amenazas");
-
                     b.Navigation("_especies");
                 });
 

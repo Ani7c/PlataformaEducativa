@@ -9,10 +9,7 @@ namespace WebApp.Controllers
     {
         private IAddSpecies AddSpeciesUC;
 
-        public EspecieController(IAddSpecies AddSpeciesUC)
-        {
-            AddSpeciesUC = AddSpeciesUC;
-        }
+        public EspecieController(IAddSpecies addSpeciesUC) => AddSpeciesUC = addSpeciesUC;
 
 
         // GET: EspecieController

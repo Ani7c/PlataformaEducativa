@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace EcosistemasMarinos.Entidades
 {
-    [PrimaryKey(nameof(Id))]
+    [PrimaryKey(nameof(IdAmenaza))]
     public class Amenaza: IValidable
     {
        
-        public int Id;
+        public int IdAmenaza;
         public string Descripcion { get; set; }
 
         //[Range ]

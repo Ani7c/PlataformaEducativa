@@ -40,7 +40,7 @@ namespace WebApp.Controllers
         {
             ViewBag.Mensaje = mensaje;
             //ViewBag.Amenazas = this.GetThreatsUC.GetAmenazas();
-            ViewBag.Paises = this.GetCountriesUC.GetCountries();
+            ViewBag.Pais = this.GetCountriesUC.GetCountries();
             return View(); 
         }
 
