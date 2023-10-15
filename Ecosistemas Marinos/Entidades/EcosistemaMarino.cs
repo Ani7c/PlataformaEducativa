@@ -37,6 +37,8 @@ namespace EcosistemasMarinos.Entidades
         //public List<Amenaza> _amenazas { get; set; }
 
         public List<EspecieMarina> _especies { get; set; }
+
+        string ImgEcosistema { get; set; }
         public EcosistemaMarino() 
         {
             //_amenazas = new List<Amenaza>();
