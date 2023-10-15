@@ -53,7 +53,7 @@ namespace WebApp.Controllers
         public ActionResult Create(string mensaje)
         {
             ViewBag.Mensaje = mensaje;
-            ViewBag.Amenazas = this.GetThreatsUC.GetAmenazas();
+            //ViewBag.Amenazas = this.GetThreatsUC.GetAmenazas();
             ViewBag.Paises = this.GetCountriesUC.GetCountries();
             return View(); 
         }
@@ -61,26 +61,21 @@ namespace WebApp.Controllers
         // POST: EcosistemaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EcosistemaMarino em, List<string> paisesCods, IFormFile imagen)
+        public ActionResult Create(EcosistemaMarino em/* , string paisCod IFormFile imagen*/)
             {
             try
             {
-                if (imagen == null || !ModelState.IsValid) return View();
+                /*if (imagen == null || !ModelState.IsValid) return View();
 
                 if (GuardarImagen(imagen, em))
-                {
+                {*/
 
-                    em.Paises = new List<Pais>();
-                    foreach (string paisCod in paisesCods)
-                    {
-                        Pais pais = ObtenerPaisPorCodigoUC.BuscarPorCodigo(paisCod);
-                        if (pais != null)
-                        {
-                            em.Paises.Add(pais);
-                        }
-                    }
+                Pais pais = ObtenerPaisPorCodigoUC.BuscarPorCodigo(em.codPais);
+
+                 em.Pais = pais;
+           
                     this.AddEcosystemUC.AddEcosystem(em);
-                }
+                /*}*/
               
                 return RedirectToAction(nameof(Index));
             }
@@ -114,7 +109,7 @@ namespace WebApp.Controllers
                     imagen.CopyTo(f);
                 }
                 //GUARDAR EL NOMBRE DE LA IMAGEN SUBIDA EN EL OBJETO
-                p.NombreArchivoFoto = nombreImagen;
+                //p.NombreArchivoFoto = nombreImagen;
                 return true;
             }
             catch (Exception ex)

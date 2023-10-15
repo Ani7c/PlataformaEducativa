@@ -29,10 +29,11 @@ namespace EcosistemasMarinos.Entidades
         public double Area { get; set; }
         public string Caracteristicas { get; set; }
 
-        [Key, ForeignKey(nameof(EstadoConservacion))] public int IdEstadoConservacion { get; set; }
+        [ForeignKey(nameof(EstadoConservacion))] public int IdEstadoConservacion { get; set; }
         public EstadoConservacion EstadoConservacion { get; set; }
 
-        public List<Pais> Paises { get; set; }
+        [ForeignKey(nameof(Pais))] public string codPais { get; set; }
+        public Pais Pais { get; set; }
 
         //public List<Amenaza> _amenazas { get; set; }
 

@@ -36,7 +36,7 @@ namespace EcosistemasMarinos.Entidades
         [Key, ForeignKey(nameof(EstadoConservacion))] public int IdEstadoConservacion { get; set; }
         public EstadoConservacion EstadoConservacion { get; set; }
 
-        public List<Amenaza> _amenazas { get; set; }
+        //public List<Amenaza> _amenazas { get; set; }
 
         public List<EcosistemaMarino> _ecosistemas { get; set; }
 

@@ -4,6 +4,7 @@ using AccessData.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AccessData.Migrations
 {
     [DbContext(typeof(EcosistemaMarinoContext))]
-    partial class EcosistemaMarinoContextModelSnapshot : ModelSnapshot
+    [Migration("20231015175630_15-10")]
+    partial class _1510
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,10 +52,15 @@ namespace AccessData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("EspecieMarinaId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Peligrosidad")
                         .HasColumnType("int");
 
                     b.HasKey("IdAmenaza");
+
+                    b.HasIndex("EspecieMarinaId");
 
                     b.ToTable("Amenazas");
                 });
@@ -81,15 +89,9 @@ namespace AccessData.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("Nombre del ecosistema");
 
-                    b.Property<string>("codPais")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("IdEcosistema");
 
                     b.HasIndex("IdEstadoConservacion");
-
-                    b.HasIndex("codPais");
 
                     b.ToTable("Ecosistemas");
                 });
@@ -153,11 +155,16 @@ namespace AccessData.Migrations
                     b.Property<string>("Codigo")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int?>("EcosistemaMarinoIdEcosistema")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Codigo");
+
+                    b.HasIndex("EcosistemaMarinoIdEcosistema");
 
                     b.ToTable("Pais");
                 });
@@ -204,17 +211,18 @@ namespace AccessData.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("EcosistemasMarinos.Entidades.Amenaza", b =>
+                {
+                    b.HasOne("EcosistemasMarinos.Entidades.EspecieMarina", null)
+                        .WithMany("_amenazas")
+                        .HasForeignKey("EspecieMarinaId");
+                });
+
             modelBuilder.Entity("EcosistemasMarinos.Entidades.EcosistemaMarino", b =>
                 {
                     b.HasOne("EcosistemasMarinos.Entidades.EstadoConservacion", "EstadoConservacion")
                         .WithMany()
                         .HasForeignKey("IdEstadoConservacion")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Ecosistemas_Marinos.Entidades.Pais", "Pais")
-                        .WithMany()
-                        .HasForeignKey("codPais")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -239,8 +247,6 @@ namespace AccessData.Migrations
 
                     b.Navigation("EstadoConservacion");
 
-                    b.Navigation("Pais");
-
                     b.Navigation("UbicacionGeografica")
                         .IsRequired();
                 });
@@ -254,6 +260,23 @@ namespace AccessData.Migrations
                         .IsRequired();
 
                     b.Navigation("EstadoConservacion");
+                });
+
+            modelBuilder.Entity("Ecosistemas_Marinos.Entidades.Pais", b =>
+                {
+                    b.HasOne("EcosistemasMarinos.Entidades.EcosistemaMarino", null)
+                        .WithMany("Paises")
+                        .HasForeignKey("EcosistemaMarinoIdEcosistema");
+                });
+
+            modelBuilder.Entity("EcosistemasMarinos.Entidades.EcosistemaMarino", b =>
+                {
+                    b.Navigation("Paises");
+                });
+
+            modelBuilder.Entity("EcosistemasMarinos.Entidades.EspecieMarina", b =>
+                {
+                    b.Navigation("_amenazas");
                 });
 #pragma warning restore 612, 618
         }
