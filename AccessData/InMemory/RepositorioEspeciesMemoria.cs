@@ -58,5 +58,10 @@ namespace AccessData.InMemory
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<EcosistemaMarino> GetPosiblesEcosistemas()
+        {
+            return new List<EcosistemaMarino>();
+        }
     }
 }

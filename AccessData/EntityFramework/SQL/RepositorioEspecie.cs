@@ -107,7 +107,8 @@ namespace AccessData.EntityFramework.SQL
 
         public IEnumerable<EcosistemaMarino> GetPosiblesEcosistemas()
         {
-            return (IEnumerable<EcosistemaMarino>)_context.Especies.Include(e => e._ecosistemas).ToList();
+            var ecosistemasDeEspecies = _context.Especies.SelectMany(especie => especie._ecosistemas);
+            return ecosistemasDeEspecies.ToList();
         }
     }
     

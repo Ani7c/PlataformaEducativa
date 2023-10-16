@@ -2,15 +2,15 @@
 
 <h1>Asociar especie con ecosistema</h1>
 
-
+ <form asp-action="Create">
 <h3>Elija una especie</h3>
 <div class="form-group">
     <label for="EspecieMarina">Especie</label>
-    <select class="form-control" asp-for="codEspecie">
+    <select class="form-control" asp-for="Id">
         <option disabled>-- Seleccione una especie --</option>
         @foreach (var es in ViewBag.Especies)
         {
-            <option value="@e.Id">@e.NombreVulgar</option>
+            <option value="@es.Id">@es.NombreVulgar</option>
         }
     </select>
 </div>
@@ -18,7 +18,7 @@
 <h3>Elija un ecosistema</h3>
 <div class="form-group">
     <label for="EcosistemaMarino">Ecosistema</label>
-    <select class="form-control" asp-for="codEco">
+    <select class="form-control" asp-for="Id">
         <option disabled>-- Seleccione un ecosistema --</option>
         @foreach (var e in ViewBag.Ecosistemas)
         {
@@ -26,3 +26,9 @@
         }
     </select>
 </div>
+
+<div class="form-group pt-3">
+    <input type="submit" value="Create" class="btn btn-primary" />
+</div>
+
+</form>
