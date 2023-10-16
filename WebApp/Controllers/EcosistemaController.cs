@@ -21,10 +21,12 @@ namespace WebApp.Controllers
         private IGetThreats GetThreatsUC;
         private IGetCountries GetCountriesUC;
         private IObtenerPaisPorCodigo ObtenerPaisPorCodigoUC;
+        private IGetEcosystemById GetEcosystemByIdUC;
+        private IRemoveById RemoveByIdUC;
 
         public EcosistemaController(IAddEcosystem addEcosystemUC, IGetEcosystem getEcosystemUC, 
             IGetThreats getThreatsUC, IGetCountries getCountriesUC, IObtenerPaisPorCodigo obtenerPaisPorCodigoUC, 
-            IWebHostEnvironment environment)
+            IWebHostEnvironment environment, IGetEcosystemById getEcosystemByIdUC, IRemoveById removeByIdUC)
         {
             AddEcosystemUC = addEcosystemUC;
             GetEcosystemUC = getEcosystemUC;
@@ -32,6 +34,8 @@ namespace WebApp.Controllers
             GetCountriesUC = getCountriesUC;
             ObtenerPaisPorCodigoUC = obtenerPaisPorCodigoUC;
             _environment = environment;
+            GetEcosystemByIdUC = getEcosystemByIdUC;
+            RemoveByIdUC = removeByIdUC;
         }
 
 
@@ -61,7 +65,7 @@ namespace WebApp.Controllers
         // POST: EcosistemaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EcosistemaMarino em/* , string paisCod IFormFile imagen*/)
+        public ActionResult Create(EcosistemaMarino em /*,IFormFile imagen*/)
             {
             try
             {
@@ -69,12 +73,10 @@ namespace WebApp.Controllers
 
                 if (GuardarImagen(imagen, em))
                 {*/
-
                 Pais pais = ObtenerPaisPorCodigoUC.BuscarPorCodigo(em.codPais);
 
-                 em.Pais = pais;
-           
-                    this.AddEcosystemUC.AddEcosystem(em);
+                em.Pais = pais;
+                this.AddEcosystemUC.AddEcosystem(em);
                 /*}*/
               
                 return RedirectToAction(nameof(Index));
@@ -143,7 +145,14 @@ namespace WebApp.Controllers
         // GET: EcosistemaController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            try
+            {
+                return View(this.GetEcosystemByIdUC.GetEcosystemById(id));
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction(nameof(Index), new { mensaje = e.Message });
+            }
         }
 
         // POST: EcosistemaController/Delete/5
@@ -153,6 +162,7 @@ namespace WebApp.Controllers
         {
             try
             {
+                this.RemoveByIdUC.RemoveById(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

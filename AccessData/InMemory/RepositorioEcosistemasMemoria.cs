@@ -36,6 +36,11 @@ namespace AccessData.InMemory
             throw new NotImplementedException();
         }
 
+        public void Remove(int id)
+        {
+            _ecosistemas.RemoveAt(id);
+        }
+
         public void Update(EcosistemaMarino t)
         {
             throw new NotImplementedException();

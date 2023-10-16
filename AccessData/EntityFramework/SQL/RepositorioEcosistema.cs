@@ -21,10 +21,13 @@ namespace AccessData.EntityFramework.SQL
         }
 
 
-        void IRepositorio<EcosistemaMarino>.Add(EcosistemaMarino e)
+        public void Add(EcosistemaMarino e)
         {
             try
             {
+                
+                _context.Entry(e.Pais).State = EntityState.Unchanged;
+             
                 e.EsValido();
                 _context.Ecosistemas.Add(e);
                 _context.SaveChanges();
@@ -64,6 +67,19 @@ namespace AccessData.EntityFramework.SQL
         }
 
         public void Update(EcosistemaMarino t)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRepositorio<EcosistemaMarino>.Remove(int id)
+        {
+            EcosistemaMarino em = new EcosistemaMarino();
+            em.IdEcosistema = id;
+            this._context.Ecosistemas.Remove(em);
+            this._context.SaveChanges();
+        }
+
+        public void AsociarEspecieConEcosistema(EcosistemaMarino ecosistema, EspecieMarina especie)
         {
             throw new NotImplementedException();
         }

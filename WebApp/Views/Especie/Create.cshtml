@@ -60,7 +60,7 @@
 
             <div class="form-group">
                 <label for="Ecosistemas">Posibles ecosistemas</label>
-                <select multiple="multiple" class="form-control" asp-for="_ecosistemas" name="Ecosistema.IdEcosistema">
+                <select multiple="multiple" class="form-control" asp-for="_ecosistemas" name="ecoIds">
                     <option disabled>-- Seleccione ecosistemas --</option>
                     @foreach (var e in ViewBag.Ecosistemas)
                     {

@@ -69,5 +69,10 @@ namespace AccessData.EntityFramework.SQL
         {
             throw new NotImplementedException();
         }
+
+        public void Remove(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

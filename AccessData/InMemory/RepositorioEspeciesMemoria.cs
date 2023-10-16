@@ -36,6 +36,11 @@ namespace AccessData.InMemory
             throw new NotImplementedException();
         }
 
+        public void Remove(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(EspecieMarina t)
         {
             throw new NotImplementedException();

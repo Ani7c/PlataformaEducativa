@@ -28,6 +28,7 @@ builder.Services.AddScoped<IGetCountries, GetCountriesUC>();
 builder.Services.AddScoped<IObtenerPaisPorCodigo, ObtenerPaisPorCodigoUC>();
 builder.Services.AddScoped<IGetSpecies, GetSpeciesUC>();
 builder.Services.AddScoped<IGetEcosystemById, GetEcosystemByIdUC>();
+builder.Services.AddScoped<IRemoveById, RemoveByIdUC>();
 
 var app = builder.Build();
 

@@ -63,6 +63,11 @@ namespace AccessData.EntityFramework.SQL
                 return View("PaisNoEncontrado"); // Puedes crear una vista específica para este caso.
             }*/
         }
+
+        public void Remove(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

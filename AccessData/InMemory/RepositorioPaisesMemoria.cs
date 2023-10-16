@@ -47,5 +47,10 @@ namespace AccessData.InMemory
         {
             return _paises.FirstOrDefault();
         }
+
+        public void Remove(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

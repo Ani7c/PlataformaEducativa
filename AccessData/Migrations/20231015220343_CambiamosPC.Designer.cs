@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AccessData.Migrations
 {
     [DbContext(typeof(EcosistemaMarinoContext))]
-    [Migration("20231015203048_agregarIDpaisaEcosistema2")]
-    partial class agregarIDpaisaEcosistema2
+    [Migration("20231015220343_CambiamosPC")]
+    partial class CambiamosPC
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,15 +52,10 @@ namespace AccessData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("EspecieMarinaId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Peligrosidad")
                         .HasColumnType("int");
 
                     b.HasKey("IdAmenaza");
-
-                    b.HasIndex("EspecieMarinaId");
 
                     b.ToTable("Amenazas");
                 });
@@ -212,13 +207,6 @@ namespace AccessData.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EcosistemasMarinos.Entidades.Amenaza", b =>
-                {
-                    b.HasOne("EcosistemasMarinos.Entidades.EspecieMarina", null)
-                        .WithMany("_amenazas")
-                        .HasForeignKey("EspecieMarinaId");
-                });
-
             modelBuilder.Entity("EcosistemasMarinos.Entidades.EcosistemaMarino", b =>
                 {
                     b.HasOne("EcosistemasMarinos.Entidades.EstadoConservacion", "EstadoConservacion")
@@ -269,11 +257,6 @@ namespace AccessData.Migrations
                         .IsRequired();
 
                     b.Navigation("EstadoConservacion");
-                });
-
-            modelBuilder.Entity("EcosistemasMarinos.Entidades.EspecieMarina", b =>
-                {
-                    b.Navigation("_amenazas");
                 });
 #pragma warning restore 612, 618
         }
