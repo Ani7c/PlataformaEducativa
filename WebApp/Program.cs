@@ -30,6 +30,7 @@ builder.Services.AddScoped<IGetSpecies, GetSpeciesUC>();
 builder.Services.AddScoped<IGetEcosystemById, GetEcosystemByIdUC>();
 builder.Services.AddScoped<IRemoveById, RemoveByIdUC>();
 builder.Services.AddScoped<IAddSpecieToEcosystem, AddSpecieToEcosystemUC>();
+builder.Services.AddScoped<IGetEspeciesPorNombre, GetEspeciesPorNombreUC>();
 
 var app = builder.Build();
 

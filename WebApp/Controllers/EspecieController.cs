@@ -14,14 +14,16 @@ namespace WebApp.Controllers
         private IGetEcosystem GetEcosystemUC;
         private IGetEcosystemById GetEcosystemByIdUC;
         private IAddSpecieToEcosystem AddSpecieToEcosystemUC;
+        private IGetEspeciesPorNombre GetEspeciesPorNombreUC;
 
-        public EspecieController(IAddSpecies addSpeciesUC, IGetSpecies getSpeciesUC, IGetEcosystem getEcosystemUC, IGetEcosystemById getEcosystemByIdUC, IAddSpecieToEcosystem addSpecieToEcosystemUC)
+        public EspecieController(IAddSpecies addSpeciesUC, IGetSpecies getSpeciesUC, IGetEcosystem getEcosystemUC, IGetEcosystemById getEcosystemByIdUC, IAddSpecieToEcosystem addSpecieToEcosystemUC, IGetEspeciesPorNombre getEspeciesPorNombreUC)
         {
             AddSpeciesUC = addSpeciesUC;
             GetSpeciesUC = getSpeciesUC;
             GetEcosystemUC = getEcosystemUC;
             GetEcosystemByIdUC = getEcosystemByIdUC;
             AddSpecieToEcosystemUC = addSpecieToEcosystemUC;
+            GetEspeciesPorNombreUC = getEspeciesPorNombreUC;
         }
 
 
@@ -68,6 +70,28 @@ namespace WebApp.Controllers
             {
                 return RedirectToAction(nameof(Create), new { mensaje = "La especie ya existe" });
             }
+        }
+
+        public IActionResult FiltrarPorNombreCientifico()
+        {
+            string? lAlias = HttpContext.Session.GetString("LogueadoAlias");
+            if (lAlias != null)
+            {
+                return View();
+            }
+            else
+            {
+                ViewBag.msg = "No autorizado";
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public IActionResult FiltrarPorNombreCientifico(string NombreCientifico)
+        {
+            List<EspecieMarina> ret = this.GetEspeciesPorNombreUC.GetEspeciesPorNombre(NombreCientifico);
+            
+            return View(ret);
         }
 
         // GET: EspecieController/Edit/5

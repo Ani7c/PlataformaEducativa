@@ -53,5 +53,10 @@ namespace AccessData.InMemory
                 eco._especies.Add(especieId);
 
         }
+
+        public List<EspecieMarina> GetEspeciesPorNombre(string nombreCientifico)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

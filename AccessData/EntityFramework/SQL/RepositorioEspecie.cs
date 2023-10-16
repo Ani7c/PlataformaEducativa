@@ -62,6 +62,12 @@ namespace AccessData.EntityFramework.SQL
             }
         }
 
+        public IEnumerable<EspecieMarina> GetEspeciesPorNombre(string nombreCientifico)
+        {
+            List<EspecieMarina> ret = new List<EspecieMarina>();
+            return _context.Especies.Where(especie => especie.NombreCientifico.Equals(nombreCientifico));            
+        }
+
 
 
         public void Delete(EspecieMarina t)
@@ -94,6 +100,10 @@ namespace AccessData.EntityFramework.SQL
             throw new NotImplementedException();
         }
 
+        List<EspecieMarina> IRepositorioEspecie.GetEspeciesPorNombre(string nombreCientifico)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

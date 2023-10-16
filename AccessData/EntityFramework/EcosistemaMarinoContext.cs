@@ -33,12 +33,14 @@ namespace AccessData.EntityFramework
         {
             modelBuilder.Entity<EcosistemaMarino>()
                 .HasMany(em => em._especies)
-                .WithMany(ecosistema => ecosistema._ecosistemas)
+                .WithMany()
                 .UsingEntity<Dictionary<string, string>>(
                     "Ecosistema_Especie",
                     em => em.HasOne<EspecieMarina>().WithMany().OnDelete(DeleteBehavior.Restrict),
                     ecosistema => ecosistema.HasOne<EcosistemaMarino>().WithMany().OnDelete(DeleteBehavior.Restrict)
                 );
+
+
         }
 
        
