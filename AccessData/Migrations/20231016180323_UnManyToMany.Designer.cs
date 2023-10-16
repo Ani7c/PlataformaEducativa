@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AccessData.Migrations
 {
     [DbContext(typeof(EcosistemaMarinoContext))]
-    [Migration("20231016035349_pcAna222")]
-    partial class pcAna222
+    [Migration("20231016180323_UnManyToMany")]
+    partial class UnManyToMany
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -151,6 +151,49 @@ namespace AccessData.Migrations
                     b.ToTable("EstadosDeConservacion");
                 });
 
+            modelBuilder.Entity("Ecosistemas_Marinos.Entidades.Configuracion", b =>
+                {
+                    b.Property<string>("NombreAtributo")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("TopeInferior")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TopeSuperior")
+                        .HasColumnType("int");
+
+                    b.HasKey("NombreAtributo");
+
+                    b.ToTable("Configuraciones");
+                });
+
+            modelBuilder.Entity("Ecosistemas_Marinos.Entidades.ControlDeCambios", b =>
+                {
+                    b.Property<int>("IdCambios")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCambios"));
+
+                    b.Property<DateTime>("FechaHora")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdEntidad")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NombreUsuario")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TipoEntidad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdCambios");
+
+                    b.ToTable("ControlDeCambios");
+                });
+
             modelBuilder.Entity("Ecosistemas_Marinos.Entidades.Pais", b =>
                 {
                     b.Property<string>("Codigo")
@@ -197,7 +240,7 @@ namespace AccessData.Migrations
                     b.HasOne("EcosistemasMarinos.Entidades.EcosistemaMarino", null)
                         .WithMany()
                         .HasForeignKey("_ecosistemasIdEcosistema")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("EcosistemasMarinos.Entidades.EspecieMarina", null)
