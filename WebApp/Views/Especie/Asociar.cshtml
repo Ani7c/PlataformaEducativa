@@ -1,28 +1,28 @@
-﻿@* @model EcosistemasMarinos.Entidades.EspecieMarina
+﻿@model EcosistemasMarinos.Entidades.EspecieMarina
 
 <h1>Asociar especie con ecosistema</h1>
 
 
 <h3>Elija una especie</h3>
 <div class="form-group">
-    <label for="Pais">Pais</label>
+    <label for="EspecieMarina">Especie</label>
     <select class="form-control" asp-for="codEspecie">
-        <option disabled>-- Seleccione pais --</option>
-        @foreach (var p in ViewBag.Paises)
+        <option disabled>-- Seleccione una especie --</option>
+        @foreach (var es in ViewBag.Especies)
         {
-            <option value="@p.Codigo">@p.Nombre</option>
+            <option value="@e.Id">@e.NombreVulgar</option>
         }
     </select>
 </div>
 
 <h3>Elija un ecosistema</h3>
 <div class="form-group">
-    <label for="Pais">Pais</label>
+    <label for="EcosistemaMarino">Ecosistema</label>
     <select class="form-control" asp-for="codEco">
-        <option disabled>-- Seleccione pais --</option>
-        @foreach (var p in ViewBag.Paises)
+        <option disabled>-- Seleccione un ecosistema --</option>
+        @foreach (var e in ViewBag.Ecosistemas)
         {
-            <option value="@p.Codigo">@p.Nombre</option>
+            <option value="@e.IdEcosistema">@e.Nombre</option>
         }
     </select>
-</div> *@
+</div>

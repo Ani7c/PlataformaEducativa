@@ -104,6 +104,12 @@ namespace AccessData.EntityFramework.SQL
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<EcosistemaMarino> GetPosiblesEcosistemas()
+        {
+            return (IEnumerable<EcosistemaMarino>)_context.Especies.Include(e => e._ecosistemas).ToList();
+        }
     }
+    
 
 }

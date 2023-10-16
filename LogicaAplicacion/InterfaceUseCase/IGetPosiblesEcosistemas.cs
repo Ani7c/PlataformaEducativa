@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ecosistemas_Marinos.Interfaces_Repositorios
+namespace LogicaAplicacion.InterfaceUseCase
 {
-    public interface IRepositorioEcosistema : IRepositorio<EcosistemaMarino>
+    public interface IGetPosiblesEcosistemas
     {
-
+        public List<EcosistemaMarino> GetPosiblesEcosistemas();
     }
 }

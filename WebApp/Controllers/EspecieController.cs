@@ -135,5 +135,12 @@ namespace WebApp.Controllers
                 return View();
             }
         }
+
+        public ActionResult Asociar()
+        {
+            ViewBag.Especies = this.GetSpeciesUC.GetSpecies();//todas las especies
+            ViewBag.Ecosistemas = ;//los posibles ecosistemas de la lista en especie
+            return View();
+        }
     }
 }

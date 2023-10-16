@@ -12,6 +12,9 @@ namespace Ecosistemas_Marinos.Interfaces_Repositorios
         void AsociarEspecieAEcosistema(EspecieMarina especieId, EcosistemaMarino eco);
 
         public List<EspecieMarina> GetEspeciesPorNombre(string nombreCientifico);
+
+
+        public IEnumerable<EcosistemaMarino> GetPosiblesEcosistemas();
     }
 
 }
