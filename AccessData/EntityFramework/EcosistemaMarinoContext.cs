@@ -9,7 +9,7 @@ using Ecosistemas_Marinos.Entidades;
 
 namespace AccessData.EntityFramework
 {
-    public class EcosistemaMarinoContext:DbContext
+    public class EcosistemaMarinoContext : DbContext
     {
         #region DbSets
         public DbSet<EcosistemaMarino> Ecosistemas { get; set; }
@@ -33,7 +33,7 @@ namespace AccessData.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-         
+
 
             modelBuilder.Entity<EcosistemaMarino>()
                 .HasMany(em => em._especies)
@@ -59,11 +59,22 @@ namespace AccessData.EntityFramework
 
         //public override int SaveChanges()
         //{
-        //    var modifiedEntries = ChangeTracker.Entries().Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted);
+        //    var modificaciones = ChangeTracker.Entries()
+        //        .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted);
+
+        //    foreach (var e in modificaciones)
+        //    {
+        //        var cambio = new ControlDeCambios
+        //        {
+        //            // NombreUsuario = HttpContext.Session.GetString("LogueadoAlias");
+        //        };
+        //    }
+
+
         //    return base.SaveChanges();
+
+
+
         //}
-
-
-
     }
 }

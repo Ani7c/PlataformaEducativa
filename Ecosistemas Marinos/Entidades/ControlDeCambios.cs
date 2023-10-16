@@ -21,5 +21,9 @@ namespace Ecosistemas_Marinos.Entidades
         {
         }
 
+        public void EsValido()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
