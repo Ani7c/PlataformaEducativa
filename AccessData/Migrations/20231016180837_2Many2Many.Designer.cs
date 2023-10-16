@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AccessData.Migrations
 {
     [DbContext(typeof(EcosistemaMarinoContext))]
-    [Migration("20231016141556_splitMany2Manyv2")]
-    partial class splitMany2Manyv2
+    [Migration("20231016180837_2Many2Many")]
+    partial class _2Many2Many
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,20 +27,23 @@ namespace AccessData.Migrations
 
             modelBuilder.Entity("Ecosistema_Especie", b =>
                 {
+                    b.Property<int>("_ecosistemasTempId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("_especiesTempId")
+                        .HasColumnType("int");
+
                     b.Property<int>("EcosistemaMarinoIdEcosistema")
                         .HasColumnType("int");
 
-                    b.Property<int>("_especiesId")
+                    b.Property<int>("EspecieMarinaId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EspecieMarinaId")
-                        .HasColumnType("int");
+                    b.HasKey("_ecosistemasTempId", "_especiesTempId");
 
-                    b.HasKey("EcosistemaMarinoIdEcosistema", "_especiesId");
+                    b.HasIndex("EcosistemaMarinoIdEcosistema");
 
                     b.HasIndex("EspecieMarinaId");
-
-                    b.HasIndex("_especiesId");
 
                     b.ToTable("Ecosistema_Especie");
                 });
@@ -80,7 +83,7 @@ namespace AccessData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EstadoConservacionId")
+                    b.Property<int>("IdEstadoConservacion")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
@@ -95,7 +98,7 @@ namespace AccessData.Migrations
 
                     b.HasKey("IdEcosistema");
 
-                    b.HasIndex("EstadoConservacionId");
+                    b.HasIndex("IdEstadoConservacion");
 
                     b.HasIndex("codPais");
 
@@ -114,7 +117,7 @@ namespace AccessData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EstadoConservacionId")
+                    b.Property<int>("IdEstadoConservacion")
                         .HasColumnType("int");
 
                     b.Property<string>("NombreCientifico")
@@ -131,7 +134,7 @@ namespace AccessData.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EstadoConservacionId");
+                    b.HasIndex("IdEstadoConservacion");
 
                     b.ToTable("Especies");
                 });
@@ -242,20 +245,15 @@ namespace AccessData.Migrations
 
             modelBuilder.Entity("EspeciesHabitanEcosistema", b =>
                 {
-                    b.Property<int>("EspecieMarinaId")
-                        .HasColumnType("int");
-
                     b.Property<int>("_ecosistemasIdEcosistema")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EcosistemaMarinoIdEcosistema")
+                    b.Property<int>("_especiesId")
                         .HasColumnType("int");
 
-                    b.HasKey("EspecieMarinaId", "_ecosistemasIdEcosistema");
+                    b.HasKey("_ecosistemasIdEcosistema", "_especiesId");
 
-                    b.HasIndex("EcosistemaMarinoIdEcosistema");
-
-                    b.HasIndex("_ecosistemasIdEcosistema");
+                    b.HasIndex("_especiesId");
 
                     b.ToTable("EspeciesHabitanEcosistema");
                 });
@@ -265,18 +263,13 @@ namespace AccessData.Migrations
                     b.HasOne("EcosistemasMarinos.Entidades.EcosistemaMarino", null)
                         .WithMany()
                         .HasForeignKey("EcosistemaMarinoIdEcosistema")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("EcosistemasMarinos.Entidades.EspecieMarina", null)
                         .WithMany()
                         .HasForeignKey("EspecieMarinaId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("EcosistemasMarinos.Entidades.EspecieMarina", null)
-                        .WithMany()
-                        .HasForeignKey("_especiesId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -284,7 +277,7 @@ namespace AccessData.Migrations
                 {
                     b.HasOne("EcosistemasMarinos.Entidades.EstadoConservacion", "EstadoConservacion")
                         .WithMany()
-                        .HasForeignKey("EstadoConservacionId")
+                        .HasForeignKey("IdEstadoConservacion")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -325,7 +318,7 @@ namespace AccessData.Migrations
                 {
                     b.HasOne("EcosistemasMarinos.Entidades.EstadoConservacion", "EstadoConservacion")
                         .WithMany()
-                        .HasForeignKey("EstadoConservacionId")
+                        .HasForeignKey("IdEstadoConservacion")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -336,19 +329,14 @@ namespace AccessData.Migrations
                 {
                     b.HasOne("EcosistemasMarinos.Entidades.EcosistemaMarino", null)
                         .WithMany()
-                        .HasForeignKey("EcosistemaMarinoIdEcosistema")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("_ecosistemasIdEcosistema")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("EcosistemasMarinos.Entidades.EspecieMarina", null)
                         .WithMany()
-                        .HasForeignKey("EspecieMarinaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EcosistemasMarinos.Entidades.EcosistemaMarino", null)
-                        .WithMany()
-                        .HasForeignKey("_ecosistemasIdEcosistema")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("_especiesId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
