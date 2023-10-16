@@ -37,7 +37,11 @@ namespace EcosistemasMarinos.Entidades
 
         //public List<Amenaza> _amenazas { get; set; }
 
+        [ForeignKey(nameof(EspecieMarina))] public int IdEspecie { get; set; }
+
         public List<EspecieMarina> _especies { get; set; }
+
+      //  public List<EspecieMarina> _especiesQueHabitan { get; set; }
 
       //  public string ImgEcosistema { get; set; }
         public EcosistemaMarino() 

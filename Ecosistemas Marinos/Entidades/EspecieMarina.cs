@@ -37,8 +37,10 @@ namespace EcosistemasMarinos.Entidades
         public EstadoConservacion EstadoConservacion { get; set; }
 
         //public List<Amenaza> _amenazas { get; set; }
-
+ 
         public List<EcosistemaMarino> _ecosistemas { get; set; }
+
+      //  public List<EcosistemaMarino> _PosiblesEcosistemas { get; set; }
 
         public EspecieMarina()
         {

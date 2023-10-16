@@ -4,6 +4,7 @@ using AccessData.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AccessData.Migrations
 {
     [DbContext(typeof(EcosistemaMarinoContext))]
-    partial class EcosistemaMarinoContextModelSnapshot : ModelSnapshot
+    [Migration("20231016140859_splitMany2Many")]
+    partial class splitMany2Many
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,7 +80,7 @@ namespace AccessData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EstadoConservacionId")
+                    b.Property<int>("IdEstadoConservacion")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
@@ -92,7 +95,7 @@ namespace AccessData.Migrations
 
                     b.HasKey("IdEcosistema");
 
-                    b.HasIndex("EstadoConservacionId");
+                    b.HasIndex("IdEstadoConservacion");
 
                     b.HasIndex("codPais");
 
@@ -111,7 +114,7 @@ namespace AccessData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EstadoConservacionId")
+                    b.Property<int>("IdEstadoConservacion")
                         .HasColumnType("int");
 
                     b.Property<string>("NombreCientifico")
@@ -128,7 +131,7 @@ namespace AccessData.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EstadoConservacionId");
+                    b.HasIndex("IdEstadoConservacion");
 
                     b.ToTable("Especies");
                 });
@@ -281,7 +284,7 @@ namespace AccessData.Migrations
                 {
                     b.HasOne("EcosistemasMarinos.Entidades.EstadoConservacion", "EstadoConservacion")
                         .WithMany()
-                        .HasForeignKey("EstadoConservacionId")
+                        .HasForeignKey("IdEstadoConservacion")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -322,7 +325,7 @@ namespace AccessData.Migrations
                 {
                     b.HasOne("EcosistemasMarinos.Entidades.EstadoConservacion", "EstadoConservacion")
                         .WithMany()
-                        .HasForeignKey("EstadoConservacionId")
+                        .HasForeignKey("IdEstadoConservacion")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
