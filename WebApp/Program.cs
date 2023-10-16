@@ -32,7 +32,11 @@ builder.Services.AddScoped<IGetEcosystemById, GetEcosystemByIdUC>();
 builder.Services.AddScoped<IRemoveById, RemoveByIdUC>();
 builder.Services.AddScoped<IAddSpecieToEcosystem, AddSpecieToEcosystemUC>();
 builder.Services.AddScoped<IGetEspeciesPorNombre, GetEspeciesPorNombreUC>();
+<<<<<<< HEAD
 builder.Services.AddScoped<IAddChangeTracking, AddChangeTrackingUC>();
+=======
+builder.Services.AddScoped<IGetPosiblesEcosistemas, GetPosiblesEcosistemasUC>();
+>>>>>>> 51a8398cb3bea296078199163050a708d754598b
 
 var app = builder.Build();
 

@@ -15,8 +15,9 @@ namespace WebApp.Controllers
         private IGetEcosystemById GetEcosystemByIdUC;
         private IAddSpecieToEcosystem AddSpecieToEcosystemUC;
         private IGetEspeciesPorNombre GetEspeciesPorNombreUC;
+        private IGetPosiblesEcosistemas GetPosiblesEcosistemasUC;
 
-        public EspecieController(IAddSpecies addSpeciesUC, IGetSpecies getSpeciesUC, IGetEcosystem getEcosystemUC, IGetEcosystemById getEcosystemByIdUC, IAddSpecieToEcosystem addSpecieToEcosystemUC, IGetEspeciesPorNombre getEspeciesPorNombreUC)
+        public EspecieController(IAddSpecies addSpeciesUC, IGetSpecies getSpeciesUC, IGetEcosystem getEcosystemUC, IGetEcosystemById getEcosystemByIdUC, IAddSpecieToEcosystem addSpecieToEcosystemUC, IGetEspeciesPorNombre getEspeciesPorNombreUC, IGetPosiblesEcosistemas getPosiblesEcosistemas)
         {
             AddSpeciesUC = addSpeciesUC;
             GetSpeciesUC = getSpeciesUC;
@@ -24,6 +25,7 @@ namespace WebApp.Controllers
             GetEcosystemByIdUC = getEcosystemByIdUC;
             AddSpecieToEcosystemUC = addSpecieToEcosystemUC;
             GetEspeciesPorNombreUC = getEspeciesPorNombreUC;
+            GetPosiblesEcosistemasUC = getPosiblesEcosistemas;
         }
 
 
@@ -139,8 +141,22 @@ namespace WebApp.Controllers
         public ActionResult Asociar()
         {
             ViewBag.Especies = this.GetSpeciesUC.GetSpecies();//todas las especies
-            ViewBag.Ecosistemas = ;//los posibles ecosistemas de la lista en especie
+            ViewBag.Ecosistemas = this.GetPosiblesEcosistemasUC.GetPosiblesEcosistemas() ; //los posibles ecosistemas de la lista en especie
             return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Asociar(int codEspecie, int IdEcosistema)
+        {
+            try
+            {
+                //llamar a asociar
+                return RedirectToAction(nameof(Index), new { mensaje = "Asociados exitosamente" });
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }
