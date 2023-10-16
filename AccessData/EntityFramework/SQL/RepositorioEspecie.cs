@@ -46,7 +46,7 @@ namespace AccessData.EntityFramework.SQL
             //TODO
         }
 
-
+        ///REVISAR, CREO QUE NO ES NECESARIO QUE LE PASEMOS LA ESPECIE POR PARAMETRO
         public void AsociarEspecieAEcosistema(EspecieMarina especie, EcosistemaMarino ecosistema)
         {
             /*var ecosistema = _context.Ecosistemas.Find(ecosistemaId);
