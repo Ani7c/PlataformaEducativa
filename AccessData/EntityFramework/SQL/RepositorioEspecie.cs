@@ -1,6 +1,8 @@
-﻿using Ecosistemas_Marinos.Exceptions;
+﻿using Ecosistemas_Marinos.Entidades;
+using Ecosistemas_Marinos.Exceptions;
 using Ecosistemas_Marinos.Interfaces_Repositorios;
 using EcosistemasMarinos.Entidades;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,10 @@ namespace AccessData.EntityFramework.SQL
         {
             try
             {
+                foreach (EcosistemaMarino eco in especieMarina._ecosistemas)
+                {
+                    _context.Entry(eco).State = EntityState.Unchanged;
+                }
                 especieMarina.EsValido();
                 _context.Especies.Add(especieMarina);
                 _context.SaveChanges();
@@ -66,6 +72,11 @@ namespace AccessData.EntityFramework.SQL
         }
 
         public void Remove(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Asociar(EcosistemaMarino ecosistema, EspecieMarina especie)
         {
             throw new NotImplementedException();
         }

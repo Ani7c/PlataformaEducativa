@@ -31,7 +31,10 @@ namespace EcosistemasMarinos.Entidades
             Nombre = nombre;
         }
 
-        public void EsValido() { }
+        public void EsValido() 
+        { 
+        
+        }
 
     }
 }

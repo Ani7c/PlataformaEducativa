@@ -79,9 +79,6 @@ namespace AccessData.EntityFramework.SQL
             this._context.SaveChanges();
         }
 
-        public void AsociarEspecieConEcosistema(EcosistemaMarino ecosistema, EspecieMarina especie)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
