@@ -19,6 +19,7 @@ namespace Ecosistemas_Marinos.Entidades
 
         public ControlDeCambios()
         {
+            this.FechaHora = DateTime.Now;
         }
 
         public void EsValido()

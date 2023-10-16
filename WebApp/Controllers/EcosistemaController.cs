@@ -23,10 +23,11 @@ namespace WebApp.Controllers
         private IObtenerPaisPorCodigo ObtenerPaisPorCodigoUC;
         private IGetEcosystemById GetEcosystemByIdUC;
         private IRemoveById RemoveByIdUC;
+        private IAddChangeTracking AddChangeTrackingUC;
 
         public EcosistemaController(IAddEcosystem addEcosystemUC, IGetEcosystem getEcosystemUC, 
             IGetThreats getThreatsUC, IGetCountries getCountriesUC, IObtenerPaisPorCodigo obtenerPaisPorCodigoUC, 
-            IWebHostEnvironment environment, IGetEcosystemById getEcosystemByIdUC, IRemoveById removeByIdUC)
+            IWebHostEnvironment environment, IGetEcosystemById getEcosystemByIdUC, IRemoveById removeByIdUC, IAddChangeTracking addChangeTrackingUC)
         {
             AddEcosystemUC = addEcosystemUC;
             GetEcosystemUC = getEcosystemUC;
@@ -36,6 +37,7 @@ namespace WebApp.Controllers
             _environment = environment;
             GetEcosystemByIdUC = getEcosystemByIdUC;
             RemoveByIdUC = removeByIdUC;
+            AddChangeTrackingUC = addChangeTrackingUC;
         }
 
 
@@ -77,8 +79,18 @@ namespace WebApp.Controllers
 
                     em.Pais = pais;
                     this.AddEcosystemUC.AddEcosystem(em);
+
+                //REGISTRAMOS CAMBIOS
+                ControlDeCambios cambios = new ControlDeCambios
+                {
+                    NombreUsuario = HttpContext.Session.GetString("LogueadoAlias"),
+                    TipoEntidad = em.ToString(),
+                    IdEntidad = em.IdEcosistema
+
+                };
+                this.AddChangeTrackingUC.AddChangeTracking(cambios);
                 //}
-              
+
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

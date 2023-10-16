@@ -14,7 +14,8 @@ builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 builder.Services.AddScoped<IRepositorioEcosistema, RepositorioEcosistema>();
 builder.Services.AddScoped<IRepositorioEspecie, RepositorioEspecie>();
 builder.Services.AddScoped<IRepositorioAmenaza, RepositorioAmenaza>();
-builder.Services.AddScoped<IRepositorioPais, RepositorioPais>();     
+builder.Services.AddScoped<IRepositorioPais, RepositorioPais>();
+builder.Services.AddScoped<IRepositorioControlDeCambios, RepositorioControlDeCambios>();
 
 
 //inicializacion de casos de uso
@@ -31,6 +32,7 @@ builder.Services.AddScoped<IGetEcosystemById, GetEcosystemByIdUC>();
 builder.Services.AddScoped<IRemoveById, RemoveByIdUC>();
 builder.Services.AddScoped<IAddSpecieToEcosystem, AddSpecieToEcosystemUC>();
 builder.Services.AddScoped<IGetEspeciesPorNombre, GetEspeciesPorNombreUC>();
+builder.Services.AddScoped<IAddChangeTracking, AddChangeTrackingUC>();
 
 var app = builder.Build();
 

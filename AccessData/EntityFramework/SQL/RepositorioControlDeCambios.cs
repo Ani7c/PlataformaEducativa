@@ -21,7 +21,6 @@ namespace AccessData.EntityFramework.SQL
         {
             try
             {
-
                 //_context.Entry(e.Pais).State = EntityState.Unchanged;
 
                 //t.EsValido();
