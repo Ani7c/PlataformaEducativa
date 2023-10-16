@@ -46,6 +46,24 @@ namespace AccessData.EntityFramework.SQL
             //TODO
         }
 
+
+        public void AsociarEspecieAEcosistema(EspecieMarina especie, EcosistemaMarino ecosistema)
+        {
+            /*var ecosistema = _context.Ecosistemas.Find(ecosistemaId);
+            var especie = _context.Especies.Find(especieId);*/
+
+            if (ecosistema != null && especie != null)
+            {
+                _context.Entry(especie).State = EntityState.Unchanged;
+
+                ecosistema._especies.Add(especie);
+
+                _context.SaveChanges();
+            }
+        }
+
+
+
         public void Delete(EspecieMarina t)
         {
             throw new NotImplementedException();
@@ -76,9 +94,6 @@ namespace AccessData.EntityFramework.SQL
             throw new NotImplementedException();
         }
 
-        public void Asociar(EcosistemaMarino ecosistema, EspecieMarina especie)
-        {
-            throw new NotImplementedException();
-        }
     }
+
 }

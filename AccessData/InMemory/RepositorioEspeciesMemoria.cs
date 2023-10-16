@@ -1,5 +1,6 @@
 ﻿using Ecosistemas_Marinos.Interfaces_Repositorios;
 using EcosistemasMarinos.Entidades;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,13 @@ namespace AccessData.InMemory
         public void Update(EspecieMarina t)
         {
             throw new NotImplementedException();
+        }
+
+        public void AsociarEspecieAEcosistema(EspecieMarina especieId, EcosistemaMarino eco)
+        {
+                     
+                eco._especies.Add(especieId);
+
         }
     }
 }

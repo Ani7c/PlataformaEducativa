@@ -13,13 +13,15 @@ namespace WebApp.Controllers
         private IGetSpecies GetSpeciesUC;
         private IGetEcosystem GetEcosystemUC;
         private IGetEcosystemById GetEcosystemByIdUC;
+        private IAddSpecieToEcosystem AddSpecieToEcosystemUC;
 
-        public EspecieController(IAddSpecies addSpeciesUC, IGetSpecies getSpeciesUC, IGetEcosystem getEcosystemUC, IGetEcosystemById getEcosystemByIdUC)
+        public EspecieController(IAddSpecies addSpeciesUC, IGetSpecies getSpeciesUC, IGetEcosystem getEcosystemUC, IGetEcosystemById getEcosystemByIdUC, IAddSpecieToEcosystem addSpecieToEcosystemUC)
         {
             AddSpeciesUC = addSpeciesUC;
             GetSpeciesUC = getSpeciesUC;
             GetEcosystemUC = getEcosystemUC;
             GetEcosystemByIdUC = getEcosystemByIdUC;
+            AddSpecieToEcosystemUC = addSpecieToEcosystemUC;
         }
 
 
