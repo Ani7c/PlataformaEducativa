@@ -1,0 +1,40 @@
+﻿@model EcosistemasMarinos.Entidades.EspecieMarina
+ 
+
+<form asp-controller="Especie" asp-action="Filtrado" method="get">
+    <div class="form-group">
+        <label for="NombreCientifico">Nombre Científico</label>
+        <input type="text" name="NombreCientifico" class="form-control" />
+    </div>
+
+    <div class="form-check">
+        <input type="checkbox" name="enPeligroExtincion" class="form-check-input" />
+        <label class="form-check-label">Especies en Peligro de Extinción</label>
+    </div>
+
+    <div class="form-group">
+        <label >Peso Mínimo</label>
+        <input type="number" name="pesoMinimo" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label >Peso Máximo</label>
+        <input type="number" name="pesoMaximo" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="IdEcosistema">Ecosistema</label>
+        <select name="IdEcosistema" class="form-control">
+            <option value="">Seleccione un Ecosistema</option>
+            @foreach (var ecosistema in ViewBag.Ecosistemas)
+            {
+                <option value="@ecosistema.IdEcosistema">@ecosistema.Nombre</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+</form>
+
+   
+}

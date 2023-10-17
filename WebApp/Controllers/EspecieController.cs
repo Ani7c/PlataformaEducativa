@@ -21,8 +21,9 @@ namespace WebApp.Controllers
         private IAddSpecieToEcosystem AddSpecieToEcosystemUC;
         private IGetEspeciesPorNombre GetEspeciesPorNombreUC;
         private IGetPosiblesEcosistemas GetPosiblesEcosistemasUC;
+        private IFiltrado FiltradoUC;
 
-        public EspecieController(IWebHostEnvironment environment, IAddSpecies addSpeciesUC, IGetSpecies getSpeciesUC, IGetEcosystem getEcosystemUC, IGetEcosystemById getEcosystemByIdUC, IAddSpecieToEcosystem addSpecieToEcosystemUC, IGetEspeciesPorNombre getEspeciesPorNombreUC, IGetPosiblesEcosistemas getPosiblesEcosistemas)
+        public EspecieController(IWebHostEnvironment environment, IAddSpecies addSpeciesUC, IGetSpecies getSpeciesUC, IGetEcosystem getEcosystemUC, IGetEcosystemById getEcosystemByIdUC, IAddSpecieToEcosystem addSpecieToEcosystemUC, IGetEspeciesPorNombre getEspeciesPorNombreUC, IGetPosiblesEcosistemas getPosiblesEcosistemas , IFiltrado filtradoUC)
         {
             _environment = environment;
             AddSpeciesUC = addSpeciesUC;
@@ -32,6 +33,7 @@ namespace WebApp.Controllers
             AddSpecieToEcosystemUC = addSpecieToEcosystemUC;
             GetEspeciesPorNombreUC = getEspeciesPorNombreUC;
             GetPosiblesEcosistemasUC = getPosiblesEcosistemas;
+            FiltradoUC = filtradoUC;
         }
 
 
@@ -101,14 +103,13 @@ namespace WebApp.Controllers
             //ruta donde se guardan las fotos de las personas
             string rutaFisicaFoto = Path.Combine
             (rutaFisicaWwwRoot, "img", "Especies", nombreImagen);
-            //FileStream permite manejar archivos
+       
             try
             {
                 //el método using libera los recursos del objeto FileStream al finalizar
                 using (FileStream f = new FileStream(rutaFisicaFoto, FileMode.Create))
                 {
-                    //Para archivos grandes o varios archivos usar la versión
-                    //asincrónica de CopyTo. Sería: await imagen.CopyToAsync (f);
+                    
                     imagen.CopyTo(f);
                 }
                 //GUARDAR EL NOMBRE DE LA IMAGEN SUBIDA EN EL OBJETO
@@ -121,26 +122,27 @@ namespace WebApp.Controllers
             }
         }
 
-        public IActionResult FiltrarPorNombreCientifico()
+        public IActionResult Filtrado()
         {
-            string? lAlias = HttpContext.Session.GetString("LogueadoAlias");
-            if (lAlias != null)
-            {
+            //string? lAlias = HttpContext.Session.GetString("LogueadoAlias");
+            //if (lAlias != null)
+            //{
+                ViewBag.Ecosistemas = this.GetEcosystemUC.GetEcosystems();
                 return View();
-            }
-            else
-            {
-                ViewBag.msg = "No autorizado";
-                return View();
-            }
+            //}
+            //else
+            //{
+            //    ViewBag.msg = "No autorizado";
+            //    return View();
+            //}
         }
 
         [HttpPost]
-        public IActionResult FiltrarPorNombreCientifico(string NombreCientifico)
+        public IActionResult Filtrado(string NombreCientifico, bool enPeligroExtincion, double pesoMinimo, double pesoMaximo, int IdEcosistema)
         {
-            List<EspecieMarina> ret = this.GetEspeciesPorNombreUC.GetEspeciesPorNombre(NombreCientifico);
-            
-            return View(ret);
+
+            var resultados = this.FiltradoUC.GetSpeciesBy(NombreCientifico, enPeligroExtincion, pesoMinimo, pesoMaximo, IdEcosistema);
+            return View("ResultadoFiltrado", resultados);
         }
 
         // GET: EspecieController/Edit/5

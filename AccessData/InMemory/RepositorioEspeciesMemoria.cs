@@ -68,5 +68,10 @@ namespace AccessData.InMemory
         {
             _especies.Add(FindById(ecosistemaId));
         }
+
+        public List<EspecieMarina> GetSpeciesBy(string NombreCientifico, bool enPeligroExtincion, double pesoMinimo, double pesoMaximo, int IdEcosistema)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

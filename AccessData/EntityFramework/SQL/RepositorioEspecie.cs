@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace AccessData.EntityFramework.SQL
 {
@@ -112,6 +113,36 @@ namespace AccessData.EntityFramework.SQL
         {
             var ecosistemasDeEspecies = _context.Especies.SelectMany(especie => especie._ecosistemas);
             return ecosistemasDeEspecies.ToList();
+        }
+
+        public List<EspecieMarina> GetSpeciesBy(string NombreCientifico, bool enPeligroExtincion, double pesoMinimo, double pesoMaximo, int IdEcosistema)
+        {
+            List<EspecieMarina> ret = new List<EspecieMarina>();
+
+            if(!string.IsNullOrEmpty(NombreCientifico))
+            {               
+                ret = _context.Especies.Where(especie => especie.NombreCientifico.Equals(NombreCientifico)).ToList();
+            }
+            //if (enPeligroExtincion)
+            //{
+            //    ret = ret.Where(e =>
+            //        e.EstadoConservacion < 60 ||
+            //        e.Amenazas.Count > 3 ||
+            //        e.Ecosistemas.Any(ec => ec.GradoConservacion < 60 && ec.Amenazas.Count > 3)
+            //    );
+            //}
+
+            //if (pesoMinimo > 0)
+            //{
+            //    ret = ret.Where(e => e.rangoPeso.PesoMin <= pesoMinimo && e=> enPeligroExtincion.rangoPeso.PesoMax >= pesoMaximo);
+            //}
+            
+            //if (IdEcosistema > 0)
+            //{
+            //    ret = ret.Where(e => e._ecosistemas.Any(ec => ec.IdEcosistema == IdEcosistema));
+            //}
+
+            return ret;
         }
     }
     

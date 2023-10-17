@@ -15,6 +15,8 @@ namespace Ecosistemas_Marinos.Interfaces_Repositorios
 
 
         public IEnumerable<EcosistemaMarino> GetPosiblesEcosistemas();
+
+        public List<EspecieMarina> GetSpeciesBy(string NombreCientifico, bool enPeligroExtincion, double pesoMinimo, double pesoMaximo, int IdEcosistema);
     }
 
 }
