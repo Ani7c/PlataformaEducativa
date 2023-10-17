@@ -1,7 +1,7 @@
 ﻿@model EcosistemasMarinos.Entidades.EspecieMarina
  
 
-<form asp-controller="Especie" asp-action="Filtrado" method="get">
+<form asp-controller="Especie" asp-action="Filtrado" method="post">
     <div class="form-group">
         <label for="NombreCientifico">Nombre Científico</label>
         <input type="text" name="NombreCientifico" class="form-control" />
@@ -33,8 +33,9 @@
         </select>
     </div>
 
-    <button type="submit" class="btn btn-primary">Filtrar</button>
+    <div class="form-group pt-3">
+        <input type="submit" value="Filtrado" class="btn btn-primary" />
+    </div>
 </form>
 
    
-}
