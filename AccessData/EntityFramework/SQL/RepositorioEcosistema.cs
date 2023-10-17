@@ -73,10 +73,17 @@ namespace AccessData.EntityFramework.SQL
 
         void IRepositorio<EcosistemaMarino>.Remove(int id)
         {
-            EcosistemaMarino em = new EcosistemaMarino();
-            em.IdEcosistema = id;
-            this._context.Ecosistemas.Remove(em);
-            this._context.SaveChanges();
+            try
+            {
+                EcosistemaMarino em = new EcosistemaMarino();
+                em.IdEcosistema = id;
+                this._context.Ecosistemas.Remove(em);
+                this._context.SaveChanges();
+            }
+            catch
+            {
+                throw new Exception("No se puede eliminar el ecosistema ya que tine especies que lo habitan");
+            }
         }
 
        

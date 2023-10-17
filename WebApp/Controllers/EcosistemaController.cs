@@ -73,17 +73,19 @@ namespace WebApp.Controllers
             {
                 Pais pais = ObtenerPaisPorCodigoUC.BuscarPorCodigo(em.codPais);
                 em.Pais = pais;
+
+                if (HttpContext.Session.GetString("LogueadoAlias") != null) { 
+                    //REGISTRAMOS CAMBIOS
+                    ControlDeCambios cambios = new ControlDeCambios
+                    {
+                        NombreUsuario = HttpContext.Session.GetString("LogueadoAlias"),
+                        TipoEntidad = em.ToString(),
+                        IdEntidad = em.IdEcosistema
+
+                    };
+                    this.AddChangeTrackingUC.AddChangeTracking(cambios);
+                }
                 
-
-                //REGISTRAMOS CAMBIOS
-                //ControlDeCambios cambios = new ControlDeCambios
-                //{
-                //    NombreUsuario = HttpContext.Session.GetString("LogueadoAlias"),
-                //    TipoEntidad = em.ToString(),
-                //    IdEntidad = em.IdEcosistema
-
-                //};
-                //this.AddChangeTrackingUC.AddChangeTracking(cambios);
 
                 //GUARDAMOS IMAGEN
                 if (em == null || imagen == null) return View();
@@ -181,9 +183,9 @@ namespace WebApp.Controllers
                 this.RemoveByIdUC.RemoveById(id);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return RedirectToAction(nameof(Index), new { mensaje = e.Message });
             }
         }
     }

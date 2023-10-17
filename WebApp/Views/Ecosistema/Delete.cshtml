@@ -48,3 +48,11 @@
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
+
+
+@if (!String.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div class="alert alert-danger">
+        @ViewBag.Mensaje
+    </div>
+}
