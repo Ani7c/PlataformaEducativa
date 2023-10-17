@@ -1,4 +1,5 @@
 ﻿using Ecosistemas_Marinos.Interfaces;
+using Ecosistemas_Marinos.Interfaces_Repositorios;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Ecosistemas_Marinos.ValueObjects
             LongitudMax = longitudMax;
         }
         
-        public void EsValido()
+        public void EsValido(IRepositorioConfiguracion configuracion)
         {
             if(LongitudMin > LongitudMax)
             {

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -46,15 +47,25 @@ namespace Ecosistemas_Marinos.Entidades
         {
             if(Contrasenia.ToUpper() ==Contrasenia) 
             {
-                throw new UserException("La contraseñadebe contener al menos uno de los" +
-                    " siguientes caracteres: . , # ; : !");
+                throw new UserException("La contraseña debe contener mayusculas y minusculas");
             }
             if (Contrasenia.ToLower()== Contrasenia)
             {
-                throw new UserException("La contraseñadebe contener al menos uno de los" +
-                    " siguientes caracteres: . , # ; : !");
+                throw new UserException("La contraseña debe contener mayusculas y minusculas");
+            }
+            if (!ContieneCaracterEspecial(Contrasenia)){
+                throw new UserException("La contraseña debe contener caracteres especiales");
             }
             
+        }
+
+        static bool ContieneCaracterEspecial(string password)
+        {
+            string pattern = @"[!@#$%^&*()_+{}\[\]:;<>,.?~\\]";
+            Regex regex = new Regex(pattern);
+
+            // Utilizamos el método Any para verificar si hay al menos un carácter especial
+            return regex.Matches(password).Cast<Match>().Any();
         }
     }
 }

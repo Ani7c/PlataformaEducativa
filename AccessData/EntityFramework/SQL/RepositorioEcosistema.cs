@@ -15,8 +15,10 @@ namespace AccessData.EntityFramework.SQL
     public class RepositorioEcosistema : IRepositorioEcosistema
     {
         private EcosistemaMarinoContext _context;
-        public RepositorioEcosistema()
+        private IRepositorioConfiguracion config;
+        public RepositorioEcosistema(IRepositorioConfiguracion repositorioConfiguracion)
         {
+            config = repositorioConfiguracion;
             _context = new EcosistemaMarinoContext();
         }
 
@@ -28,7 +30,7 @@ namespace AccessData.EntityFramework.SQL
                 
                 _context.Entry(e.Pais).State = EntityState.Unchanged;
              
-                e.EsValido();
+                e.EsValido(config);
                 _context.Ecosistemas.Add(e);
                 _context.SaveChanges();
 

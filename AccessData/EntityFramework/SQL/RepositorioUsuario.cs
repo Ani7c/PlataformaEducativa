@@ -2,6 +2,7 @@
 using Ecosistemas_Marinos.Exceptions;
 using Ecosistemas_Marinos.Interfaces_Repositorios;
 using EcosistemasMarinos.Entidades;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +15,26 @@ namespace AccessData.EntityFramework.SQL
     public class RepositorioUsuario: IRepositorioUsuario
     {
         private EcosistemaMarinoContext _context;
+        private IRepositorioConfiguracion config;
 
-        public RepositorioUsuario()
+        public RepositorioUsuario(IRepositorioConfiguracion config)
         {
             _context = new EcosistemaMarinoContext();
+            this.config = config;
         }
 
         void IRepositorio<Usuario>.Add(Usuario usuario)
         {
             try
             {
-                usuario.EsValido();
+                var usuarioExistente = _context.usuarios.FirstOrDefault(u => u.Alias == usuario.Alias);
+
+                if (usuarioExistente != null)
+                {
+                    throw new UserException("El alias de usuario ya está en uso");
+                }
+
+                usuario.EsValido(config);
                 _context.usuarios.Add(usuario);
                 _context.SaveChanges();
             }

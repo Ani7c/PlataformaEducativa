@@ -1,4 +1,5 @@
 ﻿using Ecosistemas_Marinos.Entidades;
+using Ecosistemas_Marinos.Exceptions;
 using LogicaAplicacion.InterfaceUseCase;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -46,9 +47,10 @@ namespace WebApp.Controllers
                 ViewBag.msg = "Usuario agregado con éxito";
                 return RedirectToAction("Index", "Home");
             }
-            catch(Exception ex)
+            
+            catch (Exception ex)
             {
-                return RedirectToAction(nameof(Create), new { mensaje = "Usuario ya existente" });
+                return RedirectToAction(nameof(Create), new { mensaje = ex });
             }
         }
 

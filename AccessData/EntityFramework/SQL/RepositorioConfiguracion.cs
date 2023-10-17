@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace AccessData.EntityFramework.SQL
 {
-    internal class RepositorioConfiguracion : IRepositorioConfiguracion
+    public class RepositorioConfiguracion : IRepositorioConfiguracion
     {
 
         public EcosistemaMarinoContext _context;

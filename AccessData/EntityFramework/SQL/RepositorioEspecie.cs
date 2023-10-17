@@ -16,8 +16,10 @@ namespace AccessData.EntityFramework.SQL
     {
 
         private EcosistemaMarinoContext _context;
-        public RepositorioEspecie()
+        private IRepositorioConfiguracion config;
+        public RepositorioEspecie(IRepositorioConfiguracion repositorioConfiguracion)
         {
+            config = repositorioConfiguracion;
             _context = new EcosistemaMarinoContext ();
         }
 
@@ -30,7 +32,7 @@ namespace AccessData.EntityFramework.SQL
                 {
                     _context.Entry(eco).State = EntityState.Unchanged;
                 }
-                especieMarina.EsValido();
+                especieMarina.EsValido(config);
                 _context.Especies.Add(especieMarina);
                 _context.SaveChanges();
             }
