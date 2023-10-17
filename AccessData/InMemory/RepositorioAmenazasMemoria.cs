@@ -30,7 +30,7 @@ namespace AccessData.InMemory
 
         public Amenaza FindById(int id)
         {
-            throw new NotImplementedException();
+            return _amenazas.FirstOrDefault();
         }
 
         public void Remove(Amenaza t)

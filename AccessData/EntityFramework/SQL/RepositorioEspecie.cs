@@ -33,6 +33,10 @@ namespace AccessData.EntityFramework.SQL
                 {
                     _context.Entry(eco).State = EntityState.Unchanged;
                 }
+                foreach(Amenaza a in especieMarina._amenazas)
+                {
+                    _context.Entry(a).State = EntityState.Unchanged;
+                }
                 especieMarina.EsValido(config);
                 _context.Especies.Add(especieMarina);
                 _context.SaveChanges();
@@ -126,9 +130,9 @@ namespace AccessData.EntityFramework.SQL
             //if (enPeligroExtincion)
             //{
             //    ret = ret.Where(e =>
-            //        e.EstadoConservacion < 60 ||
+            //        e.EstadoConservacion.Nombre == "Vulnerable" ||
             //        e.Amenazas.Count > 3 ||
-            //        e.Ecosistemas.Any(ec => ec.GradoConservacion < 60 && ec.Amenazas.Count > 3)
+            //        e._ecosistemas.Any(ec => ec.EstadoConservacion.Nombre == "Vulnerable" && ec.Amenazas.Count > 3)
             //    );
             //}
 
@@ -136,7 +140,7 @@ namespace AccessData.EntityFramework.SQL
             //{
             //    ret = ret.Where(e => e.rangoPeso.PesoMin <= pesoMinimo && e=> enPeligroExtincion.rangoPeso.PesoMax >= pesoMaximo);
             //}
-            
+
             //if (IdEcosistema > 0)
             //{
             //    ret = ret.Where(e => e._ecosistemas.Any(ec => ec.IdEcosistema == IdEcosistema));

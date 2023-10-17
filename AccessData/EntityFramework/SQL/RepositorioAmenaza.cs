@@ -34,7 +34,7 @@ namespace AccessData.EntityFramework.SQL
 
         public Amenaza FindById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Amenazas.Where(a => a.IdAmenaza.Equals(id)).FirstOrDefault();
         }
 
         public void Remove(Amenaza t)

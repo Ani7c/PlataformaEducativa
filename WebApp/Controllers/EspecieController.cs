@@ -22,8 +22,13 @@ namespace WebApp.Controllers
         private IGetEspeciesPorNombre GetEspeciesPorNombreUC;
         private IGetPosiblesEcosistemas GetPosiblesEcosistemasUC;
         private IFiltrado FiltradoUC;
+        private IGetThreats GetThreatsUC;
+        private IGetAmenazaById GetAmenazaByIdUC;
 
-        public EspecieController(IWebHostEnvironment environment, IAddSpecies addSpeciesUC, IGetSpecies getSpeciesUC, IGetEcosystem getEcosystemUC, IGetEcosystemById getEcosystemByIdUC, IAddSpecieToEcosystem addSpecieToEcosystemUC, IGetEspeciesPorNombre getEspeciesPorNombreUC, IGetPosiblesEcosistemas getPosiblesEcosistemas , IFiltrado filtradoUC)
+        public EspecieController(IWebHostEnvironment environment, IAddSpecies addSpeciesUC, 
+            IGetSpecies getSpeciesUC, IGetEcosystem getEcosystemUC, IGetEcosystemById getEcosystemByIdUC, 
+            IAddSpecieToEcosystem addSpecieToEcosystemUC, IGetEspeciesPorNombre getEspeciesPorNombreUC, 
+            IGetPosiblesEcosistemas getPosiblesEcosistemas , IFiltrado filtradoUC, IGetThreats getThreatsUC, IGetAmenazaById getAmenazaByIdUC)
         {
             _environment = environment;
             AddSpeciesUC = addSpeciesUC;
@@ -34,6 +39,8 @@ namespace WebApp.Controllers
             GetEspeciesPorNombreUC = getEspeciesPorNombreUC;
             GetPosiblesEcosistemasUC = getPosiblesEcosistemas;
             FiltradoUC = filtradoUC;
+            GetThreatsUC = getThreatsUC;
+            GetAmenazaByIdUC = getAmenazaByIdUC;
         }
 
 
@@ -52,6 +59,7 @@ namespace WebApp.Controllers
         // GET: EspecieController/Create
         public ActionResult Create(string mensaje)
         {
+            ViewBag.Amenazas = this.GetThreatsUC.GetAmenazas();
             ViewBag.Mensaje = mensaje;
             ViewBag.Ecosistemas = this.GetEcosystemUC.GetEcosystems();
             return View();
@@ -60,7 +68,7 @@ namespace WebApp.Controllers
         // POST: EspecieController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EspecieMarina especie, List<int> ecoIds, IFormFile imagen)
+        public ActionResult Create(EspecieMarina especie, List<int> ecoIds, List<int> amenazaIds, IFormFile imagen)
         {
             try
             {
@@ -73,6 +81,17 @@ namespace WebApp.Controllers
                         especie._ecosistemas.Add(ecosistema);
                     }
                 }
+
+                especie._amenazas = new List<Amenaza>();
+                foreach(int amenazaId in amenazaIds)
+                {
+                    Amenaza amenaza = this.GetAmenazaByIdUC.FindById(amenazaId);
+                    if( amenaza != null)
+                    {
+                        especie._amenazas.Add(amenaza);
+                    }
+                }
+
                 //GUARDAMOS IMAGEN
                 if (especie == null || imagen == null) return View();
 
