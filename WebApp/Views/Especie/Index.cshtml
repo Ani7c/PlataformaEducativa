@@ -21,6 +21,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Descripcion)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImgEspecie)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -37,9 +40,12 @@
                 @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
             <td>
+                <img class="img-thumbnail" src="~/img/Ecosistemas/@item.ImgEspecie" />
+            </td>
+            <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) 
+               @*  @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
             </td>
         </tr>
 }

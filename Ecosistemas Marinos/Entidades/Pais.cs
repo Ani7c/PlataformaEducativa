@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using Ecosistemas_Marinos.Exceptions;
+using Ecosistemas_Marinos.Interfaces_Repositorios;
 
 namespace Ecosistemas_Marinos.Entidades
 {
@@ -33,7 +35,7 @@ namespace Ecosistemas_Marinos.Entidades
 
         }
 
-        public void EsValido()
+        public void EsValido(IRepositorioConfiguracion configuracion)
         {
             if (string.IsNullOrEmpty(Nombre))
             {
@@ -42,6 +44,14 @@ namespace Ecosistemas_Marinos.Entidades
             if (string.IsNullOrEmpty(Codigo))
             {
                 throw new Exception("Codigo no valido");
+            }
+            if (Nombre.Length < configuracion.GetTopeInferior("Nombre"))
+            {
+                throw new Exception("Nombre demasiado corto");
+            }
+            if (Nombre.Length > configuracion.GetTopeSuperior("Nombre"))
+            {
+                throw new Exception("Nombre demasiado largo");
             }
         }
     }

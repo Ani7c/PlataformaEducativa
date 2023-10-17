@@ -96,7 +96,7 @@ namespace WebApp.Controllers
                     return RedirectToAction("Index");
 
                 }
-                this.AddEcosystemUC.AddEcosystem(em);
+                //this.AddEcosystemUC.AddEcosystem(em);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

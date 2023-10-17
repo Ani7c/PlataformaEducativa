@@ -1,4 +1,5 @@
 ﻿using Ecosistemas_Marinos.Interfaces;
+using Ecosistemas_Marinos.Interfaces_Repositorios;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -27,11 +28,19 @@ namespace EcosistemasMarinos.Entidades
 
         public Amenaza() { }
 
-        public void EsValido()
+        public void EsValido(IRepositorioConfiguracion configuracion)
         {
-            if(Peligrosidad < 1 || Peligrosidad > 10)
+            if (Peligrosidad < 1 || Peligrosidad > 10)
             {
                 throw new Exception("Debe estar entre 1 y 10");
+            }
+            if (Descripcion.Length < configuracion.GetTopeInferior("Descripcion"))
+            {
+                throw new Exception("Descripcion demasiado corta");
+            }
+            if(Descripcion.Length > configuracion.GetTopeSuperior("Descripcion"))
+            {
+                throw new Exception("Descripcion demasiado larga");
             }
         }
     }

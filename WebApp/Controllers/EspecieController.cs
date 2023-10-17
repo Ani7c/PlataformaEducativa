@@ -4,11 +4,16 @@ using LogicaAplicacion.InterfaceUseCase;
 using LogicaAplicacion.UseCase;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+//upload img
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+
 
 namespace WebApp.Controllers
 {
     public class EspecieController : Controller
     {
+        private IWebHostEnvironment _environment;
         private IAddSpecies AddSpeciesUC;
         private IGetSpecies GetSpeciesUC;
         private IGetEcosystem GetEcosystemUC;
@@ -17,8 +22,9 @@ namespace WebApp.Controllers
         private IGetEspeciesPorNombre GetEspeciesPorNombreUC;
         private IGetPosiblesEcosistemas GetPosiblesEcosistemasUC;
 
-        public EspecieController(IAddSpecies addSpeciesUC, IGetSpecies getSpeciesUC, IGetEcosystem getEcosystemUC, IGetEcosystemById getEcosystemByIdUC, IAddSpecieToEcosystem addSpecieToEcosystemUC, IGetEspeciesPorNombre getEspeciesPorNombreUC, IGetPosiblesEcosistemas getPosiblesEcosistemas)
+        public EspecieController(IWebHostEnvironment environment, IAddSpecies addSpeciesUC, IGetSpecies getSpeciesUC, IGetEcosystem getEcosystemUC, IGetEcosystemById getEcosystemByIdUC, IAddSpecieToEcosystem addSpecieToEcosystemUC, IGetEspeciesPorNombre getEspeciesPorNombreUC, IGetPosiblesEcosistemas getPosiblesEcosistemas)
         {
+            _environment = environment;
             AddSpeciesUC = addSpeciesUC;
             GetSpeciesUC = getSpeciesUC;
             GetEcosystemUC = getEcosystemUC;
@@ -52,7 +58,7 @@ namespace WebApp.Controllers
         // POST: EspecieController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EspecieMarina especie, List<int> ecoIds)
+        public ActionResult Create(EspecieMarina especie, List<int> ecoIds, IFormFile imagen)
         {
             try
             {
@@ -65,12 +71,53 @@ namespace WebApp.Controllers
                         especie._ecosistemas.Add(ecosistema);
                     }
                 }
-                this.AddSpeciesUC.AddSpecies(especie);
+                //GUARDAMOS IMAGEN
+                if (especie == null || imagen == null) return View();
+
+                if (GuardarImagen(imagen, especie))
+                {
+                    this.AddSpeciesUC.AddSpecies(especie);
+                    return RedirectToAction("Index");
+
+                }
+               
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
                 return RedirectToAction(nameof(Create), new { mensaje = "La especie ya existe" });
+            }
+        }
+
+        private bool GuardarImagen(IFormFile imagen, EspecieMarina especie)
+        {
+            if (imagen == null || especie == null) return false;
+            // SUBIR LA IMAGEN
+            //ruta física de wwwroot
+            string rutaFisicaWwwRoot = _environment.WebRootPath;
+
+            //ver como hacer para que se mantenga la extension jpg, etc
+            string nombreImagen = especie.Id + "_001";
+            //ruta donde se guardan las fotos de las personas
+            string rutaFisicaFoto = Path.Combine
+            (rutaFisicaWwwRoot, "img", "Especies", nombreImagen);
+            //FileStream permite manejar archivos
+            try
+            {
+                //el método using libera los recursos del objeto FileStream al finalizar
+                using (FileStream f = new FileStream(rutaFisicaFoto, FileMode.Create))
+                {
+                    //Para archivos grandes o varios archivos usar la versión
+                    //asincrónica de CopyTo. Sería: await imagen.CopyToAsync (f);
+                    imagen.CopyTo(f);
+                }
+                //GUARDAR EL NOMBRE DE LA IMAGEN SUBIDA EN EL OBJETO
+                especie.ImgEspecie = nombreImagen;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
 

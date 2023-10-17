@@ -1,6 +1,7 @@
 ﻿using Ecosistemas_Marinos.Entidades;
 using Ecosistemas_Marinos.Exceptions;
 using Ecosistemas_Marinos.Interfaces;
+using Ecosistemas_Marinos.Interfaces_Repositorios;
 using Ecosistemas_Marinos.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,7 +22,7 @@ namespace EcosistemasMarinos.Entidades
         public int IdEcosistema;
 
         [Required(ErrorMessage = "El nombre del ecosistema es requerido"), Column("Nombre del ecosistema")]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "Largo del nombre: entre 2 y 50 caracteres")]
+       
         public string Nombre { get; set; }
 
         [DisplayName("Ubicacion geografica")]
@@ -52,14 +53,17 @@ namespace EcosistemasMarinos.Entidades
         }
 
 
-        public void EsValido()
+
+        public void EsValido(IRepositorioConfiguracion configuracion)
         {
-            if(Nombre.Length < 2 || Nombre.Length > 50)
+            if(Nombre.Length < configuracion.GetTopeInferior("Nombre"))
             {
-                throw new EcosystemException("Nombre no valido");
+                throw new EcosystemException("Nombre demasiado corto");
+            }
+            if (Nombre.Length > configuracion.GetTopeSuperior("Nombre"))
+            {
+                throw new EcosystemException("Nombre demasiado largo");
             }
         }
-
-       
     }
 }

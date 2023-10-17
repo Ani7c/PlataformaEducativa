@@ -9,5 +9,7 @@ namespace Ecosistemas_Marinos.Interfaces_Repositorios
 {
     public interface IRepositorioConfiguracion : IRepositorio<Configuracion>
     {
+        public int GetTopeSuperior(string nombreAtributo);
+        public int GetTopeInferior(string nombreAtributo);
     }
 }

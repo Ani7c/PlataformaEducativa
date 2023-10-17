@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ecosistemas_Marinos.Interfaces_Repositorios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Ecosistemas_Marinos.Interfaces
 {
     public interface IValidable
     {
-        public void EsValido();
+        public void EsValido(IRepositorioConfiguracion configuracion);
     }
 }

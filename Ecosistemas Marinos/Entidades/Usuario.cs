@@ -1,5 +1,6 @@
 ﻿using Ecosistemas_Marinos.Exceptions;
 using Ecosistemas_Marinos.Interfaces;
+using Ecosistemas_Marinos.Interfaces_Repositorios;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -41,7 +42,7 @@ namespace Ecosistemas_Marinos.Entidades
             //EsAdmin = esAdmin;
         }
 
-        public void EsValido()
+        public void EsValido(IRepositorioConfiguracion configuracion)
         {
             if(Contrasenia.ToUpper() ==Contrasenia) 
             {

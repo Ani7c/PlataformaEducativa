@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Ecosistemas_Marinos.Interfaces;
 using Ecosistemas_Marinos.Entidades;
 using Microsoft.EntityFrameworkCore;
+using Ecosistemas_Marinos.Interfaces_Repositorios;
+using Ecosistemas_Marinos.Exceptions;
 
 namespace EcosistemasMarinos.Entidades
 {
@@ -31,10 +33,18 @@ namespace EcosistemasMarinos.Entidades
             Nombre = nombre;
         }
 
-        public void EsValido() 
-        { 
-        
-        }
+      
 
+        public void EsValido(IRepositorioConfiguracion configuracion)
+        {
+            if (Nombre.Length < configuracion.GetTopeInferior("Nombre"))
+            {
+                throw new Exception("Nombre demasiado corto");
+            }
+            if (Nombre.Length > configuracion.GetTopeSuperior("Nombre"))
+            {
+                throw new Exception("Nombre demasiado largo");
+            }
+        }
     }
 }
