@@ -117,7 +117,7 @@ namespace AccessData.EntityFramework.SQL
 
         public List<EspecieMarina> GetSpeciesBy(string NombreCientifico, bool enPeligroExtincion, double pesoMinimo, double pesoMaximo, int IdEcosistema)
         {
-            List<EspecieMarina> ret = new List<EspecieMarina>();
+            List<EspecieMarina> ret = _context.Especies.ToList();
 
             if(!string.IsNullOrEmpty(NombreCientifico))
             {               
