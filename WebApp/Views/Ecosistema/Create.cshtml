@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             @* nombre del ecosistema *@
@@ -70,11 +70,19 @@
             </div>
 
             @* <div class="form-group">
-                <label for="ImgEcosistema" class="control-label"></label>
-                <input type="file" name=" imagen" class="form-control" />
-                <span asp-validation="ImgEcosistema" class="text-danger"></span>
+                <label asp-for="ImgEcosistema" class="control-label"></label>
+                <input type="file" name="imagen" class="form-control" />
+                <span asp-validation-for="ImgEcosistema" class="text-danger"></span>
             </div> *@
 
+
+            <div class="form-group">
+                <label asp-for="ImgEcosistema" class="control-label"></label>
+                <input asp-for="ImgEcosistema" type="file" name="imagen" class="form-control" />
+                <span asp-validation-for="ImgEcosistema" class="text-danger"></span>
+            </div>
+
+        
 
 
             @* <div class="form-group">

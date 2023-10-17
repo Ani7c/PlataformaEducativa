@@ -34,6 +34,9 @@
             @* <th>
                 @Html.DisplayNameFor(model => model.Pais.Nombre)
             </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.ImgEcosistema)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -56,6 +59,9 @@
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { id=item.IdEcosistema })
+            </td>
+            <td>
+                <img class="img-thumbnail" src="~/img/Ecosistemas/@item.ImgEcosistema" />
             </td>
         </tr>
 }

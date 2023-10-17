@@ -9,6 +9,6 @@ namespace LogicaAplicacion.InterfaceUseCase
 {
     public interface IAddSpecieToEcosystem
     {
-        public void AsociarEspecieAEcosistema(EspecieMarina especieId, EcosistemaMarino eco);
+        public void AsociarEspecieAEcosistema(int especieId, int eco);
     }
 }

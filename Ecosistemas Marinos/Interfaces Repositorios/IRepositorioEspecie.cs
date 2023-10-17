@@ -9,7 +9,7 @@ namespace Ecosistemas_Marinos.Interfaces_Repositorios
 {
     public interface IRepositorioEspecie : IRepositorio<EspecieMarina>
     {
-        void AsociarEspecieAEcosistema(EspecieMarina especieId, EcosistemaMarino eco);
+        void AsociarEspecieAEcosistema(int especieId, int ecosistemaId);
 
         public List<EspecieMarina> GetEspeciesPorNombre(string nombreCientifico);
 

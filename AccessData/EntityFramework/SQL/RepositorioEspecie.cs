@@ -47,10 +47,10 @@ namespace AccessData.EntityFramework.SQL
         }
 
         ///REVISAR, CREO QUE NO ES NECESARIO QUE LE PASEMOS LA ESPECIE POR PARAMETRO
-        public void AsociarEspecieAEcosistema(EspecieMarina especie, EcosistemaMarino ecosistema)
+        public void AsociarEspecieAEcosistema(int ecosistemaId, int especieId)
         {
-            /*var ecosistema = _context.Ecosistemas.Find(ecosistemaId);
-            var especie = _context.Especies.Find(especieId);*/
+            var ecosistema = _context.Ecosistemas.Find(ecosistemaId);
+            var especie = _context.Especies.Find(especieId);
 
             if (ecosistema != null && especie != null)
             {
@@ -82,7 +82,8 @@ namespace AccessData.EntityFramework.SQL
 
         public EspecieMarina FindById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Especies.Where(especie => especie.Id.Equals(id)).FirstOrDefault();
+       
         }
 
         public void Remove(EspecieMarina t)

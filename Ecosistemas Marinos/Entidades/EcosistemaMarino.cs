@@ -40,9 +40,12 @@ namespace EcosistemasMarinos.Entidades
 
         public List<EspecieMarina> _especies { get; set; }
 
-      //  public List<EspecieMarina> _especiesQueHabitan { get; set; }
+        //  public List<EspecieMarina> _especiesQueHabitan { get; set; }
 
-      //  public string ImgEcosistema { get; set; }
+        [DisplayName("Imagen")]
+        public string ImgEcosistema { get; set; }
+
+        
         public EcosistemaMarino() 
         {
             //_amenazas = new List<Amenaza>();

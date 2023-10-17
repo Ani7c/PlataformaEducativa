@@ -18,7 +18,7 @@
 <h3>Elija un ecosistema</h3>
 <div class="form-group">
     <label for="EcosistemaMarino">Ecosistema</label>
-    <select class="form-control" asp-for="Id">
+    <select class="form-control" asp-for="_ecosistemas">
         <option disabled>-- Seleccione un ecosistema --</option>
         @foreach (var e in ViewBag.Ecosistemas)
         {
@@ -27,8 +27,13 @@
     </select>
 </div>
 
+    <!-- Campos ocultos para almacenar el ID de la especie y el ID del ecosistema -->
+    <input type="hidden" asp-for="Id" name="EspecieId" />
+    <input type="hidden" asp-for="_ecosistemas" name="EcosistemaId" />
+
 <div class="form-group pt-3">
     <input type="submit" value="Asociar" class="btn btn-primary" />
 </div>
+
 
 </form>

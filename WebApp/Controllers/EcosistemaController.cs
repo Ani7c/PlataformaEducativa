@@ -67,30 +67,34 @@ namespace WebApp.Controllers
         // POST: EcosistemaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EcosistemaMarino em ,IFormFile imagen)
+        public ActionResult Create(EcosistemaMarino em, IFormFile imagen)
             {
             try
             {
-                //if (imagen == null || !ModelState.IsValid) return View();
-
-                //if (GuardarImagen(imagen, em))
-                //{
-                    Pais pais = ObtenerPaisPorCodigoUC.BuscarPorCodigo(em.codPais);
-
-                    em.Pais = pais;
-                    this.AddEcosystemUC.AddEcosystem(em);
+                Pais pais = ObtenerPaisPorCodigoUC.BuscarPorCodigo(em.codPais);
+                em.Pais = pais;
+                
 
                 //REGISTRAMOS CAMBIOS
-                ControlDeCambios cambios = new ControlDeCambios
+                //ControlDeCambios cambios = new ControlDeCambios
+                //{
+                //    NombreUsuario = HttpContext.Session.GetString("LogueadoAlias"),
+                //    TipoEntidad = em.ToString(),
+                //    IdEntidad = em.IdEcosistema
+
+                //};
+                //this.AddChangeTrackingUC.AddChangeTracking(cambios);
+
+                //GUARDAMOS IMAGEN
+                if (em == null || imagen == null) return View();
+
+                if (GuardarImagen(imagen, em))
                 {
-                    NombreUsuario = HttpContext.Session.GetString("LogueadoAlias"),
-                    TipoEntidad = em.ToString(),
-                    IdEntidad = em.IdEcosistema
+                    this.AddEcosystemUC.AddEcosystem(em);
+                    return RedirectToAction("Index");
 
-                };
-                this.AddChangeTrackingUC.AddChangeTracking(cambios);
-                //}
-
+                }
+                this.AddEcosystemUC.AddEcosystem(em);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
@@ -100,37 +104,37 @@ namespace WebApp.Controllers
         }
 
 
-        //private bool GuardarImagen(IFormFile imagen, EcosistemaMarino em)
-        //{
-        //    if (imagen == null || em == null) return false;
-        //    // SUBIR LA IMAGEN
-        //    //ruta física de wwwroot
-        //    string rutaFisicaWwwRoot = _environment.WebRootPath;
+        private bool GuardarImagen(IFormFile imagen, EcosistemaMarino em)
+        {
+            if (imagen == null || em == null) return false;
+            // SUBIR LA IMAGEN
+            //ruta física de wwwroot
+            string rutaFisicaWwwRoot = _environment.WebRootPath;
 
-        //    //ver como hacer para que se mantenga la extension jpg, etc
-        //    string nombreImagen = em.IdEcosistema+"_001";
-        //    //ruta donde se guardan las fotos de las personas
-        //    string rutaFisicaFoto = Path.Combine
-        //    (rutaFisicaWwwRoot, "img", "Ecosistemas", nombreImagen);
-        //    //FileStream permite manejar archivos
-        //    try
-        //    {
-        //        //el método using libera los recursos del objeto FileStream al finalizar
-        //        using (FileStream f = new FileStream(rutaFisicaFoto, FileMode.Create))
-        //        {
-        //            //Para archivos grandes o varios archivos usar la versión
-        //            //asincrónica de CopyTo. Sería: await imagen.CopyToAsync (f);
-        //            imagen.CopyTo(f);
-        //        }
-        //        //GUARDAR EL NOMBRE DE LA IMAGEN SUBIDA EN EL OBJETO
-        //        em.ImgEcosistema = nombreImagen;
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return false;
-        //    }
-        //}
+            //ver como hacer para que se mantenga la extension jpg, etc
+            string nombreImagen = em.IdEcosistema + "_001";
+            //ruta donde se guardan las fotos de las personas
+            string rutaFisicaFoto = Path.Combine
+            (rutaFisicaWwwRoot, "img", "Ecosistemas", nombreImagen);
+            //FileStream permite manejar archivos
+            try
+            {
+                //el método using libera los recursos del objeto FileStream al finalizar
+                using (FileStream f = new FileStream(rutaFisicaFoto, FileMode.Create))
+                {
+                    //Para archivos grandes o varios archivos usar la versión
+                    //asincrónica de CopyTo. Sería: await imagen.CopyToAsync (f);
+                    imagen.CopyTo(f);
+                }
+                //GUARDAR EL NOMBRE DE LA IMAGEN SUBIDA EN EL OBJETO
+                em.ImgEcosistema = nombreImagen;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
 
         // GET: EcosistemaController/Edit/5

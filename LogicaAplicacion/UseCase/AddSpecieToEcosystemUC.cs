@@ -18,7 +18,7 @@ namespace LogicaAplicacion.UseCase
             this.repositorioEspecie = repositorioEspecie;
         }
 
-        public void AsociarEspecieAEcosistema(EspecieMarina especieId, EcosistemaMarino eco)
+        public void AsociarEspecieAEcosistema(int especieId, int eco)
         {
             repositorioEspecie.AsociarEspecieAEcosistema(especieId, eco);
 

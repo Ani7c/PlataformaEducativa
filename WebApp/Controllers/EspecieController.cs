@@ -146,11 +146,14 @@ namespace WebApp.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Asociar(int codEspecie, int IdEcosistema)
+        public ActionResult Asociar(int EspecieId, int EcosistemaId)
         {
             try
             {
+               // EspecieMarina especie = this.GetSpecieByIdUC.GetEspecieMarina(EspecieId);
+               // EcosistemaMarino ecosistema = this.GetEcosystemByIdUC.GetEcosystemById(EcosistemaId);
                 //llamar a asociar
+                this.AddSpecieToEcosystemUC.AsociarEspecieAEcosistema(EspecieId, EcosistemaId);
                 return RedirectToAction(nameof(Index), new { mensaje = "Asociados exitosamente" });
             }
             catch

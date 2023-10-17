@@ -47,12 +47,12 @@ namespace AccessData.InMemory
             throw new NotImplementedException();
         }
 
-        public void AsociarEspecieAEcosistema(EspecieMarina especieId, EcosistemaMarino eco)
-        {
-                     
-                eco._especies.Add(especieId);
+        //public void asociarespecieaecosistema(int especieid, int eco)
+        //{
+        //    _especies.Add(FindById(eco));
+        //   // eco._especies.add(especieid);
 
-        }
+        //}
 
         public List<EspecieMarina> GetEspeciesPorNombre(string nombreCientifico)
         {
@@ -62,6 +62,11 @@ namespace AccessData.InMemory
         public IEnumerable<EcosistemaMarino> GetPosiblesEcosistemas()
         {
             return new List<EcosistemaMarino>();
+        }
+
+        public void AsociarEspecieAEcosistema(int especieId, int ecosistemaId)
+        {
+            _especies.Add(FindById(ecosistemaId));
         }
     }
 }
