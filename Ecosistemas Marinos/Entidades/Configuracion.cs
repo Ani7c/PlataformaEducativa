@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Ecosistemas_Marinos.Interfaces;
+using Ecosistemas_Marinos.Interfaces_Repositorios;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Ecosistemas_Marinos.Entidades
 {
-    public class Configuracion
+    public class Configuracion :IValidable
     {
         [Key]
         public string NombreAtributo {  get; set; }
@@ -18,6 +20,16 @@ namespace Ecosistemas_Marinos.Entidades
 
         public Configuracion() { }
 
-
+        public void EsValido(IRepositorioConfiguracion configuracion)
+        {
+            if (TopeInferior > TopeSuperior)
+            {
+                throw new Exception("Topes no validos");
+            }
+            if(string.IsNullOrEmpty(NombreAtributo))
+            {
+                throw new Exception("Debe tener nombre");
+            }
+        }
     }
 }

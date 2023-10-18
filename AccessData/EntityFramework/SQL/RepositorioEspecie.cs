@@ -140,24 +140,25 @@ namespace AccessData.EntityFramework.SQL
             {               
                 ret = _context.Especies.Where(especie => especie.NombreCientifico.Equals(NombreCientifico)).ToList();
             }
-            //if (enPeligroExtincion)
-            //{
-            //    ret = ret.Where(e =>
-            //        e.EstadoConservacion.Nombre == "Vulnerable" ||
-            //        e.Amenazas.Count > 3 ||
-            //        e._ecosistemas.Any(ec => ec.EstadoConservacion.Nombre == "Vulnerable" && ec.Amenazas.Count > 3)
-            //    );
-            //}
+            if (enPeligroExtincion)
+            {
+                ret = ret.Where(e => e.EstadoConservacion.Nombre == "Vulnerable" || e._amenazas.Count() > 3 ||
+                e._ecosistemas.Any(ec => ec.EstadoConservacion.Nombre == "Vulnerable" && ec._amenazas.Count() > 3)  ).ToList();  
+                    //e.EstadoConservacion.Nombre == "Vulnerable" ||
+                    //e._amenazas.Count() > 3 ||
+                    //e._ecosistemas.Any(ec => ec.EstadoConservacion.Nombre == "Vulnerable" && ec._amenazas.Count() > 3)
+                
+            }
 
             //if (pesoMinimo > 0)
             //{
             //    ret = ret.Where(e => e.rangoPeso.PesoMin <= pesoMinimo && e=> enPeligroExtincion.rangoPeso.PesoMax >= pesoMaximo);
             //}
 
-            //if (IdEcosistema > 0)
-            //{
-            //    ret = ret.Where(e => e._ecosistemas.Any(ec => ec.IdEcosistema == IdEcosistema));
-            //}
+            if (IdEcosistema > 0)
+            {
+                ret = ret.Where(e => e._ecosistemas != null && e._ecosistemas.Any(ec => ec.IdEcosistema == IdEcosistema)).ToList();
+            }
 
             return ret;
         }

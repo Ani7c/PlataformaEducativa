@@ -1,4 +1,5 @@
 ﻿using Ecosistemas_Marinos.Entidades;
+using Ecosistemas_Marinos.Exceptions;
 using Ecosistemas_Marinos.Interfaces_Repositorios;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,11 @@ namespace AccessData.EntityFramework.SQL
 {
     public class RepositorioConfiguracion : IRepositorioConfiguracion
     {
-
+        
         public EcosistemaMarinoContext _context;
         public RepositorioConfiguracion()
         {
+            
             _context = new EcosistemaMarinoContext();
         }
 
@@ -56,9 +58,18 @@ namespace AccessData.EntityFramework.SQL
             throw new NotImplementedException();
         }
 
-        public void Update(Configuracion t)
+        public void Update(Configuracion c)
         {
-            throw new NotImplementedException();
+            try
+            {
+          
+                this._context.Configuraciones.Update(c);
+                this._context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al actualizar" + ex);
+            }
         }
     }
 }

@@ -85,7 +85,7 @@ namespace AccessData.EntityFramework.SQL
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al agregar el ecosistema " + e.Nombre);
+                throw new Exception("Error al actualizar el ecosistema " + e.Nombre);
             }
         }
 
