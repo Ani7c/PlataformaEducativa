@@ -71,9 +71,22 @@ namespace AccessData.EntityFramework.SQL
             throw new NotImplementedException();
         }
 
-        public void Update(EcosistemaMarino t)
+        public void Update(EcosistemaMarino e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                e.EsValido(config);
+                this._context.Ecosistemas.Update(e);
+                this._context.SaveChanges();
+            }
+            catch (EcosystemException ecosystemException)
+            {
+                throw ecosystemException;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al agregar el ecosistema " + e.Nombre);
+            }
         }
 
         void IRepositorio<EcosistemaMarino>.Remove(int id)

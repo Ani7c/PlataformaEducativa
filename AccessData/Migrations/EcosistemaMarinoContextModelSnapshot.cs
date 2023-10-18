@@ -246,7 +246,7 @@ namespace AccessData.Migrations
 
                     b.Property<string>("Alias")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Contrasenia")
                         .IsRequired()
@@ -259,6 +259,9 @@ namespace AccessData.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Alias")
+                        .IsUnique();
 
                     b.ToTable("usuarios");
                 });

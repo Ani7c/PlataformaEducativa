@@ -26,11 +26,13 @@ namespace WebApp.Controllers
         private IAddChangeTracking AddChangeTrackingUC;
         private IGetAmenazaById GetAmenazaByIdUC;
         private IGetEstadosConservacion GetEstadosConservacionUC;
+        private IUpdateEcosystem UpdateEcosystemUC;
 
         public EcosistemaController(IAddEcosystem addEcosystemUC, IGetEcosystem getEcosystemUC, 
             IGetThreats getThreatsUC, IGetCountries getCountriesUC, IObtenerPaisPorCodigo obtenerPaisPorCodigoUC, 
             IWebHostEnvironment environment, IGetEcosystemById getEcosystemByIdUC, IRemoveById removeByIdUC, 
-            IAddChangeTracking addChangeTrackingUC, IGetAmenazaById getAmenazaByIdUC, IGetEstadosConservacion getEstadosConservacionUC)
+            IAddChangeTracking addChangeTrackingUC, IGetAmenazaById getAmenazaByIdUC, IGetEstadosConservacion getEstadosConservacionUC
+            , IUpdateEcosystem updateEcosystemUC)
         {
             AddEcosystemUC = addEcosystemUC;
             GetEcosystemUC = getEcosystemUC;
@@ -43,6 +45,7 @@ namespace WebApp.Controllers
             AddChangeTrackingUC = addChangeTrackingUC;
             GetAmenazaByIdUC = getAmenazaByIdUC;
             GetEstadosConservacionUC = getEstadosConservacionUC;
+            UpdateEcosystemUC = updateEcosystemUC;
         }
 
 
@@ -101,14 +104,17 @@ namespace WebApp.Controllers
                     };
                     this.AddChangeTrackingUC.AddChangeTracking(cambios);
                 }
-                
+
+                //AGREGARMOS ECOSISTEMA
+                em.ImgEcosistema = "SinNombreAun";
+                this.AddEcosystemUC.AddEcosystem(em);
 
                 //GUARDAMOS IMAGEN
                 if (em == null || imagen == null) return View();
 
                 if (GuardarImagen(imagen, em))
                 {
-                    this.AddEcosystemUC.AddEcosystem(em);
+                    this.UpdateEcosystemUC.UpdateEcosystem(em);
                     return RedirectToAction("Index");
 
                 }

@@ -25,12 +25,14 @@ namespace WebApp.Controllers
         private IGetThreats GetThreatsUC;
         private IGetAmenazaById GetAmenazaByIdUC;
         private IGetEstadosConservacion GetEstadosConservacionUC;
+        private IUpdateSpecie UpdateSpecieUC;
 
         public EspecieController(IWebHostEnvironment environment, IAddSpecies addSpeciesUC, 
             IGetSpecies getSpeciesUC, IGetEcosystem getEcosystemUC, IGetEcosystemById getEcosystemByIdUC, 
             IAddSpecieToEcosystem addSpecieToEcosystemUC, IGetEspeciesPorNombre getEspeciesPorNombreUC, 
             IGetPosiblesEcosistemas getPosiblesEcosistemas , IFiltrado filtradoUC, IGetThreats getThreatsUC, 
-            IGetAmenazaById getAmenazaByIdUC, IGetEstadosConservacion getEstadosConservacionUC)
+            IGetAmenazaById getAmenazaByIdUC, IGetEstadosConservacion getEstadosConservacionUC,
+             IUpdateSpecie updateSpecieUC)
         {
             _environment = environment;
             AddSpeciesUC = addSpeciesUC;
@@ -44,6 +46,7 @@ namespace WebApp.Controllers
             GetThreatsUC = getThreatsUC;
             GetAmenazaByIdUC = getAmenazaByIdUC;
             GetEstadosConservacionUC = getEstadosConservacionUC;
+            UpdateSpecieUC = updateSpecieUC;
         }
 
 
@@ -96,12 +99,16 @@ namespace WebApp.Controllers
                     }
                 }
 
+                //GUARDAMOS ESPECIE
+                especie.ImgEspecie = "sinNombreAun";
+                this.AddSpeciesUC.AddSpecies(especie);
+
                 //GUARDAMOS IMAGEN
                 if (especie == null || imagen == null) return View();
 
                 if (GuardarImagen(imagen, especie))
                 {
-                    this.AddSpeciesUC.AddSpecies(especie);
+                    this.UpdateSpecieUC.UpdateSpecie(especie);
                     return RedirectToAction("Index");
 
                 }

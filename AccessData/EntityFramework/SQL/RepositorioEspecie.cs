@@ -98,9 +98,22 @@ namespace AccessData.EntityFramework.SQL
             throw new NotImplementedException();
         }
 
-        public void Update(EspecieMarina t)
+        public void Update(EspecieMarina especie)
         {
-            throw new NotImplementedException();
+            try
+            {
+                especie.EsValido(config);
+                this._context.Especies.Update(especie);
+                this._context.SaveChanges();
+            }
+            catch (SpeciesException specieException)
+            {
+                throw specieException;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al agregar la especie " + especie.NombreVulgar);
+            }
         }
 
         public void Remove(int id)

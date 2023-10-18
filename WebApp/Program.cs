@@ -37,6 +37,8 @@ builder.Services.AddScoped<IGetEspeciesPorNombre, GetEspeciesPorNombreUC>();
 builder.Services.AddScoped<IFiltrado, FiltradoUC>();
 builder.Services.AddScoped<IGetAmenazaById, GetAmenazaByIdUC>();
 builder.Services.AddScoped<IGetEstadosConservacion, GetEstadosConservacionUC>();
+builder.Services.AddScoped<IUpdateEcosystem, UpdateEcosystemUC>();
+builder.Services.AddScoped<IUpdateSpecie, UpdateSpecieUC>();
 
 
 builder.Services.AddScoped<IAddChangeTracking, AddChangeTrackingUC>();

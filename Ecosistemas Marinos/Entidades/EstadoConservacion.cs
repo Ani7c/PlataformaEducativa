@@ -13,7 +13,7 @@ using Ecosistemas_Marinos.Exceptions;
 
 namespace EcosistemasMarinos.Entidades
 {
-    //  [Index(nameof(Nombre), IsUnique = true)]
+    [Index(nameof(Nombre), IsUnique = true)]
     [PrimaryKey(nameof(Id))]
     public class EstadoConservacion : IValidable
     {
