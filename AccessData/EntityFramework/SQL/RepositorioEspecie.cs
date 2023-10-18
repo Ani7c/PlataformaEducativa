@@ -154,10 +154,10 @@ namespace AccessData.EntityFramework.SQL
                 
             }
 
-            //if (pesoMinimo > 0)
-            //{
-            //    ret = ret.Where(e => e.rangoPeso.PesoMin <= pesoMinimo && e=> enPeligroExtincion.rangoPeso.PesoMax >= pesoMaximo);
-            //}
+            if (pesoMinimo > 0)
+            {
+                ret = ret.Where(e => e.rangoPeso.PesoMin <= pesoMinimo && e.rangoPeso.PesoMax >= pesoMaximo).ToList();
+            }
 
             if (IdEcosistema > 0)
             {

@@ -33,8 +33,8 @@ namespace EcosistemasMarinos.Entidades
         public string NombreVulgar { get; set; }
 
         public string Descripcion { get; set; }
-        //public Peso rangoPeso { get; set; }
-        //public Longitud rangoLongitud { get; set; }
+        public Peso rangoPeso { get; set; }
+        public Longitud rangoLongitud { get; set; }
 
         [Key, ForeignKey(nameof(EstadoConservacion))] public int IdEstadoConservacion { get; set; }
         public EstadoConservacion EstadoConservacion { get; set; }
