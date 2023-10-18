@@ -25,11 +25,12 @@ namespace WebApp.Controllers
         private IRemoveById RemoveByIdUC;
         private IAddChangeTracking AddChangeTrackingUC;
         private IGetAmenazaById GetAmenazaByIdUC;
+        private IGetEstadosConservacion GetEstadosConservacionUC;
 
         public EcosistemaController(IAddEcosystem addEcosystemUC, IGetEcosystem getEcosystemUC, 
             IGetThreats getThreatsUC, IGetCountries getCountriesUC, IObtenerPaisPorCodigo obtenerPaisPorCodigoUC, 
             IWebHostEnvironment environment, IGetEcosystemById getEcosystemByIdUC, IRemoveById removeByIdUC, 
-            IAddChangeTracking addChangeTrackingUC, IGetAmenazaById getAmenazaByIdUC)
+            IAddChangeTracking addChangeTrackingUC, IGetAmenazaById getAmenazaByIdUC, IGetEstadosConservacion getEstadosConservacionUC)
         {
             AddEcosystemUC = addEcosystemUC;
             GetEcosystemUC = getEcosystemUC;
@@ -41,6 +42,7 @@ namespace WebApp.Controllers
             RemoveByIdUC = removeByIdUC;
             AddChangeTrackingUC = addChangeTrackingUC;
             GetAmenazaByIdUC = getAmenazaByIdUC;
+            GetEstadosConservacionUC = getEstadosConservacionUC;
         }
 
 
@@ -64,6 +66,7 @@ namespace WebApp.Controllers
             ViewBag.Mensaje = mensaje;
             ViewBag.Amenazas = this.GetThreatsUC.GetAmenazas();
             ViewBag.Paises = this.GetCountriesUC.GetCountries();
+            ViewBag.Estados = this.GetEstadosConservacionUC.GetEstadosConservacion();
             return View(); 
         }
 

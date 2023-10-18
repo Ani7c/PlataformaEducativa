@@ -24,11 +24,13 @@ namespace WebApp.Controllers
         private IFiltrado FiltradoUC;
         private IGetThreats GetThreatsUC;
         private IGetAmenazaById GetAmenazaByIdUC;
+        private IGetEstadosConservacion GetEstadosConservacionUC;
 
         public EspecieController(IWebHostEnvironment environment, IAddSpecies addSpeciesUC, 
             IGetSpecies getSpeciesUC, IGetEcosystem getEcosystemUC, IGetEcosystemById getEcosystemByIdUC, 
             IAddSpecieToEcosystem addSpecieToEcosystemUC, IGetEspeciesPorNombre getEspeciesPorNombreUC, 
-            IGetPosiblesEcosistemas getPosiblesEcosistemas , IFiltrado filtradoUC, IGetThreats getThreatsUC, IGetAmenazaById getAmenazaByIdUC)
+            IGetPosiblesEcosistemas getPosiblesEcosistemas , IFiltrado filtradoUC, IGetThreats getThreatsUC, 
+            IGetAmenazaById getAmenazaByIdUC, IGetEstadosConservacion getEstadosConservacionUC)
         {
             _environment = environment;
             AddSpeciesUC = addSpeciesUC;
@@ -41,6 +43,7 @@ namespace WebApp.Controllers
             FiltradoUC = filtradoUC;
             GetThreatsUC = getThreatsUC;
             GetAmenazaByIdUC = getAmenazaByIdUC;
+            GetEstadosConservacionUC = getEstadosConservacionUC;
         }
 
 
@@ -62,6 +65,7 @@ namespace WebApp.Controllers
             ViewBag.Amenazas = this.GetThreatsUC.GetAmenazas();
             ViewBag.Mensaje = mensaje;
             ViewBag.Ecosistemas = this.GetEcosystemUC.GetEcosystems();
+            ViewBag.Estados = this.GetEstadosConservacionUC.GetEstadosConservacion();
             return View();
         }
 

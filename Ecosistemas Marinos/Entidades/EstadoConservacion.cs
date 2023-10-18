@@ -13,37 +13,27 @@ using Ecosistemas_Marinos.Exceptions;
 
 namespace EcosistemasMarinos.Entidades
 {
-  //  [Index(nameof(Nombre), IsUnique = true)]
+    //  [Index(nameof(Nombre), IsUnique = true)]
     [PrimaryKey(nameof(Id))]
-    public class EstadoConservacion :IValidable
+    public class EstadoConservacion : IValidable
     {
-    
+
         public int Id;
 
-      //  [Required, Column("Nombre estado conservacion"), StringLength(50, MinimumLength = 2)]
-        
+        //  [Required, Column("Nombre estado conservacion"), StringLength(50, MinimumLength = 2)]
+
         public string Nombre { get; set; }
 
+        public int ValorMin { get; set; }
+
+        public int ValorMax { get; set; }
         public RangoSeguridad RangoDeSeguridad { get; set; }
 
         public EstadoConservacion()
         {
-            switch (RangoDeSeguridad)
-            {
-                case RangoSeguridad.Aceptable:
-                    Nombre = "Aceptable";
-                    break;
-                case RangoSeguridad.Optimo:
-                    Nombre = "Óptimo";
-                    break;
-                case RangoSeguridad.Vulnerable:
-                    Nombre = "Vulnerable";
-                    break;
-                
-            }
         }
 
-      
+
 
         public void EsValido(IRepositorioConfiguracion configuracion)
         {
@@ -55,6 +45,12 @@ namespace EcosistemasMarinos.Entidades
             {
                 throw new Exception("Nombre demasiado largo");
             }
+            
+
         }
-    }
+
+       
+
+
+    }    
 }

@@ -46,7 +46,7 @@ namespace EcosistemasMarinos.Entidades
         [DisplayName("Imagen")]
         public string ImgEspecie {get; set;}
 
-      //  public List<EcosistemaMarino> _PosiblesEcosistemas { get; set; }
+      
 
         public EspecieMarina()
         {

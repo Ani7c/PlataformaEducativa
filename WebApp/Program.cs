@@ -17,6 +17,7 @@ builder.Services.AddScoped<IRepositorioAmenaza, RepositorioAmenaza>();
 builder.Services.AddScoped<IRepositorioPais, RepositorioPais>();
 builder.Services.AddScoped<IRepositorioControlDeCambios, RepositorioControlDeCambios>();
 builder.Services.AddScoped<IRepositorioConfiguracion, RepositorioConfiguracion>();
+builder.Services.AddScoped<IRepositorioEstadoConservacion, RepositorioEstadoConservacion>();
 
 
 //inicializacion de casos de uso
@@ -35,7 +36,7 @@ builder.Services.AddScoped<IAddSpecieToEcosystem, AddSpecieToEcosystemUC>();
 builder.Services.AddScoped<IGetEspeciesPorNombre, GetEspeciesPorNombreUC>();
 builder.Services.AddScoped<IFiltrado, FiltradoUC>();
 builder.Services.AddScoped<IGetAmenazaById, GetAmenazaByIdUC>();
-
+builder.Services.AddScoped<IGetEstadosConservacion, GetEstadosConservacionUC>();
 
 
 builder.Services.AddScoped<IAddChangeTracking, AddChangeTrackingUC>();

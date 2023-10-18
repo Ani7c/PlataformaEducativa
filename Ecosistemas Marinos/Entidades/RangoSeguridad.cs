@@ -8,8 +8,9 @@ namespace Ecosistemas_Marinos.Entidades
 {
     public enum RangoSeguridad
     {
-        Aceptable,
         Optimo,
+        MuyBueno,
+        Aceptable,      
         Vulnerable
     }
 }
