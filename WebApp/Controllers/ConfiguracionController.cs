@@ -8,16 +8,20 @@ namespace WebApp.Controllers
     public class ConfiguracionController : Controller
     {
         private IUpdateSettings UpdateSettingsUC;
+        private IGetSettings GetSettingsUC;
+        private IFindSettingsByName GetSettingsByNameUC;
 
-        public ConfiguracionController(IUpdateSettings updateSettingsUC)
+        public ConfiguracionController(IUpdateSettings updateSettingsUC, IGetSettings getSettingsUC, IFindSettingsByName getSettingsByNameUC)
         {
             UpdateSettingsUC = updateSettingsUC;
+            GetSettingsUC = getSettingsUC;
+            GetSettingsByNameUC = getSettingsByNameUC;
         }
 
         // GET: ConfiguracionController
         public ActionResult Index()
         {
-            return View();
+            return View(this.GetSettingsUC.GetSettings());
         }
 
         // GET: ConfiguracionController/Details/5
@@ -48,26 +52,25 @@ namespace WebApp.Controllers
         }
 
         // GET: ConfiguracionController/Edit/5
-        public ActionResult Edit(int id, string mensaje)
+        public ActionResult Edit(String id, string mensaje)
         {
             ViewBag.Mensaje = mensaje;
-            return View();
+            return View(this.GetSettingsByNameUC.FindSettingsByName(id));
         }
 
         // POST: ConfiguracionController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Configuracion configuracion)
+        public ActionResult Edit(Configuracion setting)
         {
             try
             {
-                this.UpdateSettingsUC.UpdateSettings(configuracion);
+                this.UpdateSettingsUC.UpdateSettings(setting);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
-                //hacer index de conf
+                return View();            
             }
         }
 

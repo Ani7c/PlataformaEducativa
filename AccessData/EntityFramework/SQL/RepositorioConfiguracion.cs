@@ -45,12 +45,17 @@ namespace AccessData.EntityFramework.SQL
 
         public IEnumerable<Configuracion> FindAll()
         {
-            throw new NotImplementedException();
+            return _context.Configuraciones.ToList();
         }
 
         public Configuracion FindById(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public Configuracion FindByName(string name)
+        {
+            return _context.Configuraciones.Where(c => c.NombreAtributo.Equals(name)).FirstOrDefault();
         }
 
         public void Remove(int id)
