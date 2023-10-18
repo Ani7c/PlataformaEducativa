@@ -17,7 +17,6 @@ namespace EcosistemasMarinos.Entidades
         public int IdAmenaza;
         public string Descripcion { get; set; }
 
-        //[Range ]
         public int Peligrosidad { get; set; }
 
         public Amenaza(string descripcion, int peligrosidad)

@@ -27,13 +27,6 @@ namespace AccessData.EntityFramework.SQL
         {
             try
             {
-                var usuarioExistente = _context.usuarios.FirstOrDefault(u => u.Alias == usuario.Alias);
-
-                if (usuarioExistente != null)
-                {
-                    throw new UserException("El alias de usuario ya está en uso");
-                }
-
                 usuario.EsValido(config);
                 _context.usuarios.Add(usuario);
                 _context.SaveChanges();

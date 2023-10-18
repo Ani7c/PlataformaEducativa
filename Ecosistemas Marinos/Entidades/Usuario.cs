@@ -13,7 +13,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Ecosistemas_Marinos.Entidades
 {
-   // [Index(nameof(Alias), IsUnique = true)]
+    [Index(nameof(Alias), IsUnique = true)]
     [PrimaryKey(nameof(Id))]
     public class Usuario : IValidable
     {
