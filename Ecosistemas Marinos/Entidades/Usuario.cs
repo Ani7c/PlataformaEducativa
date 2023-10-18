@@ -21,8 +21,9 @@ namespace Ecosistemas_Marinos.Entidades
         public int Id;
         [MinLength(8)]
 
-
         public string Contrasenia { get; set; }
+
+       // public string Encriptada { get; set; }
         
         [MinLength(6)]
         public string Alias { get; set; }
@@ -56,12 +57,19 @@ namespace Ecosistemas_Marinos.Entidades
             if (!ContieneCaracterEspecial(Contrasenia)){
                 throw new UserException("La contraseña debe contener caracteres especiales");
             }
-            
+            if (Alias.Length < 6)
+            {
+                throw new UserException("Alias demasiado corto");
+            }
+            if (Contrasenia.Length < 8)
+            {
+                throw new UserException("Contraseña demasiado corta");
+            }
         }
 
         static bool ContieneCaracterEspecial(string password)
         {
-            string pattern = @"[!@#$%^&*()_+{}\[\]:;<>,.?~\\]";
+            string pattern = @".,#;:!";
             Regex regex = new Regex(pattern);
 
             // Utilizamos el método Any para verificar si hay al menos un carácter especial

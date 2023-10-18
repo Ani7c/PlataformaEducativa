@@ -19,7 +19,7 @@ namespace LogicaAplicacion.UseCase
         }
         public List<EcosistemaMarino> GetPosiblesEcosistemas()
         {
-            return (List<EcosistemaMarino>)repositorioEspecie.GetPosiblesEcosistemas();
+            return repositorioEspecie.GetPosiblesEcosistemas().ToList();
         }
     }
 }
