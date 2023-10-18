@@ -127,7 +127,8 @@ namespace WebApp.Controllers
             string rutaFisicaWwwRoot = _environment.WebRootPath;
 
             //ver como hacer para que se mantenga la extension jpg, etc
-            string nombreImagen = em.IdEcosistema + "_001";
+            string extension = Path.GetExtension(imagen.FileName);
+            string nombreImagen = em.IdEcosistema + "_001"+ extension;
             //ruta donde se guardan las fotos de las personas
             string rutaFisicaFoto = Path.Combine
             (rutaFisicaWwwRoot, "img", "Ecosistemas", nombreImagen);

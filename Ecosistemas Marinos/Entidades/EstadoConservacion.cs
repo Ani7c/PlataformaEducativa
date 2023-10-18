@@ -26,11 +26,21 @@ namespace EcosistemasMarinos.Entidades
 
         public RangoSeguridad RangoDeSeguridad { get; set; }
 
-        public EstadoConservacion() { }
-
-        public EstadoConservacion(string nombre)
+        public EstadoConservacion()
         {
-            Nombre = nombre;
+            switch (RangoDeSeguridad)
+            {
+                case RangoSeguridad.Aceptable:
+                    Nombre = "Aceptable";
+                    break;
+                case RangoSeguridad.Optimo:
+                    Nombre = "Óptimo";
+                    break;
+                case RangoSeguridad.Vulnerable:
+                    Nombre = "Vulnerable";
+                    break;
+                
+            }
         }
 
       

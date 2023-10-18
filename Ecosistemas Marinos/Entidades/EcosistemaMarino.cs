@@ -49,7 +49,7 @@ namespace EcosistemasMarinos.Entidades
         
         public EcosistemaMarino() 
         {
-            //_amenazas = new List<Amenaza>();
+        
         }
 
 
