@@ -36,7 +36,7 @@ namespace EcosistemasMarinos.Entidades
         [ForeignKey(nameof(Pais))] public string codPais { get; set; }
         public Pais Pais { get; set; }
 
-        //public List<Amenaza> _amenazas { get; set; }
+        public List<Amenaza> _amenazas { get; set; }
 
 
         public List<EspecieMarina> _especies { get; set; }

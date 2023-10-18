@@ -29,7 +29,11 @@ namespace AccessData.EntityFramework.SQL
             {
                 
                 _context.Entry(e.Pais).State = EntityState.Unchanged;
-             
+                foreach (Amenaza a in e._amenazas)
+                {
+                    _context.Entry(a).State = EntityState.Unchanged;
+                }
+
                 e.EsValido(config);
                 _context.Ecosistemas.Add(e);
                 _context.SaveChanges();

@@ -69,11 +69,16 @@
                 <span asp-validation-for="EstadoConservacion.Nombre" class="text-danger"></span>
             </div>
 
-            @* <div class="form-group">
-                <label asp-for="ImgEcosistema" class="control-label"></label>
-                <input type="file" name="imagen" class="form-control" />
-                <span asp-validation-for="ImgEcosistema" class="text-danger"></span>
-            </div> *@
+            <div class="form-group">
+                <label for="Amenazas">Amenazas</label>
+                <select multiple="multiple" class="form-control" asp-for="_amenazas" name="amenazaIds">
+                    <option disabled>-- Seleccione amenazas --</option>
+                    @foreach (var a in ViewBag.Amenazas)
+                    {
+                        <option value="@a.IdAmenaza">@a.Descripcion</option>
+                    }
+                </select>
+            </div>
 
 
             <div class="form-group">
@@ -82,23 +87,8 @@
                 <span asp-validation-for="ImgEcosistema" class="text-danger"></span>
             </div>
 
-        
-
-
-            @* <div class="form-group">
-                <label for="_amenazas">Amenazas:</label>
-                 <select multiple="multiple" class="form-control" id="_amenazas.Id" name="_amenazas.Descripcion">
-                    @foreach (var amenaza in ViewBag.Amenazas)
-                    {
-                        <option value="@amenaza.Descripcion">@amenaza.Descripcion</option>
-                    }
-                </select> 
-                
-                <select asp-for="_amenazas" asp-items="@(new SelectList(ViewBag.Amenazas,"Id","Descripcion"))" multiple class="control-label"></select>
-            </div>    *@        
-            
-
-            
+      
+          
 
             <div class="form-group pt-3">
                 <input type="submit" value="Create" class="btn btn-primary" />

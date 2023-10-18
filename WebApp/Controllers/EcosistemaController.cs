@@ -24,10 +24,12 @@ namespace WebApp.Controllers
         private IGetEcosystemById GetEcosystemByIdUC;
         private IRemoveById RemoveByIdUC;
         private IAddChangeTracking AddChangeTrackingUC;
+        private IGetAmenazaById GetAmenazaByIdUC;
 
         public EcosistemaController(IAddEcosystem addEcosystemUC, IGetEcosystem getEcosystemUC, 
             IGetThreats getThreatsUC, IGetCountries getCountriesUC, IObtenerPaisPorCodigo obtenerPaisPorCodigoUC, 
-            IWebHostEnvironment environment, IGetEcosystemById getEcosystemByIdUC, IRemoveById removeByIdUC, IAddChangeTracking addChangeTrackingUC)
+            IWebHostEnvironment environment, IGetEcosystemById getEcosystemByIdUC, IRemoveById removeByIdUC, 
+            IAddChangeTracking addChangeTrackingUC, IGetAmenazaById getAmenazaByIdUC)
         {
             AddEcosystemUC = addEcosystemUC;
             GetEcosystemUC = getEcosystemUC;
@@ -38,6 +40,7 @@ namespace WebApp.Controllers
             GetEcosystemByIdUC = getEcosystemByIdUC;
             RemoveByIdUC = removeByIdUC;
             AddChangeTrackingUC = addChangeTrackingUC;
+            GetAmenazaByIdUC = getAmenazaByIdUC;
         }
 
 
@@ -59,7 +62,7 @@ namespace WebApp.Controllers
         public ActionResult Create(string mensaje)
         {
             ViewBag.Mensaje = mensaje;
-            //ViewBag.Amenazas = this.GetThreatsUC.GetAmenazas();
+            ViewBag.Amenazas = this.GetThreatsUC.GetAmenazas();
             ViewBag.Paises = this.GetCountriesUC.GetCountries();
             return View(); 
         }
@@ -67,12 +70,22 @@ namespace WebApp.Controllers
         // POST: EcosistemaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EcosistemaMarino em, IFormFile imagen)
+        public ActionResult Create(EcosistemaMarino em, List<int> amenazaIds, IFormFile imagen)
             {
             try
             {
                 Pais pais = ObtenerPaisPorCodigoUC.BuscarPorCodigo(em.codPais);
                 em.Pais = pais;
+
+                em._amenazas = new List<Amenaza>();
+                foreach (int amenazaId in amenazaIds)
+                {
+                    Amenaza amenaza = this.GetAmenazaByIdUC.FindById(amenazaId);
+                    if (amenaza != null)
+                    {
+                        em._amenazas.Add(amenaza);
+                    }
+                }
 
                 if (HttpContext.Session.GetString("LogueadoAlias") != null) { 
                     //REGISTRAMOS CAMBIOS
