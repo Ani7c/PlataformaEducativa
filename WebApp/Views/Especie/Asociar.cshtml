@@ -6,7 +6,7 @@
 <h3>Elija una especie</h3>
 <div class="form-group">
     <label for="EspecieMarina">Especie</label>
-    <select class="form-control" asp-for="Id">
+        <select class="form-control" asp-for="Id" required>
         <option disabled>-- Seleccione una especie --</option>
         @foreach (var es in ViewBag.Especies)
         {
@@ -18,7 +18,7 @@
 <h3>Elija un ecosistema</h3>
 <div class="form-group">
     <label for="EcosistemaMarino">Ecosistema</label>
-    <select class="form-control" asp-for="_ecosistemas">
+        <select class="form-control" asp-for="_ecosistemas" required>
         <option disabled>-- Seleccione un ecosistema --</option>
         @foreach (var e in ViewBag.Ecosistemas)
         {

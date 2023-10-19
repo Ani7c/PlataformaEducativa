@@ -30,6 +30,9 @@
                 @Html.DisplayNameFor(model => model.Descripcion)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.EstadoConservacion)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ImgEspecie)
             </th>
             <th></th>
@@ -48,6 +51,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoConservacion.Nombre)
             </td>
             <td>
                 <img class="img-thumbnail" src="~/img/Especies/@item.ImgEspecie" />
