@@ -25,27 +25,42 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                       @* @if (Context.Session.GetString("LogueadoAlias") != null && Context.Session.GetString("LogueadoAlias") == "admin1")
-                        {*@
+                        @if (Context.Session.GetString("LogueadoAlias") != null && Context.Session.GetString("LogueadoAlias") == "admin1")
+                        {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Create">Registrar usuario</a>
                             </li>
-                        @*}*@
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Ecosistema" asp-action="Create">Registrar ecosistema</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Especie" asp-action="Create">Registrar especie marina</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Ecosistema" asp-action="Index">Listar ecosistemas marinos</a>
-                        </li>
+                        }
+
+                        @if (Context.Session.GetString("LogueadoAlias") != null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Ecosistema" asp-action="Create">Registrar ecosistema</a>
+                            </li>
+
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Especie" asp-action="Create">Registrar especie marina</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Ecosistema" asp-action="Index">Listar ecosistemas marinos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Especie" asp-action="Asociar">Asociar Especie a Ecosistema</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Configuracion" asp-action="Index">Editar topes</a>
+                            </li>
+                        }
 
                         @if (Context.Session.GetString("LogueadoAlias") == null)
                         {
                            <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Autorizacion" asp-action="Login">Login</a>
-                        </li> 
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Autorizacion" asp-action="Login">Login</a>
+                            </li> 
                         }                       
 
                         @if (Context.Session.GetString("LogueadoAlias") != null)
@@ -57,17 +72,13 @@
 
                         
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Especie" asp-action="Asociar">Asociar Especie a Ecosistema</a>
-                        </li>
+                        
 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Especie" asp-action="Filtrado">Filtrar especies</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Configuracion" asp-action="Index">Editar topes</a>
-                        </li>
+                       
                     </ul>
                 </div>
             </div>
