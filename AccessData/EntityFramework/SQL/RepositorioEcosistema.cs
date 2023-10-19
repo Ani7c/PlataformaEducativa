@@ -93,8 +93,15 @@ namespace AccessData.EntityFramework.SQL
         {
             try
             {
-                EcosistemaMarino em = new EcosistemaMarino();
-                em.IdEcosistema = id;
+
+                // Encontramos el ecosistema a eliminar junto con sus amenazas
+                EcosistemaMarino em = this._context.Ecosistemas.Where(e => e.IdEcosistema == id)
+                    .Include(e => e._amenazas).FirstOrDefault();
+                    
+
+                // Eliminamos las amenazas relacionadas
+                this._context.Amenazas.RemoveRange(em._amenazas);
+
                 this._context.Ecosistemas.Remove(em);
                 this._context.SaveChanges();
             }

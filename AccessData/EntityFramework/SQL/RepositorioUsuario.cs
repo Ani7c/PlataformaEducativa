@@ -28,6 +28,7 @@ namespace AccessData.EntityFramework.SQL
             try
             {
                 usuario.EsValido(config);
+                usuario.Contrasenia = BCrypt.Net.BCrypt.HashPassword(usuario.Contrasenia);               
                 _context.usuarios.Add(usuario);
                 _context.SaveChanges();
             }
@@ -77,5 +78,7 @@ namespace AccessData.EntityFramework.SQL
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

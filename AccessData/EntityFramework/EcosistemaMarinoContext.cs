@@ -39,21 +39,21 @@ namespace AccessData.EntityFramework
                 .HasMany(em => em._especies)
                 .WithMany(ecosistema => ecosistema._ecosistemas)
                 .UsingEntity<Dictionary<string, string>>(
-                    "Ecosistema_Especie",
+                    "RealmenteHabita",
                     em => em.HasOne<EspecieMarina>().WithMany().OnDelete(DeleteBehavior.Restrict),
-                    ecosistema => ecosistema.HasOne<EcosistemaMarino>().WithMany().OnDelete(DeleteBehavior.NoAction)
-                // em => em.HasOne<EspecieMarina>().WithMany().HasForeignKey("IdEspecie").OnDelete(DeleteBehavior.NoAction)
+                 ecosistema => ecosistema.HasOne<EcosistemaMarino>().WithMany().OnDelete(DeleteBehavior.Cascade)
+                //em => em.HasOne<EspecieMarina>().WithMany().HasForeignKey("IdEspecie").OnDelete(DeleteBehavior.NoAction)
                 // ecosistema => ecosistema.HasOne<EcosistemaMarino>().WithMany().OnDelete(DeleteBehavior.Restrict)
-                );
+                ); 
 
 
             modelBuilder.Entity<EspecieMarina>()
             .HasMany(es => es._ecosistemas)
             .WithMany(especie => especie._especies)
             .UsingEntity<Dictionary<string, string>>(
-                "EspeciesHabitanEcosistema",
+                "PosiblesEcosistemas",
                 es => es.HasOne<EcosistemaMarino>().WithMany().OnDelete(DeleteBehavior.Restrict),
-                especie => especie.HasOne<EspecieMarina>().WithMany().OnDelete(DeleteBehavior.NoAction));
+                especie => especie.HasOne<EspecieMarina>().WithMany().OnDelete(DeleteBehavior.Restrict));
 
         }
 

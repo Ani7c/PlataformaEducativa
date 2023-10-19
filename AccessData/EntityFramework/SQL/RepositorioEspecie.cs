@@ -102,9 +102,6 @@ namespace AccessData.EntityFramework.SQL
         {
             try
 
-
-
-
             {
                 especie.EsValido(config);
                 this._context.Especies.Update(especie);

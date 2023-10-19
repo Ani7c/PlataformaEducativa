@@ -36,13 +36,7 @@ namespace Ecosistemas_Marinos.Entidades
             EsAdmin = false;
         }
 
-        public Usuario(string contrasenia, string alias)
-        {
-            Contrasenia = contrasenia;
-            Alias = alias;
-    
-            //EsAdmin = esAdmin;
-        }
+       
 
         public void EsValido(IRepositorioConfiguracion configuracion)
         {
@@ -54,9 +48,9 @@ namespace Ecosistemas_Marinos.Entidades
             {
                 throw new UserException("La contraseña debe contener mayusculas y minusculas");
             }
-            if (!ContieneCaracterEspecial(Contrasenia)){
-                throw new UserException("La contraseña debe contener caracteres especiales");
-            }
+            //if (!ContieneCaracterEspecial(Contrasenia)){
+            //    throw new UserException("La contraseña debe contener caracteres especiales");
+            //}
             if (Alias.Length < 6)
             {
                 throw new UserException("Alias demasiado corto");

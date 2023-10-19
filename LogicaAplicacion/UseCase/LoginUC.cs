@@ -26,7 +26,8 @@ namespace LogicaAplicacion.UseCase
             Usuario u = repositorioUsuario.ObtenerPorAlias(alias);
             if (u != null)
             {
-                if (contraseña == u.Contrasenia)
+               
+                if (BCrypt.Net.BCrypt.Verify(contraseña, u.Contrasenia))
                 {
                     return true;
                 }

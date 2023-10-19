@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AccessData.Migrations
 {
     /// <inheritdoc />
-    public partial class CrearBDotraVez : Migration
+    public partial class crearDenuevo : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,7 +46,7 @@ namespace AccessData.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ValorMin = table.Column<int>(type: "int", nullable: false),
                     ValorMax = table.Column<int>(type: "int", nullable: false),
                     RangoDeSeguridad = table.Column<int>(type: "int", nullable: false)
@@ -93,6 +93,10 @@ namespace AccessData.Migrations
                     Nombrecientifico = table.Column<string>(name: "Nombre cientifico", type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Nombrevulgar = table.Column<string>(name: "Nombre vulgar", type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    rangoPeso_PesoMin = table.Column<double>(type: "float", nullable: false),
+                    rangoPeso_PesoMax = table.Column<double>(type: "float", nullable: false),
+                    rangoLongitud_LongitudMin = table.Column<double>(type: "float", nullable: false),
+                    rangoLongitud_LongitudMax = table.Column<double>(type: "float", nullable: false),
                     IdEstadoConservacion = table.Column<int>(type: "int", nullable: false),
                     ImgEspecie = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -166,7 +170,31 @@ namespace AccessData.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ecosistema_Especie",
+                name: "PosiblesEcosistemas",
+                columns: table => new
+                {
+                    _ecosistemasIdEcosistema = table.Column<int>(type: "int", nullable: false),
+                    _especiesId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PosiblesEcosistemas", x => new { x._ecosistemasIdEcosistema, x._especiesId });
+                    table.ForeignKey(
+                        name: "FK_PosiblesEcosistemas_Ecosistemas__ecosistemasIdEcosistema",
+                        column: x => x._ecosistemasIdEcosistema,
+                        principalTable: "Ecosistemas",
+                        principalColumn: "IdEcosistema",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PosiblesEcosistemas_Especies__especiesId",
+                        column: x => x._especiesId,
+                        principalTable: "Especies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RealmenteHabita",
                 columns: table => new
                 {
                     _ecosistemasTempId1 = table.Column<int>(type: "int", nullable: false),
@@ -176,41 +204,18 @@ namespace AccessData.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ecosistema_Especie", x => new { x._ecosistemasTempId1, x._especiesTempId1 });
+                    table.PrimaryKey("PK_RealmenteHabita", x => new { x._ecosistemasTempId1, x._especiesTempId1 });
                     table.ForeignKey(
-                        name: "FK_Ecosistema_Especie_Ecosistemas_EcosistemaMarinoIdEcosistema",
+                        name: "FK_RealmenteHabita_Ecosistemas_EcosistemaMarinoIdEcosistema",
                         column: x => x.EcosistemaMarinoIdEcosistema,
                         principalTable: "Ecosistemas",
                         principalColumn: "IdEcosistema");
                     table.ForeignKey(
-                        name: "FK_Ecosistema_Especie_Especies_EspecieMarinaId",
+                        name: "FK_RealmenteHabita_Especies_EspecieMarinaId",
                         column: x => x.EspecieMarinaId,
                         principalTable: "Especies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "EspeciesHabitanEcosistema",
-                columns: table => new
-                {
-                    _ecosistemasIdEcosistema = table.Column<int>(type: "int", nullable: false),
-                    _especiesId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EspeciesHabitanEcosistema", x => new { x._ecosistemasIdEcosistema, x._especiesId });
-                    table.ForeignKey(
-                        name: "FK_EspeciesHabitanEcosistema_Ecosistemas__ecosistemasIdEcosistema",
-                        column: x => x._ecosistemasIdEcosistema,
-                        principalTable: "Ecosistemas",
-                        principalColumn: "IdEcosistema",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_EspeciesHabitanEcosistema_Especies__especiesId",
-                        column: x => x._especiesId,
-                        principalTable: "Especies",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -221,16 +226,6 @@ namespace AccessData.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Amenazas_EspecieMarinaId",
                 table: "Amenazas",
-                column: "EspecieMarinaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Ecosistema_Especie_EcosistemaMarinoIdEcosistema",
-                table: "Ecosistema_Especie",
-                column: "EcosistemaMarinoIdEcosistema");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Ecosistema_Especie_EspecieMarinaId",
-                table: "Ecosistema_Especie",
                 column: "EspecieMarinaId");
 
             migrationBuilder.CreateIndex(
@@ -249,9 +244,25 @@ namespace AccessData.Migrations
                 column: "IdEstadoConservacion");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EspeciesHabitanEcosistema__especiesId",
-                table: "EspeciesHabitanEcosistema",
+                name: "IX_EstadosDeConservacion_Nombre",
+                table: "EstadosDeConservacion",
+                column: "Nombre",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PosiblesEcosistemas__especiesId",
+                table: "PosiblesEcosistemas",
                 column: "_especiesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RealmenteHabita_EcosistemaMarinoIdEcosistema",
+                table: "RealmenteHabita",
+                column: "EcosistemaMarinoIdEcosistema");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RealmenteHabita_EspecieMarinaId",
+                table: "RealmenteHabita",
+                column: "EspecieMarinaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_usuarios_Alias",
@@ -273,10 +284,10 @@ namespace AccessData.Migrations
                 name: "ControlDeCambios");
 
             migrationBuilder.DropTable(
-                name: "Ecosistema_Especie");
+                name: "PosiblesEcosistemas");
 
             migrationBuilder.DropTable(
-                name: "EspeciesHabitanEcosistema");
+                name: "RealmenteHabita");
 
             migrationBuilder.DropTable(
                 name: "usuarios");

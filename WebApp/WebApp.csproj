@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AccessData\AccessData.csproj" />
     <ProjectReference Include="..\Ecosistemas Marinos\EcosistemasMarinos.csproj" />
     <ProjectReference Include="..\LogicaAplicacion\LogicaAplicacion.csproj" />
   </ItemGroup>
