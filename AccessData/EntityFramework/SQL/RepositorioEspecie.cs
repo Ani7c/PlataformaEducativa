@@ -45,15 +45,12 @@ namespace AccessData.EntityFramework.SQL
             {
                 throw speciesException;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new Exception(@"Error al agregar la especie marina" + ex);
+                throw new Exception(@"Error al agregar la especie marina");
             }
-            //eliminar exe antes de entregar
-            //TODO
         }
 
-        ///REVISAR, CREO QUE NO ES NECESARIO QUE LE PASEMOS LA ESPECIE POR PARAMETRO
         public void AsociarEspecieAEcosistema(int ecosistemaId, int especieId)
         {
             var ecosistema = _context.Ecosistemas.Find(ecosistemaId);
@@ -111,7 +108,7 @@ namespace AccessData.EntityFramework.SQL
             {
                 throw specieException;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new Exception("Error al agregar la especie " + especie.NombreVulgar);
             }
@@ -145,10 +142,6 @@ namespace AccessData.EntityFramework.SQL
             {
                 ret = ret.Where(e => e.EstadoConservacion.Nombre == "Vulnerable" || e._amenazas.Count() > 3 ||
                 e._ecosistemas.Any(ec => ec.EstadoConservacion.Nombre == "Vulnerable" && ec._amenazas.Count() > 3)  ).ToList();  
-                    //e.EstadoConservacion.Nombre == "Vulnerable" ||
-                    //e._amenazas.Count() > 3 ||
-                    //e._ecosistemas.Any(ec => ec.EstadoConservacion.Nombre == "Vulnerable" && ec._amenazas.Count() > 3)
-                
             }
 
             if (pesoMinimo > 0)

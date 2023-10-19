@@ -25,12 +25,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @if (Context.Session.GetString("LogueadoAlias") != null && Context.Session.GetString("LogueadoAlias") == "admin1")
-                        {
+                       @* @if (Context.Session.GetString("LogueadoAlias") != null && Context.Session.GetString("LogueadoAlias") == "admin1")
+                        {*@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Create">Registrar usuario</a>
                             </li>
-                        }
+                        @*}*@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Ecosistema" asp-action="Create">Registrar ecosistema</a>
                         </li>

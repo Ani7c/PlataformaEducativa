@@ -1,5 +1,6 @@
 ﻿using Ecosistemas_Marinos.Entidades;
 using Ecosistemas_Marinos.Exceptions;
+using EcosistemasMarinos.Entidades;
 using LogicaAplicacion.InterfaceUseCase;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +10,27 @@ namespace WebApp.Controllers
     public class UsuarioController : Controller
     {
         private IAddUser AddUserUC;
+        private IAddChangeTracking AddChangeTrackingUC;
 
-        public UsuarioController(IAddUser addUserUC)
+        public UsuarioController(IAddUser addUserUC, IAddChangeTracking addChangeTrackingUC)
         {
             AddUserUC = addUserUC;
+            AddChangeTrackingUC = addChangeTrackingUC;
+        }
+        private void GuardarCambiosUsuario(Usuario u)
+        {
+            if (HttpContext.Session.GetString("LogueadoAlias") != null)
+            {
+                //REGISTRAMOS CAMBIOS
+                ControlDeCambios cambios = new ControlDeCambios
+                {
+                    NombreUsuario = HttpContext.Session.GetString("LogueadoAlias"),
+                    TipoEntidad = u.ToString(),
+                    IdEntidad = u.Id
+
+                };
+                this.AddChangeTrackingUC.AddChangeTracking(cambios);
+            }
         }
 
 
@@ -33,12 +51,12 @@ namespace WebApp.Controllers
         public ActionResult Create(string mensaje)
         {
             string alias = HttpContext.Session.GetString("LogueadoAlias");
-            if(alias != null && alias.Equals("admin1"))
-            {
+            //if(alias != null && alias.Equals("admin1"))
+            //{
             ViewBag.Mensaje = mensaje;
             return View();
-           }
-            return RedirectToAction("Index", "Home");
+           //}
+            //return RedirectToAction("Index", "Home");
         }
 
         // POST: UsuarioController/Create
@@ -49,7 +67,9 @@ namespace WebApp.Controllers
             try
             {
                 this.AddUserUC.AddUser(usuario);
+                GuardarCambiosUsuario(usuario);
                 ViewBag.msg = "Usuario agregado con éxito";
+
                 return RedirectToAction("Index", "Home");
             }
             

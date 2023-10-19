@@ -26,13 +26,15 @@ namespace WebApp.Controllers
         private IGetAmenazaById GetAmenazaByIdUC;
         private IGetEstadosConservacion GetEstadosConservacionUC;
         private IUpdateSpecie UpdateSpecieUC;
+        private IAddChangeTracking AddChangeTrackingUC;
+        private IGetSpecieById GetSpecieByIdUC;
 
         public EspecieController(IWebHostEnvironment environment, IAddSpecies addSpeciesUC, 
             IGetSpecies getSpeciesUC, IGetEcosystem getEcosystemUC, IGetEcosystemById getEcosystemByIdUC, 
             IAddSpecieToEcosystem addSpecieToEcosystemUC, IGetEspeciesPorNombre getEspeciesPorNombreUC, 
             IGetPosiblesEcosistemas getPosiblesEcosistemas , IFiltrado filtradoUC, IGetThreats getThreatsUC, 
             IGetAmenazaById getAmenazaByIdUC, IGetEstadosConservacion getEstadosConservacionUC,
-             IUpdateSpecie updateSpecieUC)
+             IUpdateSpecie updateSpecieUC, IAddChangeTracking addChangeTrackingUC, IGetSpecieById getSpecieByIdUC)
         {
             _environment = environment;
             AddSpeciesUC = addSpeciesUC;
@@ -47,6 +49,8 @@ namespace WebApp.Controllers
             GetAmenazaByIdUC = getAmenazaByIdUC;
             GetEstadosConservacionUC = getEstadosConservacionUC;
             UpdateSpecieUC = updateSpecieUC;
+            AddChangeTrackingUC = addChangeTrackingUC;
+            GetSpecieByIdUC = getSpecieByIdUC;
         }
 
 
@@ -108,6 +112,9 @@ namespace WebApp.Controllers
                 especie.ImgEspecie = "sinNombreAun";
                 this.AddSpeciesUC.AddSpecies(especie);
 
+                //GUARDAMOS CAMBIOS
+                GuardarCambiosEspecie(especie);
+
                 //GUARDAMOS IMAGEN
                 if (especie == null || imagen == null) return View();
 
@@ -154,6 +161,22 @@ namespace WebApp.Controllers
             catch (Exception ex)
             {
                 return false;
+            }
+        }
+        
+        private void GuardarCambiosEspecie(EspecieMarina es)
+        {        
+            if (HttpContext.Session.GetString("LogueadoAlias") != null)
+            {
+                //REGISTRAMOS CAMBIOS
+                ControlDeCambios cambios = new ControlDeCambios
+                {
+                    NombreUsuario = HttpContext.Session.GetString("LogueadoAlias"),
+                    TipoEntidad = es.ToString(),
+                    IdEntidad = es.Id
+
+                };
+                this.AddChangeTrackingUC.AddChangeTracking(cambios);
             }
         }
 
@@ -248,6 +271,8 @@ namespace WebApp.Controllers
                // EcosistemaMarino ecosistema = this.GetEcosystemByIdUC.GetEcosystemById(EcosistemaId);
                 //llamar a asociar
                 this.AddSpecieToEcosystemUC.AsociarEspecieAEcosistema(EspecieId, EcosistemaId);
+                //GUARDAMOS CAMBIOS
+                GuardarCambiosEspecie(GetSpecieByIdUC.FindById(EspecieId));
                 return RedirectToAction(nameof(Index), new { mensaje = "Asociados exitosamente" });
             }
             catch

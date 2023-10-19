@@ -42,8 +42,6 @@ namespace AccessData.EntityFramework
                     "RealmenteHabita",
                     em => em.HasOne<EspecieMarina>().WithMany().OnDelete(DeleteBehavior.Restrict),
                  ecosistema => ecosistema.HasOne<EcosistemaMarino>().WithMany().OnDelete(DeleteBehavior.Restrict)
-                //em => em.HasOne<EspecieMarina>().WithMany().HasForeignKey("IdEspecie").OnDelete(DeleteBehavior.NoAction)
-                // ecosistema => ecosistema.HasOne<EcosistemaMarino>().WithMany().OnDelete(DeleteBehavior.Restrict)
                 ); 
 
 
@@ -57,29 +55,5 @@ namespace AccessData.EntityFramework
 
         }
 
-
-
-
-
-
-        //public override int SaveChanges()
-        //{
-        //    var modificaciones = ChangeTracker.Entries()
-        //        .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted);
-
-        //    foreach (var e in modificaciones)
-        //    {
-        //        var cambio = new ControlDeCambios
-        //        {
-        //            // NombreUsuario = HttpContext.Session.GetString("LogueadoAlias");
-        //        };
-        //    }
-
-
-        //    return base.SaveChanges();
-
-
-
-        //}
     }
 }

@@ -18,6 +18,7 @@ namespace WebApp.Controllers
             GetSettingsByNameUC = getSettingsByNameUC;
         }
 
+        
         // GET: ConfiguracionController
         public ActionResult Index()
         {
@@ -71,6 +72,7 @@ namespace WebApp.Controllers
             try
             {
                 this.UpdateSettingsUC.UpdateSettings(setting);
+
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -13,24 +13,26 @@ namespace AccessData.EntityFramework.SQL
     public class RepositorioControlDeCambios : IRepositorioControlDeCambios
     {
         public EcosistemaMarinoContext _context;
-        public RepositorioControlDeCambios()
+        private IRepositorioConfiguracion config;
+
+        public RepositorioControlDeCambios(IRepositorioConfiguracion repositorioConfiguracion)
         {
+            config = repositorioConfiguracion;
             _context = new EcosistemaMarinoContext();
         }
         public void Add(ControlDeCambios t)
         {
             try
             {
-                //_context.Entry(e.Pais).State = EntityState.Unchanged;
 
-                //t.EsValido();
+                t.EsValido(config);
                 _context.ControlDeCambios.Add(t);
                 _context.SaveChanges();
 
             }
-            catch (Exception exe)
+            catch (Exception)
             {
-                throw new Exception(@"Error al registrar los cambios" + exe);
+                throw new Exception(@"Error al registrar los cambios");
             }
         }
 

@@ -42,6 +42,7 @@ builder.Services.AddScoped<IUpdateSpecie, UpdateSpecieUC>();
 builder.Services.AddScoped <IUpdateSettings, UpdateSettingsUC>();
 builder.Services.AddScoped <IGetSettings, GetSettingsUC>();
 builder.Services.AddScoped<IFindSettingsByName, FindSettingsByNameUC>();
+builder.Services.AddScoped<IGetSpecieById, GetSpecieByIdUC>();
 
 
 

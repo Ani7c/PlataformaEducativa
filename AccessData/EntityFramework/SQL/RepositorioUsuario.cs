@@ -36,11 +36,10 @@ namespace AccessData.EntityFramework.SQL
             {
                 throw userException;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new Exception(@"Error al agregar el usuario " + ex );
+                throw new Exception(@"Error al agregar el usuario ");
             }
-            //antes de entregar borrar ex
         }
 
 

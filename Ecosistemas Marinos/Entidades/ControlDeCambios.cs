@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Ecosistemas_Marinos.Interfaces;
+using Ecosistemas_Marinos.Interfaces_Repositorios;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Ecosistemas_Marinos.Entidades
 {
-    public class ControlDeCambios
+    public class ControlDeCambios : IValidable
     {
         [Key]
         public int IdCambios { get; set; }
@@ -22,9 +24,12 @@ namespace Ecosistemas_Marinos.Entidades
             this.FechaHora = DateTime.Now;
         }
 
-        public void EsValido()
+        public void EsValido(IRepositorioConfiguracion configuracion)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(this.NombreUsuario))
+            {
+                throw new Exception("No se pueden registrar los cambios");
+            }
         }
     }
 }
