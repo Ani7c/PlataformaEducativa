@@ -32,8 +32,13 @@ namespace WebApp.Controllers
         // GET: UsuarioController/Create
         public ActionResult Create(string mensaje)
         {
+            string alias = HttpContext.Session.GetString("LogueadoAlias");
+            if(alias != null && alias.Equals("admin1"))
+            {
             ViewBag.Mensaje = mensaje;
             return View();
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: UsuarioController/Create
@@ -42,7 +47,7 @@ namespace WebApp.Controllers
         public ActionResult Create(Usuario usuario)
         {
             try
-            {              
+            {
                 this.AddUserUC.AddUser(usuario);
                 ViewBag.msg = "Usuario agregado con éxito";
                 return RedirectToAction("Index", "Home");

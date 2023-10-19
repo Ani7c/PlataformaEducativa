@@ -18,12 +18,17 @@ namespace WebApp.Controllers
 
         public ActionResult Login()
         {
-            return View();
+            string alias = HttpContext.Session.GetString("LogueadoAlias");
+            if(alias != null)
+            {
+                return View();
+            }
+            return RedirectToAction("Index","Home");
         }
         [HttpPost]
         public ActionResult Login(string Alias, string Contrasenia)
         {
-            //if es true
+           
 
             if (LoginUC.IniciarSesion(Alias, Contrasenia))
             {

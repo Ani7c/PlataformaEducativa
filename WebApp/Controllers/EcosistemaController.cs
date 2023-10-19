@@ -66,11 +66,15 @@ namespace WebApp.Controllers
         // GET: EcosistemaController/Create
         public ActionResult Create(string mensaje)
         {
-            ViewBag.Mensaje = mensaje;
-            ViewBag.Amenazas = this.GetThreatsUC.GetAmenazas();
-            ViewBag.Paises = this.GetCountriesUC.GetCountries();
-            ViewBag.Estados = this.GetEstadosConservacionUC.GetEstadosConservacion();
-            return View(); 
+            string alias = HttpContext.Session.GetString("LogueadoAlias");
+            if(alias != null){
+                ViewBag.Mensaje = mensaje;
+                ViewBag.Amenazas = this.GetThreatsUC.GetAmenazas();
+                ViewBag.Paises = this.GetCountriesUC.GetCountries();
+                ViewBag.Estados = this.GetEstadosConservacionUC.GetEstadosConservacion();
+                return View(); 
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: EcosistemaController/Create
@@ -187,12 +191,22 @@ namespace WebApp.Controllers
         {
             try
             {
-                return View(this.GetEcosystemByIdUC.GetEcosystemById(id));
+                string alias = HttpContext.Session.GetString("LogueadoAlias");
+                if (alias != null)
+                {
+                    return View(this.GetEcosystemByIdUC.GetEcosystemById(id));
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                    
             }
             catch (Exception e)
             {
                 return RedirectToAction(nameof(Index), new { mensaje = e.Message });
             }
+            
         }
 
         // POST: EcosistemaController/Delete/5

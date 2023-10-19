@@ -65,11 +65,16 @@ namespace WebApp.Controllers
         // GET: EspecieController/Create
         public ActionResult Create(string mensaje)
         {
-            ViewBag.Amenazas = this.GetThreatsUC.GetAmenazas();
-            ViewBag.Mensaje = mensaje;
-            ViewBag.Ecosistemas = this.GetEcosystemUC.GetEcosystems();
-            ViewBag.Estados = this.GetEstadosConservacionUC.GetEstadosConservacion();
-            return View();
+            string alias = HttpContext.Session.GetString("LogueadoAlias");
+            if(alias != null)
+            {
+                ViewBag.Amenazas = this.GetThreatsUC.GetAmenazas();
+                ViewBag.Mensaje = mensaje;
+                ViewBag.Ecosistemas = this.GetEcosystemUC.GetEcosystems();
+                ViewBag.Estados = this.GetEstadosConservacionUC.GetEstadosConservacion();
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: EspecieController/Create
@@ -220,9 +225,18 @@ namespace WebApp.Controllers
 
         public ActionResult Asociar()
         {
-            ViewBag.Especies = this.GetSpeciesUC.GetSpecies();//todas las especies
-            ViewBag.Ecosistemas = this.GetPosiblesEcosistemasUC.GetPosiblesEcosistemas() ; //los posibles ecosistemas de la lista en especie
-            return View();
+            string alias = HttpContext.Session.GetString("LogueadoAlias");
+            if (alias != null)
+            {
+                ViewBag.Especies = this.GetSpeciesUC.GetSpecies();//todas las especies
+                ViewBag.Ecosistemas = this.GetPosiblesEcosistemasUC.GetPosiblesEcosistemas() ; //los posibles ecosistemas de la lista en especie
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

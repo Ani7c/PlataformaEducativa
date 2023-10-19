@@ -33,7 +33,6 @@ namespace Ecosistemas_Marinos.Entidades
         public Usuario() 
         {
             FechaAlta = DateTime.Now;
-            EsAdmin = false;
         }
 
        

@@ -54,8 +54,13 @@ namespace WebApp.Controllers
         // GET: ConfiguracionController/Edit/5
         public ActionResult Edit(String id, string mensaje)
         {
-            ViewBag.Mensaje = mensaje;
-            return View(this.GetSettingsByNameUC.FindSettingsByName(id));
+            string alias = HttpContext.Session.GetString("LogueadoAlias");
+            if (alias != null)
+            {
+                ViewBag.Mensaje = mensaje;
+                return View(this.GetSettingsByNameUC.FindSettingsByName(id));
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: ConfiguracionController/Edit/5
