@@ -18,12 +18,7 @@ namespace WebApp.Controllers
 
         public ActionResult Login()
         {
-            string alias = HttpContext.Session.GetString("LogueadoAlias");
-            if(alias != null)
-            {
-                return View();
-            }
-            return RedirectToAction("Index","Home");
+             return View();    
         }
         [HttpPost]
         public ActionResult Login(string Alias, string Contrasenia)

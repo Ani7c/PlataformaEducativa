@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AccessData.Migrations
 {
     /// <inheritdoc />
-    public partial class crearDenuevo : Migration
+    public partial class seAgregaraAdmin : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -75,6 +75,7 @@ namespace AccessData.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Contrasenia = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Encriptada = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Alias = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FechaAlta = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EsAdmin = table.Column<bool>(type: "bit", nullable: false)
@@ -184,13 +185,13 @@ namespace AccessData.Migrations
                         column: x => x._ecosistemasIdEcosistema,
                         principalTable: "Ecosistemas",
                         principalColumn: "IdEcosistema",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PosiblesEcosistemas_Especies__especiesId",
                         column: x => x._especiesId,
                         principalTable: "Especies",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -209,7 +210,8 @@ namespace AccessData.Migrations
                         name: "FK_RealmenteHabita_Ecosistemas_EcosistemaMarinoIdEcosistema",
                         column: x => x.EcosistemaMarinoIdEcosistema,
                         principalTable: "Ecosistemas",
-                        principalColumn: "IdEcosistema");
+                        principalColumn: "IdEcosistema",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_RealmenteHabita_Especies_EspecieMarinaId",
                         column: x => x.EspecieMarinaId,

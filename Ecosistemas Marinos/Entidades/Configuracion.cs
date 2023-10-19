@@ -30,6 +30,10 @@ namespace Ecosistemas_Marinos.Entidades
             {
                 throw new Exception("Debe tener nombre");
             }
+            if(TopeInferior < 0)
+            {
+                throw new Exception("Tope debe ser positivo");
+            }
         }
     }
 }

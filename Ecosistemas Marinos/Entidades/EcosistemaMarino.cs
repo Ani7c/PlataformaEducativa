@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace EcosistemasMarinos.Entidades
 {
-  //  [Index(nameof(Nombre), IsUnique = true)]
+    [Index(nameof(Nombre), IsUnique = true)]
     [PrimaryKey(nameof(IdEcosistema))]
     public class EcosistemaMarino : IValidable
     { 

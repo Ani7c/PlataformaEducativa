@@ -23,7 +23,7 @@ namespace Ecosistemas_Marinos.Entidades
 
         public string Contrasenia { get; set; }
 
-       // public string Encriptada { get; set; }
+        public string Encriptada { get; set; }
         
         [MinLength(6)]
         public string Alias { get; set; }

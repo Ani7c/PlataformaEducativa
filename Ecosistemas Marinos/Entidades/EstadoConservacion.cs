@@ -45,7 +45,14 @@ namespace EcosistemasMarinos.Entidades
             {
                 throw new Exception("Nombre demasiado largo");
             }
-            
+            if(ValorMin < 0)
+            {
+                throw new Exception("Valores entre 0 y 100");
+            }
+            if (ValorMax > 100)
+            {
+                throw new Exception("Valores entre 0 y 100");
+            }
 
         }
 

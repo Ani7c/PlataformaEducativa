@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AccessData.Migrations
 {
     [DbContext(typeof(EcosistemaMarinoContext))]
-    [Migration("20231018230125_cascadex4")]
-    partial class cascadex4
+    [Migration("20231019155951_UniqueNombreEcosistema")]
+    partial class UniqueNombreEcosistema
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -79,7 +79,7 @@ namespace AccessData.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnName("Nombre del ecosistema");
 
                     b.Property<string>("codPais")
@@ -89,6 +89,9 @@ namespace AccessData.Migrations
                     b.HasKey("IdEcosistema");
 
                     b.HasIndex("IdEstadoConservacion");
+
+                    b.HasIndex("Nombre")
+                        .IsUnique();
 
                     b.HasIndex("codPais");
 
@@ -232,6 +235,10 @@ namespace AccessData.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Contrasenia")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Encriptada")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -399,7 +406,7 @@ namespace AccessData.Migrations
                     b.HasOne("EcosistemasMarinos.Entidades.EcosistemaMarino", null)
                         .WithMany()
                         .HasForeignKey("_ecosistemasIdEcosistema")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EcosistemasMarinos.Entidades.EspecieMarina", null)
@@ -420,7 +427,7 @@ namespace AccessData.Migrations
                     b.HasOne("EcosistemasMarinos.Entidades.EspecieMarina", null)
                         .WithMany()
                         .HasForeignKey("EspecieMarinaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

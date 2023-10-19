@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AccessData.Migrations
 {
     [DbContext(typeof(EcosistemaMarinoContext))]
-    [Migration("20231018235243_eliminamosRenglon")]
-    partial class eliminamosRenglon
+    [Migration("20231019154945_seAgregaraAdmin")]
+    partial class seAgregaraAdmin
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -235,6 +235,10 @@ namespace AccessData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Encriptada")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("EsAdmin")
                         .HasColumnType("bit");
 
@@ -278,16 +282,11 @@ namespace AccessData.Migrations
                     b.Property<int>("EspecieMarinaId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EspecieMarinaId1")
-                        .HasColumnType("int");
-
                     b.HasKey("_ecosistemasTempId1", "_especiesTempId1");
 
                     b.HasIndex("EcosistemaMarinoIdEcosistema");
 
                     b.HasIndex("EspecieMarinaId");
-
-                    b.HasIndex("EspecieMarinaId1");
 
                     b.ToTable("RealmenteHabita");
                 });
@@ -404,7 +403,7 @@ namespace AccessData.Migrations
                     b.HasOne("EcosistemasMarinos.Entidades.EcosistemaMarino", null)
                         .WithMany()
                         .HasForeignKey("_ecosistemasIdEcosistema")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EcosistemasMarinos.Entidades.EspecieMarina", null)
@@ -419,19 +418,14 @@ namespace AccessData.Migrations
                     b.HasOne("EcosistemasMarinos.Entidades.EcosistemaMarino", null)
                         .WithMany()
                         .HasForeignKey("EcosistemaMarinoIdEcosistema")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("EcosistemasMarinos.Entidades.EspecieMarina", null)
                         .WithMany()
                         .HasForeignKey("EspecieMarinaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("EcosistemasMarinos.Entidades.EspecieMarina", null)
-                        .WithMany()
-                        .HasForeignKey("EspecieMarinaId1")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("EcosistemasMarinos.Entidades.EcosistemaMarino", b =>

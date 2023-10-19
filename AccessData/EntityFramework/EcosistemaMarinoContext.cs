@@ -41,7 +41,7 @@ namespace AccessData.EntityFramework
                 .UsingEntity<Dictionary<string, string>>(
                     "RealmenteHabita",
                     em => em.HasOne<EspecieMarina>().WithMany().OnDelete(DeleteBehavior.Restrict),
-                 ecosistema => ecosistema.HasOne<EcosistemaMarino>().WithMany().OnDelete(DeleteBehavior.Cascade)
+                 ecosistema => ecosistema.HasOne<EcosistemaMarino>().WithMany().OnDelete(DeleteBehavior.Restrict)
                 //em => em.HasOne<EspecieMarina>().WithMany().HasForeignKey("IdEspecie").OnDelete(DeleteBehavior.NoAction)
                 // ecosistema => ecosistema.HasOne<EcosistemaMarino>().WithMany().OnDelete(DeleteBehavior.Restrict)
                 ); 
@@ -52,10 +52,15 @@ namespace AccessData.EntityFramework
             .WithMany(especie => especie._especies)
             .UsingEntity<Dictionary<string, string>>(
                 "PosiblesEcosistemas",
-                es => es.HasOne<EcosistemaMarino>().WithMany().OnDelete(DeleteBehavior.Restrict),
+                es => es.HasOne<EcosistemaMarino>().WithMany().OnDelete(DeleteBehavior.Cascade),
                 especie => especie.HasOne<EspecieMarina>().WithMany().OnDelete(DeleteBehavior.Restrict));
 
         }
+
+
+
+
+
 
         //public override int SaveChanges()
         //{

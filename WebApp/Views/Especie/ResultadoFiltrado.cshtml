@@ -4,6 +4,14 @@
     ViewData["Title"] = "ResultadoFiltrado";
 }
 
+
+@if (Model.Count() <= 0)
+{
+    <div class="alert alert-warning">
+        No hay especies disponibles
+    </div>
+}
+
 <h1>ResultadoFiltrado</h1>
 
 <p>

@@ -125,9 +125,9 @@ namespace WebApp.Controllers
                 //this.AddEcosystemUC.AddEcosystem(em);
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return RedirectToAction(nameof(Create), new { mensaje = $"Ecosistema ya existente" + ex});
+                return RedirectToAction(nameof(Create), new { mensaje = e.Message });
             }
         }
 

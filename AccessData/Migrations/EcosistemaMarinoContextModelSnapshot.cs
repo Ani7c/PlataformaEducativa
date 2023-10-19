@@ -76,7 +76,7 @@ namespace AccessData.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnName("Nombre del ecosistema");
 
                     b.Property<string>("codPais")
@@ -86,6 +86,9 @@ namespace AccessData.Migrations
                     b.HasKey("IdEcosistema");
 
                     b.HasIndex("IdEstadoConservacion");
+
+                    b.HasIndex("Nombre")
+                        .IsUnique();
 
                     b.HasIndex("codPais");
 
@@ -229,6 +232,10 @@ namespace AccessData.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Contrasenia")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Encriptada")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -396,7 +403,7 @@ namespace AccessData.Migrations
                     b.HasOne("EcosistemasMarinos.Entidades.EcosistemaMarino", null)
                         .WithMany()
                         .HasForeignKey("_ecosistemasIdEcosistema")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EcosistemasMarinos.Entidades.EspecieMarina", null)
@@ -417,7 +424,7 @@ namespace AccessData.Migrations
                     b.HasOne("EcosistemasMarinos.Entidades.EspecieMarina", null)
                         .WithMany()
                         .HasForeignKey("EspecieMarinaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

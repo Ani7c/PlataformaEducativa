@@ -24,9 +24,11 @@ namespace LogicaAplicacion.UseCase
         public bool IniciarSesion(string alias, string contraseña)
         {           
             Usuario u = repositorioUsuario.ObtenerPorAlias(alias);
+            
             if (u != null)
-            {               
-                if (BCrypt.Net.BCrypt.Verify(contraseña, u.Contrasenia))
+            {
+                //decidimos comparar con la encriptada
+                if (BCrypt.Net.BCrypt.Verify(contraseña, u.Encriptada)) 
                 {
                     return true;
                 }
