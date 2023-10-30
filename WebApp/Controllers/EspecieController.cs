@@ -28,13 +28,15 @@ namespace WebApp.Controllers
         private IUpdateSpecie UpdateSpecieUC;
         private IAddChangeTracking AddChangeTrackingUC;
         private IGetSpecieById GetSpecieByIdUC;
+        private IFiltrarDadaUnaEspecie FiltrarDadaUnaEspecieUC;
 
-        public EspecieController(IWebHostEnvironment environment, IAddSpecies addSpeciesUC, 
-            IGetSpecies getSpeciesUC, IGetEcosystem getEcosystemUC, IGetEcosystemById getEcosystemByIdUC, 
-            IAddSpecieToEcosystem addSpecieToEcosystemUC, IGetEspeciesPorNombre getEspeciesPorNombreUC, 
-            IGetPosiblesEcosistemas getPosiblesEcosistemas , IFiltrado filtradoUC, IGetThreats getThreatsUC, 
+        public EspecieController(IWebHostEnvironment environment, IAddSpecies addSpeciesUC,
+            IGetSpecies getSpeciesUC, IGetEcosystem getEcosystemUC, IGetEcosystemById getEcosystemByIdUC,
+            IAddSpecieToEcosystem addSpecieToEcosystemUC, IGetEspeciesPorNombre getEspeciesPorNombreUC,
+            IGetPosiblesEcosistemas getPosiblesEcosistemas, IFiltrado filtradoUC, IGetThreats getThreatsUC,
             IGetAmenazaById getAmenazaByIdUC, IGetEstadosConservacion getEstadosConservacionUC,
-             IUpdateSpecie updateSpecieUC, IAddChangeTracking addChangeTrackingUC, IGetSpecieById getSpecieByIdUC)
+             IUpdateSpecie updateSpecieUC, IAddChangeTracking addChangeTrackingUC, IGetSpecieById getSpecieByIdUC,
+             IFiltrarDadaUnaEspecie filtrarDadaUnaEspecieUC)
         {
             _environment = environment;
             AddSpeciesUC = addSpeciesUC;
@@ -51,6 +53,7 @@ namespace WebApp.Controllers
             UpdateSpecieUC = updateSpecieUC;
             AddChangeTrackingUC = addChangeTrackingUC;
             GetSpecieByIdUC = getSpecieByIdUC;
+            FiltrarDadaUnaEspecieUC = filtrarDadaUnaEspecieUC;
         }
 
 
@@ -204,6 +207,21 @@ namespace WebApp.Controllers
             return View("ResultadoFiltrado", resultados);
         }
 
+
+        public IActionResult FiltrarDadaUnaEspecie()
+        {
+            ViewBag.Especies = this.GetSpeciesUC.GetSpecies();
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult FiltrarDadaUnaEspecie(int IdEspecie)
+        {
+            var resultados = this.FiltrarDadaUnaEspecieUC.FiltrarDadaUnaEspecie(IdEspecie);
+            return View("EcosistemasDadaUnaEspecie", resultados);
+        }
+
+
         // GET: EspecieController/Edit/5
         public ActionResult Edit(int id)
         {
@@ -272,7 +290,7 @@ namespace WebApp.Controllers
                 //llamar a asociar
                 this.AddSpecieToEcosystemUC.AsociarEspecieAEcosistema(EspecieId, EcosistemaId);
                 //GUARDAMOS CAMBIOS
-                GuardarCambiosEspecie(GetSpecieByIdUC.FindById(EspecieId));
+               // GuardarCambiosEspecie(GetSpecieByIdUC.FindById(EspecieId));
                 return RedirectToAction(nameof(Index), new { mensaje = "Asociados exitosamente" });
             }
             catch

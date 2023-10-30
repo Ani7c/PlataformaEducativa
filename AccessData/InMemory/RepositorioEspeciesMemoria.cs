@@ -73,5 +73,10 @@ namespace AccessData.InMemory
         {
             throw new NotImplementedException();
         }
+
+        public List<EcosistemaMarino> FiltrarDadaUnaEspecie(int IdEspecie)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -156,6 +156,23 @@ namespace AccessData.EntityFramework.SQL
 
             return ret;
         }
+
+
+        public List<EcosistemaMarino> FiltrarDadaUnaEspecie(int IdEspecie)
+        {
+            if (IdEspecie > 0)
+            {
+                EspecieMarina especie = _context.Especies.Find(IdEspecie);
+                List<EcosistemaMarino> TodosLosEcosistemas = _context.Ecosistemas.ToList();
+                List<EcosistemaMarino> EcosistemasDondePuedeHabitar = especie._ecosistemas.ToList();
+                if (EcosistemasDondePuedeHabitar != null)
+                {
+                    return TodosLosEcosistemas.Except(EcosistemasDondePuedeHabitar).ToList();
+                }
+                return null;
+            }
+            else return null;
+        }
     }
     
 

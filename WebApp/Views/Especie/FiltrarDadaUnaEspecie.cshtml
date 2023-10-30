@@ -1,0 +1,21 @@
+﻿@model EcosistemasMarinos.Entidades.EspecieMarina
+
+<h3>Dada una especie mostrar todos los ecosistemas donde no puede habitar</h3>
+
+<form asp-controller="Especie" asp-action="FiltrarDadaUnaEspecie" method="post">
+
+    <div class="form-group">
+        <label for="Id">Especie</label>
+        <select name="IdEspecie" class="form-control">
+            <option value="">Elija una especie</option>
+            @foreach (var especie in ViewBag.Especies)
+            {
+                <option value="@especie.Id">@especie.NombreVulgar</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group pt-3">
+        <input type="submit" value="Filtrar" class="btn btn-primary" />
+    </div>
+</form>

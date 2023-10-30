@@ -1,18 +1,10 @@
-﻿@model IEnumerable<EcosistemasMarinos.Entidades.EspecieMarina>
+﻿@model IEnumerable<EcosistemasMarinos.Entidades.EcosistemaMarino>
 
 @{
-    ViewData["Title"] = "ResultadoFiltrado";
+    ViewData["Title"] = "EcosistemasDadaUnaEspecie";
 }
 
-
-@if (Model.Count() <= 0)
-{
-    <div class="alert alert-warning">
-        No hay especies disponibles
-    </div>
-}
-
-<h1>ResultadoFiltrado</h1>
+<h1>EcosistemasDadaUnaEspecie</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -21,19 +13,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NombreCientifico)
+                @Html.DisplayNameFor(model => model.Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NombreVulgar)
+                @Html.DisplayNameFor(model => model.Area)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
+                @Html.DisplayNameFor(model => model.Caracteristicas)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IdEstadoConservacion)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImgEspecie)
+                @Html.DisplayNameFor(model => model.codPais)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImgEcosistema)
             </th>
             <th></th>
         </tr>
@@ -42,19 +37,22 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.NombreCientifico)
+                @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NombreVulgar)
+                @Html.DisplayFor(modelItem => item.Area)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
+                @Html.DisplayFor(modelItem => item.Caracteristicas)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EstadoConservacion.Nombre)
+                @Html.DisplayFor(modelItem => item.IdEstadoConservacion)
             </td>
             <td>
-                <img class="img-thumbnail" src="~/img/Ecosistemas/@item.ImgEspecie" />
+                @Html.DisplayFor(modelItem => item.codPais)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImgEcosistema)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
