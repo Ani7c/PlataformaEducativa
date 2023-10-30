@@ -162,7 +162,7 @@ namespace AccessData.EntityFramework.SQL
         {
             if (IdEspecie > 0)
             {
-                EspecieMarina especie = _context.Especies.Find(IdEspecie);
+                EspecieMarina especie = _context.Especies.Include(e => e._ecosistemas).Where(e => e.Id == IdEspecie).FirstOrDefault();
                 List<EcosistemaMarino> TodosLosEcosistemas = _context.Ecosistemas.ToList();
                 List<EcosistemaMarino> EcosistemasDondePuedeHabitar = especie._ecosistemas.ToList();
                 if (EcosistemasDondePuedeHabitar != null)

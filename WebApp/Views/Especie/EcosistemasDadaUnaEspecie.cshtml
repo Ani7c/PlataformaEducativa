@@ -51,14 +51,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.codPais)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImgEcosistema)
-            </td>
-            <td>
+                <td>
+                    <img class="img-thumbnail" src="~/img/Ecosistemas/@item.ImgEcosistema" />
+                </td>
+            @* <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+            </td> *@
         </tr>
 }
     </tbody>
