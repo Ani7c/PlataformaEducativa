@@ -151,7 +151,7 @@ namespace AccessData.EntityFramework.SQL
 
             if (IdEcosistema > 0)
             {
-                EcosistemaMarino ecosistema = _context.Ecosistemas.Include(ec => ec._especies).Where(ec => ec.IdEcosistema.Equals(IdEcosistema)).FirstOrDefault();
+                EcosistemaMarino ecosistema = _context.Ecosistemas.Include(ec => ec._especies).Include(ec => ec.EstadoConservacion).Where(ec => ec.IdEcosistema.Equals(IdEcosistema)).FirstOrDefault();
                 ret = ecosistema._especies.ToList();
             }
 

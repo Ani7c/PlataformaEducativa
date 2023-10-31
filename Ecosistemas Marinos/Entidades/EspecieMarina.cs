@@ -36,6 +36,7 @@ namespace EcosistemasMarinos.Entidades
         public Peso rangoPeso { get; set; }
         public Longitud rangoLongitud { get; set; }
 
+        [DisplayName("Estado de conservacion")]
         [Key, ForeignKey(nameof(EstadoConservacion))] public int IdEstadoConservacion { get; set; }
         public EstadoConservacion EstadoConservacion { get; set; }
 
