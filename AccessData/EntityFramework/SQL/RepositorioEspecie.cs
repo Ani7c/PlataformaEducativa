@@ -151,14 +151,17 @@ namespace AccessData.EntityFramework.SQL
 
             if (IdEcosistema > 0)
             {
-                EcosistemaMarino ecosistema = _context.Ecosistemas.Include(ec => ec._especies).Include(ec => ec.EstadoConservacion).Where(ec => ec.IdEcosistema.Equals(IdEcosistema)).FirstOrDefault();
+                EcosistemaMarino ecosistema = _context.Ecosistemas.
+                    Include(ec => ec._especies).
+                    ThenInclude(esp => esp.EstadoConservacion).
+                    Where(ec => ec.IdEcosistema.Equals(IdEcosistema)).FirstOrDefault();
                 ret = ecosistema._especies.ToList();
             }
 
             return ret;
         }
 
-
+        //verificar amenaza y estado
         public List<EcosistemaMarino> FiltrarDadaUnaEspecie(int IdEspecie)
         {
             if (IdEspecie > 0)
