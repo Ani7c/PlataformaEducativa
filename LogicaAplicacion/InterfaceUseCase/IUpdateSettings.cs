@@ -1,4 +1,5 @@
 ﻿using Ecosistemas_Marinos.Entidades;
+using LogicaAplicacion.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace LogicaAplicacion.InterfaceUseCase
 {
     public interface IUpdateSettings
     {
-        public void UpdateSettings(Configuracion configuracion);
+        public void UpdateSettings(ConfiguracionDTO configuracion);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Ecosistemas_Marinos.Entidades;
 using Ecosistemas_Marinos.Interfaces_Repositorios;
+using LogicaAplicacion.DTOs;
 using LogicaAplicacion.InterfaceUseCase;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,14 @@ namespace LogicaAplicacion.UseCase
         {
             this.repositorioConfiguracion = repositorioConfiguracion;
         }
-        public void UpdateSettings(Configuracion configuracion)
+        public void UpdateSettings(ConfiguracionDTO configuracion)
         {
-            repositorioConfiguracion.Update(configuracion);
+            Configuracion toUpdate = new Configuracion();
+            toUpdate.NombreAtributo = configuracion.NombreAtributo;
+            toUpdate.TopeSuperior = configuracion.TopeSuperior;
+            toUpdate.TopeInferior = configuracion.TopeInferior;
+
+            repositorioConfiguracion.Update(toUpdate);
         }
     }
 }
