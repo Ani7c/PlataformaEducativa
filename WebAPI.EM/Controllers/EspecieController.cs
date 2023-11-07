@@ -64,8 +64,8 @@ namespace WebApiEM.Controllers
         {
             try
             {
-                EspecieDTO especieDTO = this.AddSpeciesUC.AddSpecies(especie);
-                return Created("api/Especies", especieDTO);
+                AddSpeciesUC.AddSpecies(especie);
+                return Created("api/Especies", especie);
             }
             catch (Exception ex)
             {

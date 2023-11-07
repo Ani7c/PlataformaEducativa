@@ -1,4 +1,5 @@
 ﻿using EcosistemasMarinos.Entidades;
+using LogicaAplicacion.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace LogicaAplicacion.InterfaceUseCase
 {
     public interface IAddSpecies
     {
-        public void AddSpecies(EspecieMarina unaEspecie);
+        public void AddSpecies(EspecieDTO unaEspecie);
     }
 }
