@@ -53,12 +53,38 @@ namespace WebApiEM.Controllers
             FiltrarDadaUnaEspecieUC = filtrarDadaUnaEspecieUC;
         }
 
-        [HttpGet(Name ="GetEcosistemas")]
+        //Obtiene todas las especies
+        [HttpGet(Name ="GetEspecies")]
 
-        public IActionResult Get() { 
-            return Ok();
+        public IActionResult Get()
+        {
+            try { 
+                return Ok(this.GetSpeciesUC.GetSpecies());
+            } 
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
+
+        //Detalis
+        [HttpGet("{especieId}")]
+        public IActionResult GetDetails(int especieId)
+        {
+            try
+            {
+                return Ok(this.GetSpecieByIdUC.FindById(especieId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+
+        //Crea una especie
         [HttpPost()]
         public IActionResult Post([FromBody] EspecieDTO especie) 
         {

@@ -1,6 +1,7 @@
 ﻿using Ecosistemas_Marinos.Entidades;
 using Ecosistemas_Marinos.Interfaces_Repositorios;
 using EcosistemasMarinos.Entidades;
+using LogicaAplicacion.DTOs;
 using LogicaAplicacion.InterfaceUseCase;
 using System;
 using System.Collections.Generic;
@@ -20,9 +21,15 @@ namespace LogicaAplicacion.UseCase
         }
 
 
-        public void AddEcosystem(EcosistemaMarino unEcosistema)
+        public void AddEcosystem(EcosistemaDTO unEcosistema)
         {
-            repositorioEcosistema.Add(unEcosistema);
+            EcosistemaMarino aCrear = new EcosistemaMarino();
+            aCrear.IdEcosistema = unEcosistema.IdEcosistema;
+            aCrear.Nombre = unEcosistema.Nombre;
+            aCrear.Pais = unEcosistema.Pais;
+            aCrear.ImgEcosistema = unEcosistema.ImgEcosistema;
+
+            repositorioEcosistema.Add(aCrear);
         }
     }
 }
