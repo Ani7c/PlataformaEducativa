@@ -2,6 +2,7 @@ using AccessData.EntityFramework.SQL;
 using Ecosistemas_Marinos.Interfaces_Repositorios;
 using LogicaAplicacion.InterfaceUseCase;
 using LogicaAplicacion.UseCase;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +50,24 @@ builder.Services.AddScoped<IFindSettingsByName, FindSettingsByNameUC>();
 builder.Services.AddScoped<IGetSpecieById, GetSpecieByIdUC>();
 builder.Services.AddScoped<IFiltrarDadaUnaEspecie, FiltrarDadaUnaEspecieUC>();
 
+
+var rutaArchivo = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "WebAPI.EM.xml");
+
+builder.Services.AddSwaggerGen(opciones =>
+{
+    opciones.IncludeXmlComments(rutaArchivo);
+    opciones.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Plataforma Educativa Ecosistemas Marinos",
+        Description = "Tiene como objetivo proporcionar información detallada sobre la\r\nvida marina y los diferentes ecosistemas " +
+        "acuáticos.",
+        Contact = new OpenApiContact
+        {
+            Email = "ana&belen@gmail.com"
+        },
+        Version = "v1"
+    });
+});
 
 
 var app = builder.Build();

@@ -44,8 +44,14 @@ namespace WebAPI.EM.Controllers
         }
 
 
-        //Obtiene todos los ecosistemas
+        /// <summary>
+        /// Obtiene todos los ecosistemas cargados en el sistema
+        /// </summary>
+        /// <returns> Lista de todos los ecosistemas </returns>
         [HttpGet(Name = "GetEcosistema")]
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+
 
         public IActionResult Get()
         {
@@ -60,8 +66,14 @@ namespace WebAPI.EM.Controllers
         }
 
 
-        //Crea un ecosistema
+        /// <summary>
+        /// Agrega un ecosistema a la base de datos
+        /// </summary>
+        /// <param name="ecosistema"></param>
+        /// <returns></returns>
         [HttpPost()]
+
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public IActionResult Post([FromBody] EcosistemaDTO ecosistema)
         {
             try
