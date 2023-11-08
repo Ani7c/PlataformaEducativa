@@ -1,5 +1,6 @@
 ﻿using Ecosistemas_Marinos.Entidades;
 using Ecosistemas_Marinos.Interfaces_Repositorios;
+using LogicaAplicacion.DTOs;
 using LogicaAplicacion.InterfaceUseCase;
 using System;
 using System.Collections.Generic;
@@ -19,9 +20,15 @@ namespace LogicaAplicacion.UseCase
         }
 
 
-        public void AddUser(Usuario unUsuario)
+        public void AddUser(UsuarioDTO unUsuario)
         {
-            repositorioUsuario.Add(unUsuario);
+            Usuario aCrear = new Usuario();
+            aCrear.Id = unUsuario.Id;
+            aCrear.Alias = unUsuario.Alias;
+            aCrear.Contrasenia = unUsuario.Contrasenia;
+            aCrear.Encriptada = unUsuario.Encriptada;
+
+            repositorioUsuario.Add(aCrear);
         }
     }
 }
