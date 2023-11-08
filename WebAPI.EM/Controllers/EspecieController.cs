@@ -53,9 +53,14 @@ namespace WebApiEM.Controllers
             FiltrarDadaUnaEspecieUC = filtrarDadaUnaEspecieUC;
         }
 
-        //Obtiene todas las especies
+
+        /// <summary>
+        /// Obtiene todas las especies marinas cargadas en el sistema
+        /// </summary>
+        /// <returns> Lista de todas las especies marinas </returns>
         [HttpGet(Name ="GetEspecies")]
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Get()
         {
             try { 
@@ -68,8 +73,15 @@ namespace WebApiEM.Controllers
         }
 
 
-        //Detalis
+        /// <summary>
+        /// Obtiene los detalles de la especie marina
+        /// </summary>
+        /// <param name="especieId"></param>
+        /// <returns> Los detalles de la especie marina </returns>
         [HttpGet("{especieId}")]
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetDetails(int especieId)
         {
             try
@@ -84,8 +96,14 @@ namespace WebApiEM.Controllers
 
 
 
-        //Crea una especie
+        /// <summary>
+        /// Agrega una especie a la base de datos
+        /// </summary>
+        /// <param name="especie"></param>
+        /// <returns></returns>
         [HttpPost()]
+
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public IActionResult Post([FromBody] EspecieDTO especie) 
         {
             try

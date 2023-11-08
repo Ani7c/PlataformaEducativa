@@ -21,8 +21,13 @@ namespace WebAPI.EM.Controllers
         }
 
 
-        //Edit
+        /// <summary>
+        /// Permite editar los topes
+        /// </summary>
+        /// <param name="configuracion"></param>
+        /// <returns></returns>
         [HttpPut()]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Update(ConfiguracionDTO configuracion)
         {
             try
