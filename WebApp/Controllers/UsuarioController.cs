@@ -41,11 +41,7 @@ namespace WebApp.Controllers
         }
 
 
-        // GET: UsuarioController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        
 
         // GET: UsuarioController/Create
         public ActionResult Create(string mensaje)
@@ -79,26 +75,7 @@ namespace WebApp.Controllers
             }
         }
 
-        // GET: UsuarioController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: UsuarioController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
 
         // GET: UsuarioController/Delete/5
         public ActionResult Delete(int id)

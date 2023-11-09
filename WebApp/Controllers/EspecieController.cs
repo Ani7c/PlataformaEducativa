@@ -63,11 +63,7 @@ namespace WebApp.Controllers
             return View(this.GetSpeciesUC.GetSpecies());
         }
 
-        // GET: EspecieController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        
 
         // GET: EspecieController/Create
         public ActionResult Create(string mensaje)
@@ -222,47 +218,8 @@ namespace WebApp.Controllers
         }
 
 
-        // GET: EspecieController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: EspecieController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: EspecieController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: EspecieController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
 
         public ActionResult Asociar()
         {

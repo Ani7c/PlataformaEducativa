@@ -20,6 +20,28 @@ namespace WebAPI.EM.Controllers
             GetSettingsByNameUC = getSettingsByNameUC;
         }
 
+        /// <summary>
+        /// Obtiene todas las configuraciones cargadas en el sistema
+        /// </summary>
+        /// <returns> Lista de todas las Configuraciones </returns>
+        [HttpGet(Name = "GetConfiguraciones")]
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+
+
+        public IActionResult Get()
+        {
+            try
+            {
+                return Ok(this.GetSettingsUC.GetSettings());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
 
         /// <summary>
         /// Permite editar los topes
