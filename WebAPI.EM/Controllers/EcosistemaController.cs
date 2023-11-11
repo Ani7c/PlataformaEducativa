@@ -95,53 +95,53 @@ namespace WebAPI.EM.Controllers
         /// <param name="control"></param>
         /// <returns></returns>
 
-        [HttpPost()]
-        public IActionResult PostGuardarCambios([FromBody] EcosistemaDTO ecosistema)
-        {
-            try
-            {
-                ControlDeCambiosDTO cambios = new ControlDeCambiosDTO
-                {
-                    NombreUsuario = HttpContext.Session.GetString("LogueadoAlias"),
-                    TipoEntidad = ecosistema.ToString(),
-                    IdEntidad = ecosistema.IdEcosistema
+        //[HttpPost()]
+        //public IActionResult PostGuardarCambios([FromBody] EcosistemaDTO ecosistema)
+        //{
+        //    try
+        //    {
+        //        ControlDeCambiosDTO cambios = new ControlDeCambiosDTO
+        //        {
+        //            NombreUsuario = HttpContext.Session.GetString("LogueadoAlias"),
+        //            TipoEntidad = ecosistema.ToString(),
+        //            IdEntidad = ecosistema.IdEcosistema
 
-                };
-                AddChangeTrackingUC.AddChangeTracking(cambios);
-                return Created("api/Ecosistemas", this.GetEcosystemUC.GetEcosystems());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        //        };
+        //        AddChangeTrackingUC.AddChangeTracking(cambios);
+        //        return Created("api/Ecosistemas", this.GetEcosystemUC.GetEcosystems());
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
    
        
 
-        /// <summary>
-        /// Elimina un ecosistema de la base de datos
-        /// </summary>
-        /// <param name="ecosistemaId"></param>
-        /// <returns></returns>
+        ///// <summary>
+        ///// Elimina un ecosistema de la base de datos
+        ///// </summary>
+        ///// <param name="ecosistemaId"></param>
+        ///// <returns></returns>
 
-        [HttpDelete("{ecosistemaId}")]
+        //[HttpDelete("{ecosistemaId}")]
 
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
 
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult Delete(int ecosistemaId)
-        {
-            try
-            {
-                PostGuardarCambios(GetEcosystemByIdUC.GetEcosystemById(ecosistemaId);
-                this.RemoveByIdUC.RemoveById(ecosistemaId);
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //public IActionResult Delete(int ecosistemaId)
+        //{
+        //    try
+        //    {
+        //        PostGuardarCambios(GetEcosystemByIdUC.GetEcosystemById(ecosistemaId);
+        //        this.RemoveByIdUC.RemoveById(ecosistemaId);
+        //        return NoContent();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
     }
 }

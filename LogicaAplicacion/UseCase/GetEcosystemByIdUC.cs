@@ -21,20 +21,8 @@ namespace LogicaAplicacion.UseCase
 
         public EcosistemaMarino GetEcosystemById(int id)
         {
-            EcosistemaMarino ecosistemaMarino = repositorioEcosistema.FindById(id);
-            EcosistemaDTO ecosistemaDTO = new EcosistemaDTO();
-            ecosistemaDTO.IdEcosistema = ecosistemaMarino.IdEcosistema;
-            ecosistemaDTO.ImgEcosistema = ecosistemaMarino.ImgEcosistema;
-            ecosistemaDTO.Area = ecosistemaMarino.Area;
-            ecosistemaDTO.UbicacionGeografica = ecosistemaMarino.UbicacionGeografica;
-            ecosistemaDTO.Caracteristicas = ecosistemaMarino.Caracteristicas;
-            ecosistemaDTO.EstadoConservacion = ecosistemaMarino.EstadoConservacion;
-            ecosistemaDTO.Nombre = ecosistemaMarino.Nombre;
-            ecosistemaDTO.Pais = ecosistemaMarino.Pais;
-            ecosistemaDTO._amenazas = ecosistemaMarino._amenazas;
-            ecosistemaDTO._especies = ecosistemaMarino._especies;
+            return repositorioEcosistema.FindById(id);
 
-            return ecosistemaDTO;
         }
     }
 }
