@@ -1,5 +1,6 @@
 ﻿using Ecosistemas_Marinos.Entidades;
 using Ecosistemas_Marinos.Interfaces_Repositorios;
+using LogicaAplicacion.DTOs;
 using LogicaAplicacion.InterfaceUseCase;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,15 @@ namespace LogicaAplicacion.UseCase
         {
             this.repoControlDeCambios = repoControlDeCambios;
         }
-        public void AddChangeTracking(ControlDeCambios cambios)
+        public void AddChangeTracking(ControlDeCambiosDTO cambios)
         {
-            repoControlDeCambios.Add(cambios);
+            ControlDeCambios aCrear = new ControlDeCambios();
+            aCrear.IdCambios = cambios.IdCambios;
+            aCrear.IdEntidad = cambios.IdEntidad;
+            aCrear.TipoEntidad = cambios.TipoEntidad;
+            aCrear.FechaHora = cambios.FechaHora;
+
+            repoControlDeCambios.Add(aCrear);
         }
     }
 }

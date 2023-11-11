@@ -1,4 +1,6 @@
-﻿using LogicaAplicacion.DTOs;
+﻿using Ecosistemas_Marinos.Entidades;
+using EcosistemasMarinos.Entidades;
+using LogicaAplicacion.DTOs;
 using LogicaAplicacion.InterfaceUseCase;
 using LogicaAplicacion.UseCase;
 using Microsoft.AspNetCore.Http;
@@ -42,7 +44,7 @@ namespace WebAPI.EM.Controllers
             GetEstadosConservacionUC = getEstadosConservacionUC;
             UpdateEcosystemUC = updateEcosystemUC;
         }
-
+        
 
         /// <summary>
         /// Obtiene todos los ecosistemas cargados en el sistema
@@ -64,7 +66,7 @@ namespace WebAPI.EM.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        
 
         /// <summary>
         /// Agrega un ecosistema a la base de datos
@@ -80,6 +82,61 @@ namespace WebAPI.EM.Controllers
             {
                 AddEcosystemUC.AddEcosystem(ecosistema);
                 return Created("api/Ecosistemas", ecosistema);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Registra los cambios
+        /// </summary>
+        /// <param name="control"></param>
+        /// <returns></returns>
+
+        [HttpPost()]
+        public IActionResult PostGuardarCambios([FromBody] EcosistemaDTO ecosistema)
+        {
+            try
+            {
+                ControlDeCambiosDTO cambios = new ControlDeCambiosDTO
+                {
+                    NombreUsuario = HttpContext.Session.GetString("LogueadoAlias"),
+                    TipoEntidad = ecosistema.ToString(),
+                    IdEntidad = ecosistema.IdEcosistema
+
+                };
+                AddChangeTrackingUC.AddChangeTracking(cambios);
+                return Created("api/Ecosistemas", this.GetEcosystemUC.GetEcosystems());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+   
+       
+
+        /// <summary>
+        /// Elimina un ecosistema de la base de datos
+        /// </summary>
+        /// <param name="ecosistemaId"></param>
+        /// <returns></returns>
+
+        [HttpDelete("{ecosistemaId}")]
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult Delete(int ecosistemaId)
+        {
+            try
+            {
+                PostGuardarCambios(GetEcosystemByIdUC.GetEcosystemById(ecosistemaId);
+                this.RemoveByIdUC.RemoveById(ecosistemaId);
+                return NoContent();
             }
             catch (Exception ex)
             {

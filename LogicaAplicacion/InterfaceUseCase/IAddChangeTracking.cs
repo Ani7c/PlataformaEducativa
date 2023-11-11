@@ -1,4 +1,5 @@
 ﻿using Ecosistemas_Marinos.Entidades;
+using LogicaAplicacion.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,6 @@ namespace LogicaAplicacion.InterfaceUseCase
 {
     public interface IAddChangeTracking
     {
-        public void AddChangeTracking(ControlDeCambios cambios);
+        public void AddChangeTracking(ControlDeCambiosDTO cambios);
     }
 }

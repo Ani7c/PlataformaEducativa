@@ -57,11 +57,7 @@ namespace WebApp.Controllers
             return View(GetEcosystemUC.GetEcosystems());
         }
 
-        // GET: EcosistemaController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        
 
         // GET: EcosistemaController/Create
         public ActionResult Create(string mensaje)
