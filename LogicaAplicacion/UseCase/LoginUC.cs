@@ -37,16 +37,7 @@ namespace LogicaAplicacion.UseCase
             else return false;
            
         }
- // Verificar las credenciales del usuario en la base de datos
-            //turn _dbContext.Usuarios.FirstOrDefault(u => u.NombreUsuario == nombreUsuario && u.Contraseña == contraseña);
-        //ver si el usuario existe, si existe entonces valida que la contrasenia este correcta
-        //si lo es, entonces devuelvo true
-    
 
-        //public bool Login(string username, string password)
-        //{
-        //    return false;
-        //}
  
     }
 }

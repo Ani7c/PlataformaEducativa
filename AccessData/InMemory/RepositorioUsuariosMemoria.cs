@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AccessData.InMemory
 {
-    public class RepositorioUsuariosMemoria: IRepositorioUsuario
+    public class RepositorioUsuariosMemoria
     {
         private static List<Usuario> _usuarios = new List<Usuario>();
 

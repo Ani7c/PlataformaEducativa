@@ -10,5 +10,7 @@ namespace Ecosistemas_Marinos.Interfaces_Repositorios
     public interface IRepositorioUsuario : IRepositorio<Usuario>
     {
         public Usuario ObtenerPorAlias(string alias);
+
+        public Usuario ObtenerUsuario(string alias, string password);
     }
 }

@@ -24,9 +24,9 @@ namespace LogicaAplicacion.DTOs
         public UsuarioDTO(Usuario usuario)
         {
             Id = usuario.Id;
-            Contrasenia = usuario.Contrasenia;
-            Encriptada = usuario.Encriptada;
             Alias = usuario.Alias;
+            Contrasenia = usuario.Contrasenia; 
+          //  Encriptada = usuario.Encriptada;
             EsAdmin = usuario.EsAdmin;
         }
     }

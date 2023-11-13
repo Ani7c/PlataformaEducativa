@@ -3,9 +3,11 @@ using Ecosistemas_Marinos.Interfaces_Repositorios;
 using LogicaAplicacion.InterfaceUseCase;
 using LogicaAplicacion.UseCase;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+//using Microsoft.AspNetCore.Authorizaton
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +28,7 @@ builder.Services.AddScoped<IRepositorioPais, RepositorioPais>();
 builder.Services.AddScoped<IRepositorioControlDeCambios, RepositorioControlDeCambios>();
 builder.Services.AddScoped<IRepositorioConfiguracion, RepositorioConfiguracion>();
 builder.Services.AddScoped<IRepositorioEstadoConservacion, RepositorioEstadoConservacion>();
+builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 
 
 //inicializacion de casos de uso
@@ -34,6 +37,7 @@ builder.Services.AddScoped<IAddEcosystem, AddEcosystemUC>();
 builder.Services.AddScoped<IAddSpecies, AddSpeciesUC>();
 builder.Services.AddScoped<IGetEcosystem, GetEcosystemsUC>();
 builder.Services.AddScoped<ILogin, LoginUC>();
+builder.Services.AddScoped<IObtenerUsuario, ObtenerUsuarioUC>();
 builder.Services.AddScoped<IGetThreats, GetThreatsUC>();
 builder.Services.AddScoped<IGetCountries, GetCountriesUC>();
 builder.Services.AddScoped<IObtenerPaisPorCodigo, ObtenerPaisPorCodigoUC>();
@@ -97,6 +101,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
+//Configurar la autorizacion
+builder.Services.AddAuthorization(options =>
+{
+    options.DefaultPolicy = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .RequireAuthenticatedUser().Build();
+});
+
 
 var app = builder.Build();
 
@@ -109,6 +121,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthorization();
 app.UseAuthorization();
 
 app.MapControllers();

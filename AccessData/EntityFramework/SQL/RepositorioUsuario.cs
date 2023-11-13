@@ -78,6 +78,9 @@ namespace AccessData.EntityFramework.SQL
             throw new NotImplementedException();
         }
 
-
+        public Usuario ObtenerUsuario(string alias, string password)
+        {
+            return _context.usuarios.Where(u => u.Alias.Equals(alias) && u.Contrasenia.Equals(password) ).FirstOrDefault();
+        }
     }
 }

@@ -29,7 +29,7 @@ namespace WebApp.Controllers
                     IdEntidad = u.Id
 
                 };
-                this.AddChangeTrackingUC.AddChangeTracking(cambios);
+                //this.AddChangeTrackingUC.AddChangeTracking(cambios);
             }
         }
 
@@ -62,7 +62,7 @@ namespace WebApp.Controllers
         {
             try
             {
-                this.AddUserUC.AddUser(usuario);
+                //this.AddUserUC.AddUser(usuario);
                 GuardarCambiosUsuario(usuario);
                 ViewBag.msg = "Usuario agregado con éxito";
 

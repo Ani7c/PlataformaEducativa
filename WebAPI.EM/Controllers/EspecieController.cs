@@ -1,5 +1,6 @@
 ﻿using LogicaAplicacion.DTOs;
 using LogicaAplicacion.InterfaceUseCase;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -59,7 +60,7 @@ namespace WebApiEM.Controllers
         /// </summary>
         /// <returns> Lista de todas las especies marinas </returns>
         [HttpGet(Name ="GetEspecies")]
-
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Get()
         {

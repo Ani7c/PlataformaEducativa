@@ -109,7 +109,7 @@ namespace WebApp.Controllers
 
                 //GUARDAMOS ESPECIE
                 especie.ImgEspecie = "sinNombreAun";
-                this.AddSpeciesUC.AddSpecies(especie);
+                //this.AddSpeciesUC.AddSpecies(especie);
 
                 //GUARDAMOS CAMBIOS
                 GuardarCambiosEspecie(especie);
@@ -175,7 +175,7 @@ namespace WebApp.Controllers
                     IdEntidad = es.Id
 
                 };
-                this.AddChangeTrackingUC.AddChangeTracking(cambios);
+                //this.AddChangeTrackingUC.AddChangeTracking(cambios);
             }
         }
 
