@@ -134,7 +134,7 @@ namespace WebAPI.EM.Controllers
         //{
         //    try
         //    {
-        //        PostGuardarCambios(GetEcosystemByIdUC.GetEcosystemById(ecosistemaId);
+        //        PostGuardarCambios(GetEcosystemByIdUC.GetEcosystemById(ecosistemaId));
         //        this.RemoveByIdUC.RemoveById(ecosistemaId);
         //        return NoContent();
         //    }

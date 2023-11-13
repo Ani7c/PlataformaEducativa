@@ -2,7 +2,10 @@ using AccessData.EntityFramework.SQL;
 using Ecosistemas_Marinos.Interfaces_Repositorios;
 using LogicaAplicacion.InterfaceUseCase;
 using LogicaAplicacion.UseCase;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,6 +58,18 @@ var rutaArchivo = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, 
 
 builder.Services.AddSwaggerGen(opciones =>
 {
+    //Se agrega la opcion de autenticarse en Swagger
+    opciones.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme()
+    {
+        Description = "Autorizacion estandar mediante esquema Bearer",
+        In = ParameterLocation.Header,
+        Name =  "Authoiration",
+        Type = SecuritySchemeType.ApiKey
+    });
+
+    opciones.OperationFilter<SecurityRequirementsOperationFilter>();
+
+    // Se agregan las opciones para la documentacion de swagger
     opciones.IncludeXmlComments(rutaArchivo);
     opciones.SwaggerDoc("v1", new OpenApiInfo
     {
@@ -67,6 +82,19 @@ builder.Services.AddSwaggerGen(opciones =>
         },
         Version = "v1"
     });
+});
+
+//Configurar la autenticacion
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opciones =>
+{
+    opciones.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.
+            GetBytes(builder.Configuration.GetSection("AppSettings:SecretTokenKey").Value!)),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+    };
 });
 
 
