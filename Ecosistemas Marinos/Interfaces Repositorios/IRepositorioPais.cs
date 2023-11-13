@@ -11,5 +11,8 @@ namespace Ecosistemas_Marinos.Interfaces_Repositorios
     public interface IRepositorioPais : IRepositorio<Pais>
     {
         public Pais BuscarPorCodigo(string codigoAlfa);
+
+        public  Task SaveCountries(List<Pais> countries);
+
     }   
 }

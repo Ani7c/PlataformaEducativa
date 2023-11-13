@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AccessData.InMemory
 {
-    public class RepositorioPaisesMemoria : IRepositorioPais
+    public class RepositorioPaisesMemoria 
     {
         private static List<Pais> _paises = new List<Pais>();
         public void Add(Pais t)

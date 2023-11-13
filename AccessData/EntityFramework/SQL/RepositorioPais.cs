@@ -55,6 +55,13 @@ namespace AccessData.EntityFramework.SQL
         {
             throw new NotImplementedException();
         }
+
+        // Para implementar REST Countries
+        public async Task SaveCountries(List<Pais> countries)
+        {
+            _context.Pais.AddRange(countries);
+            await _context.SaveChangesAsync();
+        }
     }
 }
 
