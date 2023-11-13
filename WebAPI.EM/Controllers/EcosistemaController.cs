@@ -89,59 +89,38 @@ namespace WebAPI.EM.Controllers
             }
         }
 
+
+
+
+
         /// <summary>
-        /// Registra los cambios
+        /// Elimina un ecosistema de la base de datos
         /// </summary>
-        /// <param name="control"></param>
+        /// <param name="ecosistemaId"></param>
         /// <returns></returns>
 
-        //[HttpPost()]
-        //public IActionResult PostGuardarCambios([FromBody] EcosistemaDTO ecosistema)
-        //{
-        //    try
-        //    {
-        //        ControlDeCambiosDTO cambios = new ControlDeCambiosDTO
-        //        {
-        //            NombreUsuario = HttpContext.Session.GetString("LogueadoAlias"),
-        //            TipoEntidad = ecosistema.ToString(),
-        //            IdEntidad = ecosistema.IdEcosistema
+        [HttpDelete("{ecosistemaId}")]
 
-        //        };
-        //        AddChangeTrackingUC.AddChangeTracking(cambios);
-        //        return Created("api/Ecosistemas", this.GetEcosystemUC.GetEcosystems());
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
 
-   
-       
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult Delete(int ecosistemaId)
+        {
+            try
+            {
+                ControlDeCambiosDTO cambios = new ControlDeCambiosDTO();
+                cambios.NombreUsuario = "LogueadoAlias";
+                cambios.IdEntidad = ecosistemaId;
+                cambios.TipoEntidad = "EcosistemaMarino";
+                this.AddChangeTrackingUC.AddChangeTracking(cambios);
 
-        ///// <summary>
-        ///// Elimina un ecosistema de la base de datos
-        ///// </summary>
-        ///// <param name="ecosistemaId"></param>
-        ///// <returns></returns>
-
-        //[HttpDelete("{ecosistemaId}")]
-
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-
-        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        //public IActionResult Delete(int ecosistemaId)
-        //{
-        //    try
-        //    {
-        //        PostGuardarCambios(GetEcosystemByIdUC.GetEcosystemById(ecosistemaId));
-        //        this.RemoveByIdUC.RemoveById(ecosistemaId);
-        //        return NoContent();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
+                this.RemoveByIdUC.RemoveById(ecosistemaId);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

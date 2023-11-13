@@ -95,10 +95,18 @@ namespace WebApp.Controllers
 
                 //AGREGARMOS ECOSISTEMA
                 em.ImgEcosistema = "SinNombreAun";
-                this.AddEcosystemUC.AddEcosystem(em);
+ //               this.AddEcosystemUC.AddEcosystem(em);
 
                 //REGISTRAMOS CAMBIOS
-                GuardarCambiosEcosistema(em);
+                //GuardarCambiosEcosistema(em);
+                ControlDeCambios cambios = new ControlDeCambios();
+                cambios.IdEntidad = em.IdEcosistema;
+                cambios.TipoEntidad = em.ToString();
+                cambios.NombreUsuario = HttpContext.Session.GetString("LogueadoAlias")
+
+                this.AddChangeTrackingUC.AddChangeTracking(cambios);
+
+
 
                 //GUARDAMOS IMAGEN
                 if (em == null || imagen == null) return View();
@@ -118,21 +126,21 @@ namespace WebApp.Controllers
             }
         }
 
-        private void GuardarCambiosEcosistema(EcosistemaMarino em)
-        {
-            if (HttpContext.Session.GetString("LogueadoAlias") != null)
-            {
-                //REGISTRAMOS CAMBIOS
-                ControlDeCambios cambios = new ControlDeCambios
-                {
-                    NombreUsuario = HttpContext.Session.GetString("LogueadoAlias"),
-                    TipoEntidad = em.ToString(),
-                    IdEntidad = em.IdEcosistema
+        //private void GuardarCambiosEcosistema(EcosistemaMarino em)
+        //{
+        //    if (HttpContext.Session.GetString("LogueadoAlias") != null)
+        //    {
+        //        //REGISTRAMOS CAMBIOS
+        //        ControlDeCambios cambios = new ControlDeCambios
+        //        {
+        //            NombreUsuario = HttpContext.Session.GetString("LogueadoAlias"),
+        //            TipoEntidad = em.ToString(),
+        //            IdEntidad = em.IdEcosistema
 
-                };
-                this.AddChangeTrackingUC.AddChangeTracking(cambios);
-            }
-        }
+        //        };
+        //        this.AddChangeTrackingUC.AddChangeTracking(cambios);
+        //    }
+        //}
 
         private bool GuardarImagen(IFormFile imagen, EcosistemaMarino em)
         {
@@ -220,7 +228,7 @@ namespace WebApp.Controllers
             {
                 this.RemoveByIdUC.RemoveById(id);
                 //REGISTRAMOS CAMBIOS
-                GuardarCambiosEcosistema(GetEcosystemByIdUC.GetEcosystemById(id));
+            //    GuardarCambiosEcosistema(GetEcosystemByIdUC.GetEcosystemById(id));
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception e)

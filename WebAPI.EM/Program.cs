@@ -56,6 +56,7 @@ builder.Services.AddScoped<IGetSettings, GetSettingsUC>();
 builder.Services.AddScoped<IFindSettingsByName, FindSettingsByNameUC>();
 builder.Services.AddScoped<IGetSpecieById, GetSpecieByIdUC>();
 builder.Services.AddScoped<IFiltrarDadaUnaEspecie, FiltrarDadaUnaEspecieUC>();
+builder.Services.AddScoped<IAddChangeTracking,  AddChangeTrackingUC>();
 
 
 var rutaArchivo = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "WebAPI.EM.xml");

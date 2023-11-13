@@ -21,10 +21,9 @@ namespace LogicaAplicacion.UseCase
         public void AddChangeTracking(ControlDeCambiosDTO cambios)
         {
             ControlDeCambios aCrear = new ControlDeCambios();
-            aCrear.IdCambios = cambios.IdCambios;
             aCrear.IdEntidad = cambios.IdEntidad;
             aCrear.TipoEntidad = cambios.TipoEntidad;
-            aCrear.FechaHora = cambios.FechaHora;
+            aCrear.NombreUsuario = cambios.NombreUsuario;
 
             repoControlDeCambios.Add(aCrear);
         }
