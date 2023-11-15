@@ -1,4 +1,5 @@
-﻿using LogicaAplicacion.DTOs;
+﻿using Ecosistemas_Marinos.Entidades;
+using LogicaAplicacion.DTOs;
 using LogicaAplicacion.InterfaceUseCase;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -34,11 +35,8 @@ namespace WebAPI.EM.Controllers
                     return Unauthorized("Nombre de usuario o contrasenia incorrecta.");
 
                 var token = TokenHandler.GenerarToken(usuario, this._configuration);
-                return Ok(new
-                {
-                    Token = token,
-                    Usuario = usuario
-                });
+                usuario.Token = token;
+                return Ok(usuario);
             }
             catch (Exception ex)
             {

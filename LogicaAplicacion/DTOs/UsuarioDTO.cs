@@ -16,6 +16,8 @@ namespace LogicaAplicacion.DTOs
         public string Alias { get; set; }
         public DateTime FechaAlta { get; set; }
         public bool EsAdmin { get; set; }
+
+        public string? Token { get; set; }
         public UsuarioDTO()
         {
             FechaAlta = DateTime.Now;
@@ -26,7 +28,7 @@ namespace LogicaAplicacion.DTOs
             Id = usuario.Id;
             Alias = usuario.Alias;
             Contrasenia = usuario.Contrasenia; 
-          //  Encriptada = usuario.Encriptada;
+            Encriptada = usuario.Encriptada;
             EsAdmin = usuario.EsAdmin;
         }
     }
