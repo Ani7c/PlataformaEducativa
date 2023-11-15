@@ -81,6 +81,14 @@ namespace WebAPI.EM.Controllers
             try
             {
                 AddEcosystemUC.AddEcosystem(ecosistema);
+
+                //Guardamos los cambios
+                ControlDeCambiosDTO cambios = new ControlDeCambiosDTO();
+                cambios.NombreUsuario = HttpContext.Session.GetString("LogueadoAlias");
+                cambios.IdEntidad = ecosistema.IdEcosistema;
+                cambios.TipoEntidad = "EcosistemaMarino";
+                this.AddChangeTrackingUC.AddChangeTracking(cambios);
+
                 return Created("api/Ecosistemas", ecosistema);
             }
             catch (Exception ex)
@@ -109,7 +117,7 @@ namespace WebAPI.EM.Controllers
             try
             {
                 ControlDeCambiosDTO cambios = new ControlDeCambiosDTO();
-                cambios.NombreUsuario = "LogueadoAlias";
+                cambios.NombreUsuario = HttpContext.Session.GetString("LogueadoAlias");
                 cambios.IdEntidad = ecosistemaId;
                 cambios.TipoEntidad = "EcosistemaMarino";
                 this.AddChangeTrackingUC.AddChangeTracking(cambios);

@@ -110,6 +110,14 @@ namespace WebApiEM.Controllers
             try
             {
                 AddSpeciesUC.AddSpecies(especie);
+
+                //Guardamos los cambios
+                ControlDeCambiosDTO cambios = new ControlDeCambiosDTO();
+                cambios.NombreUsuario = HttpContext.Session.GetString("LogueadoAlias");
+                cambios.IdEntidad = especie.Id;
+                cambios.TipoEntidad = "EspecieMarina";
+                this.AddChangeTrackingUC.AddChangeTracking(cambios);
+
                 return Created("api/Especies", especie);
             }
             catch (Exception ex)
