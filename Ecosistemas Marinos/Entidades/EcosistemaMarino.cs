@@ -52,8 +52,6 @@ namespace EcosistemasMarinos.Entidades
         
         }
 
-
-
         public void EsValido(IRepositorioConfiguracion configuracion)
         {
             if(Nombre.Length < configuracion.GetTopeInferior("Nombre"))
@@ -64,6 +62,11 @@ namespace EcosistemasMarinos.Entidades
             {
                 throw new EcosystemException("Nombre demasiado largo");
             }
+        }
+
+        public string Tipo()
+        {
+            return "Ecosistema Marino";
         }
     }
 }

@@ -7,7 +7,7 @@ namespace WebAPI.EM.Controllers
     [ApiController]
     public class PaisesController : ControllerBase
     {
-        [HttpGet(Name ="GetPaises")]
+        //[HttpGet(Name ="GetPaises")]
 
     }
 }

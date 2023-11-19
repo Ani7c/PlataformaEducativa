@@ -40,5 +40,9 @@ namespace LogicaAplicacion.DTOs
             Pais = ecosistema.Pais;
         }
 
+        public string Tipo()
+        {
+            return "Ecosistema Marino";
+        }
     }
 }

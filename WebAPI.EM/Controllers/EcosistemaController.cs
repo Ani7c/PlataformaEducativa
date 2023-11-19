@@ -86,7 +86,7 @@ namespace WebAPI.EM.Controllers
                 ControlDeCambiosDTO cambios = new ControlDeCambiosDTO();
                 cambios.NombreUsuario = HttpContext.Session.GetString("LogueadoAlias");
                 cambios.IdEntidad = ecosistema.IdEcosistema;
-                cambios.TipoEntidad = "EcosistemaMarino";
+                cambios.TipoEntidad = ecosistema.Tipo();
                 this.AddChangeTrackingUC.AddChangeTracking(cambios);
 
                 return Created("api/Ecosistemas", ecosistema);
