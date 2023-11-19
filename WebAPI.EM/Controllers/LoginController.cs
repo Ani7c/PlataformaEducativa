@@ -23,7 +23,7 @@ namespace WebAPI.EM.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [Route("Login")]
+        [Route("login")]
         public IActionResult Login([FromBody] UsuarioDTO usuario)
         {
             try
@@ -31,8 +31,10 @@ namespace WebAPI.EM.Controllers
                 TokenHandler tokenHandler = new TokenHandler(this._obtenerUsuario);
                 var user = tokenHandler.ObtenerUsuario(usuario.Alias, usuario.Contrasenia);
 
-                if (user == null)
-                    return Unauthorized("Nombre de usuario o contrasenia incorrecta.");
+                if (user == null || user.Contrasenia != usuario.Contrasenia)
+                {
+                    return Unauthorized("Nombre de usuario o contraseña incorrecta.");
+                }
 
                 var token = TokenHandler.GenerarToken(usuario, this._configuration);
                 usuario.Token = token;
