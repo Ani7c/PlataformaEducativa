@@ -57,6 +57,7 @@ builder.Services.AddScoped<IFindSettingsByName, FindSettingsByNameUC>();
 builder.Services.AddScoped<IGetSpecieById, GetSpecieByIdUC>();
 builder.Services.AddScoped<IFiltrarDadaUnaEspecie, FiltrarDadaUnaEspecieUC>();
 builder.Services.AddScoped<IAddChangeTracking,  AddChangeTrackingUC>();
+builder.Services.AddScoped<IGetPosiblesEcosistemas, GetPosiblesEcosistemasUC>();
 
 
 var rutaArchivo = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "WebAPI.EM.xml");
@@ -68,7 +69,7 @@ builder.Services.AddSwaggerGen(opciones =>
     {
         Description = "Autorizacion estandar mediante esquema Bearer",
         In = ParameterLocation.Header,
-        Name =  "Authoiration",
+        Name =  "Authorization", //a traves de ese header manda el token
         Type = SecuritySchemeType.ApiKey
     });
 

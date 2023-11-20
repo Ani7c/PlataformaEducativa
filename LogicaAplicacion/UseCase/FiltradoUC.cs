@@ -1,5 +1,6 @@
 ﻿using Ecosistemas_Marinos.Interfaces_Repositorios;
 using EcosistemasMarinos.Entidades;
+using LogicaAplicacion.DTOs;
 using LogicaAplicacion.InterfaceUseCase;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,18 @@ namespace LogicaAplicacion.UseCase
         {
             this.repositorioEspecie = repositorioEspecie;
         }
-        public List<EspecieMarina> GetSpeciesBy(string NombreCientifico, bool enPeligroExtincion, double pesoMinimo, double pesoMaximo, int IdEcosistema)
+        public List<EspecieDTO> GetSpeciesBy(string NombreCientifico, bool enPeligroExtincion, double pesoMinimo, double pesoMaximo, int IdEcosistema)
         {
-            return repositorioEspecie.GetSpeciesBy(NombreCientifico, enPeligroExtincion, pesoMinimo, pesoMaximo, IdEcosistema);
+            //TODO
+            List<EspecieMarina> especies = repositorioEspecie.GetSpeciesBy(NombreCientifico, enPeligroExtincion, pesoMinimo, pesoMaximo, IdEcosistema);
+            List<EspecieDTO> especiesDTOs = new List<EspecieDTO>();
+            foreach(EspecieMarina esp in  especies) 
+            {
+                EspecieDTO nueva = new EspecieDTO(esp);   
+                especiesDTOs.Add(nueva);
+            }
+
+            return especiesDTOs;
         }
     }
 }

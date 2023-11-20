@@ -1,4 +1,5 @@
 ﻿using EcosistemasMarinos.Entidades;
+using LogicaAplicacion.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace LogicaAplicacion.InterfaceUseCase
 {
     public interface IFiltrado
     {
-        public List<EspecieMarina> GetSpeciesBy(string NombreCientifico, bool enPeligroExtincion, double pesoMinimo, double pesoMaximo, int IdEcosistema);
+        public List<EspecieDTO> GetSpeciesBy(string NombreCientifico, bool enPeligroExtincion, double pesoMinimo, double pesoMaximo, int IdEcosistema);
     }
 }

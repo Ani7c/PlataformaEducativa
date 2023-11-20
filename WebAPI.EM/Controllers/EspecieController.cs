@@ -136,7 +136,7 @@ namespace WebApiEM.Controllers
         /// <param name="IdEcosistema"></param>
         /// <returns>Lista de especies</returns>
         /// 
-        [HttpGet("{Filtrado}")]
+        [HttpGet("Filter")]
         [ValidateAntiForgeryToken]
         public IActionResult Filtrado(string NombreCientifico, bool enPeligroExtincion, double pesoMinimo, double pesoMaximo, int IdEcosistema)
         {
@@ -152,7 +152,7 @@ namespace WebApiEM.Controllers
         }
 
 
-        [HttpGet("{FiltrarDadaUnaEspecie}")]
+        [HttpGet("FiltrarPorEspecie")]
 
         public IActionResult Get(int idEspecie)
         {
@@ -162,7 +162,7 @@ namespace WebApiEM.Controllers
 
 
 
-        [HttpPost("{Asociar}")]
+        [HttpPost("Asociar")]
         public ActionResult Asociar(int EspecieId, int EcosistemaId)
         {
             try

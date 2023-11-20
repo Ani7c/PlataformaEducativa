@@ -104,7 +104,7 @@ namespace WebApp.Controllers
                 cambios.TipoEntidad = em.ToString();
                 cambios.NombreUsuario = HttpContext.Session.GetString("LogueadoAlias")
 
-                this.AddChangeTrackingUC.AddChangeTracking(cambios);
+                //this.AddChangeTrackingUC.AddChangeTracking(cambios);
 
 
 

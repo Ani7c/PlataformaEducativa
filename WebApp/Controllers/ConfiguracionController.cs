@@ -47,7 +47,7 @@ namespace WebApp.Controllers
         {
             try
             {
-                this.UpdateSettingsUC.UpdateSettings(setting);
+                //this.UpdateSettingsUC.UpdateSettings(setting);
 
                 return RedirectToAction(nameof(Index));
             }
