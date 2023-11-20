@@ -126,75 +126,64 @@ namespace WebApiEM.Controllers
             }
         }
 
-        //[HttpGet(Name = "Filtrado")]
-        //public IActionResult Filtrado()
-        //{
-        //    //string? lAlias = HttpContext.Session.GetString("LogueadoAlias");
-        //    //if (lAlias != null)
-        //    //{
-        //    return Ok(this.GetEcosystemUC.GetEcosystems());
-        //    //}
-        //    //else
-        //    //{
-        //    //    ViewBag.msg = "No autorizado";
-        //    //    return View();
-        //    //}
-        //}
-
-        //[HttpPost(Name = "ResultadoFiltrado")]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Post(string NombreCientifico, bool enPeligroExtincion, double pesoMinimo, double pesoMaximo, int IdEcosistema)
-        //{
-
-        //    var resultados = this.FiltradoUC.GetSpeciesBy(NombreCientifico, enPeligroExtincion, pesoMinimo, pesoMaximo, IdEcosistema);
-        //    return Ok(resultados);
-        //}
-
-
-        //[HttpPost(Name = "FiltrarDadaUnaEspecie")]
-
-        //public IActionResult Post(int IdEspecie)
-        //{
-        //    var resultados = this.FiltrarDadaUnaEspecieUC.FiltrarDadaUnaEspecie(IdEspecie);
-        //    return Ok(resultados);
-        //}
+        /// <summary>
+        /// Obtiene la lista filtrada de especies
+        /// </summary>
+        /// <param name="NombreCientifico"></param>
+        /// <param name="enPeligroExtincion"></param>
+        /// <param name="pesoMinimo"></param>
+        /// <param name="pesoMaximo"></param>
+        /// <param name="IdEcosistema"></param>
+        /// <returns>Lista de especies</returns>
+        /// 
+        [HttpGet("{Filtrado}")]
+        [ValidateAntiForgeryToken]
+        public IActionResult Filtrado(string NombreCientifico, bool enPeligroExtincion, double pesoMinimo, double pesoMaximo, int IdEcosistema)
+        {
+            try
+            {
+                var resultados = this.FiltradoUC.GetSpeciesBy(NombreCientifico, enPeligroExtincion, pesoMinimo, pesoMaximo, IdEcosistema);
+                return Ok(resultados);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
 
+        [HttpGet("{FiltrarDadaUnaEspecie}")]
+
+        public IActionResult Get(int idEspecie)
+        {
+            var resultados = this.FiltrarDadaUnaEspecieUC.FiltrarDadaUnaEspecie(idEspecie);
+            return Ok(resultados);
+        }
 
 
-        //public ActionResult Asociar()
-        //{
-        //    string alias = HttpContext.Session.GetString("LogueadoAlias");
-        //    if (alias != null)
-        //    {
-        //        ViewBag.Especies = this.GetSpeciesUC.GetSpecies();//todas las especies
-        //        ViewBag.Ecosistemas = this.GetPosiblesEcosistemasUC.GetPosiblesEcosistemas(); //los posibles ecosistemas de la lista en especie
-        //        return Ok();
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //}
 
-        //[HttpPost (Name = "Asociar")]
-        //public ActionResult Asociar(int EspecieId, int EcosistemaId)
-        //{
-        //    try
-        //    {
-        //        // EspecieMarina especie = this.GetSpecieByIdUC.GetEspecieMarina(EspecieId);
-        //        // EcosistemaMarino ecosistema = this.GetEcosystemByIdUC.GetEcosystemById(EcosistemaId);
-        //        //llamar a asociar
-        //        this.AddSpecieToEcosystemUC.AsociarEspecieAEcosistema(EspecieId, EcosistemaId);
-        //        //GUARDAMOS CAMBIOS
-        //        // GuardarCambiosEspecie(GetSpecieByIdUC.FindById(EspecieId));
-        //        return RedirectToAction(nameof(Index), new { mensaje = "Asociados exitosamente" });
-        //    }
-        //    catch
-        //    {
-        //        return BadRequest();
-        //    }
-        //}
+        [HttpPost("{Asociar}")]
+        public ActionResult Asociar(int EspecieId, int EcosistemaId)
+        {
+            try
+            {
+                //llamar a asociar
+                this.AddSpecieToEcosystemUC.AsociarEspecieAEcosistema(EspecieId, EcosistemaId);
+
+                //GUARDAMOS CAMBIOS
+                ControlDeCambiosDTO cambios = new ControlDeCambiosDTO();
+                cambios.NombreUsuario = HttpContext.Session.GetString("LogueadoAlias");
+                cambios.IdEntidad = EcosistemaId;
+                cambios.TipoEntidad = "EcosistemaMarino";
+                this.AddChangeTrackingUC.AddChangeTracking(cambios);
+
+                return RedirectToAction(nameof(Index), new { mensaje = "Asociados exitosamente" });
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
 
     }
 }

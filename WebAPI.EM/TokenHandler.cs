@@ -26,7 +26,7 @@ namespace WebAPI.EM
                 GetBytes(configuration.GetSection("AppSettings:SecretTokenKey").Value!));
 
             var credenciales = new SigningCredentials(claveSecreta, SecurityAlgorithms.HmacSha512Signature);
-            var token = new JwtSecurityToken(claims: claims, expires: DateTime.UtcNow.AddDays(1), signingCredentials: credenciales);
+            var token = new JwtSecurityToken(claims: claims, expires: DateTime.Now.AddDays(1), signingCredentials: credenciales);
             var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
 
             return jwtToken;
