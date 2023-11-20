@@ -23,13 +23,13 @@ namespace WebAPI.EM.Controllers
             try
             {
                 // Aquí puedes guardar los países en tu base de datos o realizar otras operaciones necesarias
-                // ...
+                // TODO Belen hace GuardarPaisesUC, Ana hace GuardarPaises en el RepositorioPais
+                this.GuardarPaisesUC.GuardarPaises(paises);
 
-                return Ok(); // Puedes devolver un Ok() si la operación fue exitosa
+                return Ok(); 
             }
             catch (Exception ex)
             {
-                // Manejar cualquier error que pueda ocurrir durante el procesamiento
                 return BadRequest($"Error: {ex.Message}");
             }
         }
