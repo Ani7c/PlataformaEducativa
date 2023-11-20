@@ -1,6 +1,8 @@
 ﻿using Ecosistemas_Marinos.Interfaces_Repositorios;
+using LogicaAplicacion.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace WebAPI.EM.Controllers
 {
@@ -14,22 +16,24 @@ namespace WebAPI.EM.Controllers
             this.repositorioPais = repositorioPais;
         }
 
-        /// <summary>
-        /// Obtengo todos los Paises cargados en la BBDD
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet(Name = "GetPaises")]
-        public IActionResult Get()
+
+        [HttpPost]
+        public IActionResult GuardarPaises([FromBody] IEnumerable<PaisDTO> paises)
         {
             try
             {
-                return Ok(this.repositorioPais.FindAll());
+                // Aquí puedes guardar los países en tu base de datos o realizar otras operaciones necesarias
+                // ...
+
+                return Ok(); // Puedes devolver un Ok() si la operación fue exitosa
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                // Manejar cualquier error que pueda ocurrir durante el procesamiento
+                return BadRequest($"Error: {ex.Message}");
             }
         }
+
 
     }
 }
