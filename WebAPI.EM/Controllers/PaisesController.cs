@@ -1,5 +1,6 @@
 ﻿using Ecosistemas_Marinos.Interfaces_Repositorios;
 using LogicaAplicacion.DTOs;
+using LogicaAplicacion.InterfaceUseCase;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,10 +11,11 @@ namespace WebAPI.EM.Controllers
     [ApiController]
     public class PaisesController : ControllerBase
     {
-        private IRepositorioPais repositorioPais;
-        public PaisesController(IRepositorioPais repositorioPais)
+        private IGuardarPaises GuardarPaisesUC;
+
+        public PaisesController(IGuardarPaises guardarPaisesUC)
         {
-            this.repositorioPais = repositorioPais;
+            GuardarPaisesUC = guardarPaisesUC;
         }
 
 
