@@ -54,7 +54,6 @@ namespace WebAPI.EM.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
 
-
         public IActionResult Get()
         {
             try

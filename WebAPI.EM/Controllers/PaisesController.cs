@@ -18,17 +18,24 @@ namespace WebAPI.EM.Controllers
             GuardarPaisesUC = guardarPaisesUC;
         }
 
-
+        /// <summary>
+        /// Guarda en la base de datos los paises obtenidos desde REST Countries
+        /// </summary>
+        /// <param name="paises"></param>
+        /// <returns></returns>
         [HttpPost]
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult GuardarPaises([FromBody] IEnumerable<PaisDTO> paises)
         {
             try
             {
                 // Aquí puedes guardar los países en tu base de datos o realizar otras operaciones necesarias
                 // TODO Belen hace GuardarPaisesUC, Ana hace GuardarPaises en el RepositorioPais
-                this.GuardarPaisesUC.GuardarPaises(paises);
+                // this.GuardarPaisesUC.GuardarPaises(paises);
 
                 return Ok(); 
+                //No se si es un Ok ya que es un post, sera un Created?
             }
             catch (Exception ex)
             {

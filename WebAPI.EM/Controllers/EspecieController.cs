@@ -137,7 +137,7 @@ namespace WebApiEM.Controllers
         /// <returns>Lista de especies</returns>
         /// 
         [HttpGet("Filter")]
-        [ValidateAntiForgeryToken]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Filtrado(string NombreCientifico, bool enPeligroExtincion, double pesoMinimo, double pesoMaximo, int IdEcosistema)
         {
             try
@@ -152,15 +152,33 @@ namespace WebApiEM.Controllers
         }
 
 
+        /// <summary>
+        /// Dada una especie devuelve todos los ecosistemas en donde no puede habitar
+        /// </summary>
+        /// <param name="idEspecie"></param>
+        /// <returns>Lista de ecosistemas</returns>
         [HttpGet("FiltrarPorEspecie")]
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Get(int idEspecie)
         {
-            var resultados = this.FiltrarDadaUnaEspecieUC.FiltrarDadaUnaEspecie(idEspecie);
-            return Ok(resultados);
+            try 
+            { 
+                var resultados = this.FiltrarDadaUnaEspecieUC.FiltrarDadaUnaEspecie(idEspecie);
+                return Ok(resultados);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
 
+        /// <summary>
+        /// Asigna una especie a un ecosistema
+        /// </summary>
+        /// <param name="EspecieId"></param>
+        /// <param name="EcosistemaId"></param>
 
         [HttpPost("Asociar")]
         public ActionResult Asociar(int EspecieId, int EcosistemaId)
@@ -177,7 +195,8 @@ namespace WebApiEM.Controllers
                 cambios.TipoEntidad = "EcosistemaMarino";
                 this.AddChangeTrackingUC.AddChangeTracking(cambios);
 
-                return RedirectToAction(nameof(Index), new { mensaje = "Asociados exitosamente" });
+                return Ok();
+                //return Created("Ecosistema/EcosistemaId/Especie/EspecieId");
             }
             catch
             {

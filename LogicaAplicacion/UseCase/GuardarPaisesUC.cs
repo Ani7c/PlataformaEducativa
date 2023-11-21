@@ -27,7 +27,7 @@ namespace LogicaAplicacion.UseCase
                 aGuardar.Add(nuevo);
             }
 
-            repositorioPais.GuardarPaises(aGuardar);
+           // repositorioPais.GuardarPaises(aGuardar);
         }
     }
 }

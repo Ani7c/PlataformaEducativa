@@ -21,6 +21,11 @@ namespace WebAPI.EM.Controllers
             this._obtenerUsuario = obtenerUsuario;
         }
 
+        /// <summary>
+        /// Autentica un usuario y genera un token de acceso JWT.
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [Route("login")]
