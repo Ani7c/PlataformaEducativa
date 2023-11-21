@@ -3,6 +3,7 @@ using LogicaAplicacion.InterfaceUseCase;
 using LogicaAplicacion.UseCase;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Common;
 
 namespace WebApp.Controllers
 {
@@ -27,7 +28,8 @@ namespace WebApp.Controllers
 
             if (LoginUC.IniciarSesion(Alias, Contrasenia))
             {
-              HttpContext.Session.SetString("LogueadoAlias", Alias);  
+              HttpContext.Session.SetString("LogueadoAlias", Alias);
+                //HttpContext.Session.SetString("Token", Token);
                 return RedirectToAction("Index", "Home");
 
             }
