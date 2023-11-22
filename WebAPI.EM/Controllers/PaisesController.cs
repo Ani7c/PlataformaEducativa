@@ -26,7 +26,7 @@ namespace WebAPI.EM.Controllers
         [HttpPost]
 
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult GuardarPaises([FromBody] IEnumerable<PaisDTO> paises)
+        public IActionResult GuardarPaises([FromBody] List<PaisDTO> paises)
         {
             try
             {

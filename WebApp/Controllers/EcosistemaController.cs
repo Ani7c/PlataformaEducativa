@@ -102,7 +102,7 @@ namespace WebApp.Controllers
                 ControlDeCambios cambios = new ControlDeCambios();
                 cambios.IdEntidad = em.IdEcosistema;
                 cambios.TipoEntidad = em.ToString();
-                cambios.NombreUsuario = HttpContext.Session.GetString("LogueadoAlias")
+                cambios.NombreUsuario = HttpContext.Session.GetString("LogueadoAlias");
 
                 //this.AddChangeTrackingUC.AddChangeTracking(cambios);
 

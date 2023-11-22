@@ -12,7 +12,7 @@ namespace Ecosistemas_Marinos.Interfaces_Repositorios
     {
         public Pais BuscarPorCodigo(string codigoAlfa);
 
-        public  Task SaveCountries(List<Pais> countries);
+        public void GuardarPaises(List<Pais> listaPais);
 
     }   
 }
