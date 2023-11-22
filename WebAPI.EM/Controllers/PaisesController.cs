@@ -4,6 +4,7 @@ using LogicaAplicacion.InterfaceUseCase;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 
 namespace WebAPI.EM.Controllers
 {
@@ -11,6 +12,10 @@ namespace WebAPI.EM.Controllers
     [ApiController]
     public class PaisesController : ControllerBase
     {
+        private HttpClient cliente = new HttpClient();
+        private string urlPaises = "https://restcountries.com/v3.1/all";
+
+
         private IGuardarPaises GuardarPaisesUC;
         private IGetCountries GetCountriesUC;
 
@@ -51,16 +56,27 @@ namespace WebAPI.EM.Controllers
         [HttpPost]
 
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult GuardarPaises([FromBody] List<PaisDTO> paises)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult Post()
         {
             try
             {
-                // Aquí puedes guardar los países en tu base de datos o realizar otras operaciones necesarias
+                //Traemos los paises de la API
+                Uri uri = new Uri(urlPaises);
+                HttpRequestMessage solicitud = new HttpRequestMessage(HttpMethod.Get, uri);
+                Task<HttpResponseMessage> respuesta = cliente.SendAsync(solicitud);
+                respuesta.Wait();
 
-                 this.GuardarPaisesUC.GuardarPaises(paises);
+                if (respuesta.Result.IsSuccessStatusCode)
+                {
+                    Task<string> response = respuesta.Result.Content.ReadAsStringAsync();
+                    response.Wait();
+                    List<PaisModel> paises = JsonConvert.DeserializeObject<List<PaisModel>>(response.Result);
 
+                    this.GuardarPaisesUC.GuardarPaises(paises);
+                }
+                
                 return Ok(); 
-                //No se si es un Ok ya que es un post, sera un Created?
             }
             catch (Exception ex)
             {

@@ -17,14 +17,14 @@ namespace LogicaAplicacion.UseCase
         {
             this.repositorioPais = repositorioPais;
         }
-        public void GuardarPaises(List<PaisDTO> paises)
+        public void GuardarPaises(List<PaisModel> paises)
         {
             List<Pais> aGuardar = new List<Pais>();
-            foreach(PaisDTO p in paises)
+            foreach(PaisModel p in paises)
             {
                 Pais nuevo = new Pais();
-                nuevo.Nombre = p.Nombre;
-                nuevo.Codigo = p.Codigo;
+                nuevo.Nombre = p.name.common;
+                nuevo.Codigo = p.cca3;
                 aGuardar.Add(nuevo);
             }
 

@@ -10,6 +10,6 @@ namespace LogicaAplicacion.InterfaceUseCase
 {
     public interface IGuardarPaises
     {
-        public void GuardarPaises(List<PaisDTO> paises);
+        public void GuardarPaises(List<PaisModel> paises);
     }
 }

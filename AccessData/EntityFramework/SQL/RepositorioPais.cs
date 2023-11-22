@@ -61,8 +61,8 @@ namespace AccessData.EntityFramework.SQL
         {
             foreach (Pais t in listaPais)
             {
-                _context.Pais.AddRange(t);
-                _context.SaveChangesAsync();
+                _context.Pais.Add(t);
+                _context.SaveChanges();
             }
         }
     }
