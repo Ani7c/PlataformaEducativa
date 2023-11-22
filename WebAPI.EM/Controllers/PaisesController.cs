@@ -32,7 +32,7 @@ namespace WebAPI.EM.Controllers
             {
                 // Aquí puedes guardar los países en tu base de datos o realizar otras operaciones necesarias
                 // TODO Belen hace GuardarPaisesUC, Ana hace GuardarPaises en el RepositorioPais
-                // this.GuardarPaisesUC.GuardarPaises(paises);
+                 this.GuardarPaisesUC.GuardarPaises(paises);
 
                 return Ok(); 
                 //No se si es un Ok ya que es un post, sera un Created?
