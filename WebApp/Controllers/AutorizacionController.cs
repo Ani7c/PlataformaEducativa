@@ -29,7 +29,7 @@ namespace WebApp.Controllers
             if (LoginUC.IniciarSesion(Alias, Contrasenia))
             {
               HttpContext.Session.SetString("LogueadoAlias", Alias);
-                //HttpContext.Session.SetString("Token", Token);
+               //HttpContext.Session.SetString("Token", Token);
                 return RedirectToAction("Index", "Home");
 
             }

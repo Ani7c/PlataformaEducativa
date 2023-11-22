@@ -60,7 +60,7 @@ namespace WebApiEM.Controllers
         /// </summary>
         /// <returns> Lista de todas las especies marinas </returns>
         [HttpGet(Name ="GetEspecies")]
-        [Authorize]
+       // [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Get()
         {
