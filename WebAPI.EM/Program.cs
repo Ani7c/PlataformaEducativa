@@ -58,6 +58,7 @@ builder.Services.AddScoped<IGetSpecieById, GetSpecieByIdUC>();
 builder.Services.AddScoped<IFiltrarDadaUnaEspecie, FiltrarDadaUnaEspecieUC>();
 builder.Services.AddScoped<IAddChangeTracking,  AddChangeTrackingUC>();
 builder.Services.AddScoped<IGetPosiblesEcosistemas, GetPosiblesEcosistemasUC>();
+builder.Services.AddScoped<IGuardarPaises, GuardarPaisesUC>();
 
 
 var rutaArchivo = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "WebAPI.EM.xml");

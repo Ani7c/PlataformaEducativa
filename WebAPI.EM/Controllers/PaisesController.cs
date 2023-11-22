@@ -12,11 +12,36 @@ namespace WebAPI.EM.Controllers
     public class PaisesController : ControllerBase
     {
         private IGuardarPaises GuardarPaisesUC;
+        private IGetCountries GetCountriesUC;
 
-        public PaisesController(IGuardarPaises guardarPaisesUC)
+        public PaisesController(IGuardarPaises guardarPaisesUC, IGetCountries getCountriesUC)
         {
             GuardarPaisesUC = guardarPaisesUC;
+            GetCountriesUC = getCountriesUC;
         }
+
+
+
+        /// <summary>
+        /// Obtiene todos los paises cargados en el sistema
+        /// </summary>
+        /// <returns> Lista de todos los paises </returns>
+        [HttpGet(Name = "GetPaises")]
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+
+        public IActionResult Get()
+        {
+            try
+            {
+                return Ok(this.GetCountriesUC.GetCountries());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
 
         /// <summary>
         /// Guarda en la base de datos los paises obtenidos desde REST Countries
