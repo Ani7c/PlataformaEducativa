@@ -1,4 +1,5 @@
 ﻿using Ecosistemas_Marinos.Entidades;
+using LogicaAplicacion.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace LogicaAplicacion.InterfaceUseCase
 {
     public interface IFindSettingsByName
     {
-        public Configuracion FindSettingsByName(string name);   
+        public ConfiguracionDTO FindSettingsByName(string name);   
     }
 }

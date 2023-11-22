@@ -115,11 +115,11 @@ namespace WebAPI.EM.Controllers
         {
             try
             {
-                ControlDeCambiosDTO cambios = new ControlDeCambiosDTO();
-                cambios.NombreUsuario = HttpContext.Session.GetString("LogueadoAlias");
-                cambios.IdEntidad = ecosistemaId;
-                cambios.TipoEntidad = "EcosistemaMarino";
-                this.AddChangeTrackingUC.AddChangeTracking(cambios);
+                //ControlDeCambiosDTO cambios = new ControlDeCambiosDTO();
+                //cambios.NombreUsuario = HttpContext.Session.GetString("LogueadoAlias");
+                //cambios.IdEntidad = ecosistemaId;
+                //cambios.TipoEntidad = "EcosistemaMarino";
+                //this.AddChangeTrackingUC.AddChangeTracking(cambios);
 
                 this.RemoveByIdUC.RemoveById(ecosistemaId);
                 return NoContent();

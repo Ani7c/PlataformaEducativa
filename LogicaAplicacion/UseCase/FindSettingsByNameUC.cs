@@ -1,5 +1,6 @@
 ﻿using Ecosistemas_Marinos.Entidades;
 using Ecosistemas_Marinos.Interfaces_Repositorios;
+using LogicaAplicacion.DTOs;
 using LogicaAplicacion.InterfaceUseCase;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,12 @@ namespace LogicaAplicacion.UseCase
         {
             this.repositorioConfiguracion = repositorioConfiguracion;
         }
-        Configuracion IFindSettingsByName.FindSettingsByName(string name)
+        ConfiguracionDTO IFindSettingsByName.FindSettingsByName(string name)
         {
-            return repositorioConfiguracion.FindByName(name);
+            Configuracion config = repositorioConfiguracion.FindByName(name);
+            ConfiguracionDTO configDTO = new ConfiguracionDTO(config);
+
+            return configDTO;
         }
     }
 }

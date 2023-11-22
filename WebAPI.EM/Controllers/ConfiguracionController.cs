@@ -11,13 +11,13 @@ namespace WebAPI.EM.Controllers
     {
         private IUpdateSettings UpdateSettingsUC;
         private IGetSettings GetSettingsUC;
-        private IFindSettingsByName GetSettingsByNameUC;
+        private IFindSettingsByName FindSettingsByNameUC;
 
         public ConfiguracionController(IUpdateSettings updateSettingsUC, IGetSettings getSettingsUC, IFindSettingsByName getSettingsByNameUC)
         {
             UpdateSettingsUC = updateSettingsUC;
             GetSettingsUC = getSettingsUC;
-            GetSettingsByNameUC = getSettingsByNameUC;
+            FindSettingsByNameUC = getSettingsByNameUC;
         }
 
         /// <summary>
@@ -41,6 +41,33 @@ namespace WebAPI.EM.Controllers
             }
         }
 
+
+
+
+        /// <summary>
+        /// Obtiene una configuración por nombre
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>Configuración con el nombre especificado</returns>
+        [HttpGet("GetByName", Name = "GetConfiguracionByName")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetByName(string name)
+        {
+            try
+            {
+                ConfiguracionDTO config = this.FindSettingsByNameUC.FindSettingsByName(name);
+                if (config == null)
+                {
+                    return NotFound();
+                }
+                return Ok(config);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
 
         /// <summary>

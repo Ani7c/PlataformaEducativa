@@ -200,16 +200,8 @@ namespace WebApp.Controllers
         public ActionResult Delete(int id)
         {
             try
-            {
-                string alias = HttpContext.Session.GetString("LogueadoAlias");
-                if (alias != null)
-                {
-                    return View(this.GetEcosystemByIdUC.GetEcosystemById(id));
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Home");
-                }
+            {    
+                return View(this.GetEcosystemByIdUC.GetEcosystemById(id));
                     
             }
             catch (Exception e)

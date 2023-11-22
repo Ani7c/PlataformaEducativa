@@ -22,5 +22,7 @@ namespace LogicaAplicacion.DTOs
             TopeInferior = configuracion.TopeInferior;
         }
 
+        public ConfiguracionDTO() { }
+
     }
 }
