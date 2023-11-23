@@ -1,5 +1,7 @@
-﻿using Ecosistemas_Marinos.Interfaces_Repositorios;
+﻿using Ecosistemas_Marinos.Entidades;
+using Ecosistemas_Marinos.Interfaces_Repositorios;
 using EcosistemasMarinos.Entidades;
+using LogicaAplicacion.DTOs;
 using LogicaAplicacion.InterfaceUseCase;
 using System;
 using System.Collections.Generic;
@@ -18,9 +20,18 @@ namespace LogicaAplicacion.UseCase
             this.repositorioEspecie = repositorioEspecie;
         }
 
-        public List<EcosistemaMarino> FiltrarDadaUnaEspecie(int IdEspecie)
+        public List<EcosistemaDTO> FiltrarDadaUnaEspecie(int IdEspecie)
         {
-            return repositorioEspecie.FiltrarDadaUnaEspecie(IdEspecie);
+            List<EcosistemaMarino> ecosistemas = repositorioEspecie.FiltrarDadaUnaEspecie(IdEspecie);
+            List<EcosistemaDTO> ret = new List<EcosistemaDTO>();
+
+            foreach(EcosistemaMarino em in  ecosistemas)
+            {
+                EcosistemaDTO nuevo = new EcosistemaDTO(em);
+                ret.Add(nuevo);
+            }
+
+            return ret;
         }
     }
 }
