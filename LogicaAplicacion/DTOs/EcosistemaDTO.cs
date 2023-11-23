@@ -21,7 +21,7 @@ namespace LogicaAplicacion.DTOs
 
         public string ImgEcosistema { get; set; }
         public List<Amenaza> _amenazas { get; set; }
-        public List<EspecieMarina> _especies { get; set; }
+        public List<EspecieMarina>? _especies { get; set; }
 
         public EcosistemaDTO() 
         { 
