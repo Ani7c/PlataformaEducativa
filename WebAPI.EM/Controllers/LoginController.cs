@@ -38,6 +38,18 @@ namespace WebAPI.EM.Controllers
 
                 
 
+                    return Unauthorized("Nombre de usuario o contraseña incorrecta.");
+                }
+
+                    return Unauthorized("Nombre de usuario o contraseña incorrecta.");
+                }
+
+                    return Unauthorized("Nombre de usuario o contraseña incorrecta.");
+                }
+
+                    return Unauthorized("Nombre de usuario o contraseña incorrecta.");
+                }
+
                 var token = TokenHandler.GenerarToken(usuario, this._configuration);
                 usuario.Token = token;
                 return Ok(usuario);
