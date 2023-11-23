@@ -31,20 +31,22 @@ namespace WebAPI.EM.Controllers
         [Route("login")]
         public IActionResult Login([FromBody] UsuarioDTO usuario)
         {
-
-            TokenHandler tokenHandler = new TokenHandler(this._obtenerUsuario);
-            var user = tokenHandler.ObtenerUsuario(usuario.Alias, usuario.Contrasenia);
             try
             {
+                TokenHandler tokenHandler = new TokenHandler(this._obtenerUsuario);
+                var user = tokenHandler.ObtenerUsuario(usuario.Alias, usuario.Contrasenia);
+
                 
+
                 var token = TokenHandler.GenerarToken(usuario, this._configuration);
                 usuario.Token = token;
                 return Ok(usuario);
             }
-            catch (Exception ex)
+
+            catch (Exception)
             {
-                
                 return BadRequest("Nombre de usuario o contraseña incorrecta.");
+            
             }
         }
     }

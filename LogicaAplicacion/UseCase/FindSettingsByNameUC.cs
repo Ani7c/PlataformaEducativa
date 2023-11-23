@@ -26,4 +26,5 @@ namespace LogicaAplicacion.UseCase
             return configDTO;
         }
     }
+
 }

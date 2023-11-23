@@ -180,27 +180,16 @@ namespace WebApp.Controllers
         }
 
         public IActionResult Filtrado()
-        {
-            //string? lAlias = HttpContext.Session.GetString("LogueadoAlias");
-            //if (lAlias != null)
-            //{
+        { 
                 ViewBag.Ecosistemas = this.GetEcosystemUC.GetEcosystems();
                 return View();
-            //}
-            //else
-            //{
-            //    ViewBag.msg = "No autorizado";
-            //    return View();
-            //}
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Filtrado(string NombreCientifico, bool enPeligroExtincion, double pesoMinimo, double pesoMaximo, int IdEcosistema)
         {
-
-            var resultados = this.FiltradoUC.GetSpeciesBy(NombreCientifico, enPeligroExtincion, pesoMinimo, pesoMaximo, IdEcosistema);
-            return View("ResultadoFiltrado", resultados);
+          
         }
 
 
