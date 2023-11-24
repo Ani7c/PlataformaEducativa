@@ -160,7 +160,7 @@ namespace WebApiEM.Controllers
         [HttpGet("FiltrarPorEspecie")]
 
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult Get([FromBody] int idEspecie)
+        public IActionResult Get(int idEspecie)
         {
             try 
             { 

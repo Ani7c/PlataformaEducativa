@@ -1,4 +1,5 @@
 ﻿using EcosistemasMarinos.Entidades;
+using LogicaAplicacion.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace LogicaAplicacion.InterfaceUseCase
 {
     public interface IGetEcosystem
     {
-        public List<EcosistemaMarino> GetEcosystems();
+        public List<EcosistemaDTO> GetEcosystems();
        
     }
 }

@@ -34,22 +34,7 @@ namespace WebAPI.EM.Controllers
             try
             {
                 TokenHandler tokenHandler = new TokenHandler(this._obtenerUsuario);
-                var user = tokenHandler.ObtenerUsuario(usuario.Alias, usuario.Contrasenia);
-
-                
-
-                    return Unauthorized("Nombre de usuario o contraseña incorrecta.");
-                }
-
-                    return Unauthorized("Nombre de usuario o contraseña incorrecta.");
-                }
-
-                    return Unauthorized("Nombre de usuario o contraseña incorrecta.");
-                }
-
-                    return Unauthorized("Nombre de usuario o contraseña incorrecta.");
-                }
-
+                var user = tokenHandler.ObtenerUsuario(usuario.Alias, usuario.Contrasenia);                 
                 var token = TokenHandler.GenerarToken(usuario, this._configuration);
                 usuario.Token = token;
                 return Ok(usuario);

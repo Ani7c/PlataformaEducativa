@@ -189,7 +189,15 @@ namespace WebApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Filtrado(string NombreCientifico, bool enPeligroExtincion, double pesoMinimo, double pesoMaximo, int IdEcosistema)
         {
-          
+            try
+            {
+                var resultados = this.FiltradoUC.GetSpeciesBy(NombreCientifico, enPeligroExtincion, pesoMinimo, pesoMaximo, IdEcosistema);
+                return Ok(resultados);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
 
