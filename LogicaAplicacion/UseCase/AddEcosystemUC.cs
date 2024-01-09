@@ -24,10 +24,15 @@ namespace LogicaAplicacion.UseCase
         public void AddEcosystem(EcosistemaDTO unEcosistema)
         {
             EcosistemaMarino aCrear = new EcosistemaMarino();
+            aCrear.Caracteristicas = unEcosistema.Caracteristicas;
             aCrear.IdEcosistema = unEcosistema.IdEcosistema;
             aCrear.Nombre = unEcosistema.Nombre;
             aCrear.Pais = unEcosistema.Pais;
             aCrear.ImgEcosistema = unEcosistema.ImgEcosistema;
+            aCrear.Area = unEcosistema.Area;
+            aCrear.EstadoConservacion = unEcosistema.EstadoConservacion;
+            aCrear.UbicacionGeografica = unEcosistema.UbicacionGeografica;
+            aCrear._amenazas = unEcosistema._amenazas;
 
             repositorioEcosistema.Add(aCrear);
         }

@@ -18,6 +18,7 @@ namespace LogicaAplicacion.DTOs
         public string Caracteristicas { get; set; }
         public EstadoConservacion EstadoConservacion { get; set; }
         public Pais Pais { get; set; }
+       // public string codPais { get; set; }
 
         public string ImgEcosistema { get; set; }
         public List<Amenaza> _amenazas { get; set; }

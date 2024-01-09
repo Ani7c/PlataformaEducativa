@@ -82,11 +82,11 @@ namespace WebAPI.EM.Controllers
                 AddEcosystemUC.AddEcosystem(ecosistema);
 
                 //Guardamos los cambios
-                ControlDeCambiosDTO cambios = new ControlDeCambiosDTO();
-                cambios.NombreUsuario = HttpContext.Session.GetString("LogueadoAlias");
-                cambios.IdEntidad = ecosistema.IdEcosistema;
-                cambios.TipoEntidad = ecosistema.Tipo();
-                this.AddChangeTrackingUC.AddChangeTracking(cambios);
+                //ControlDeCambiosDTO cambios = new ControlDeCambiosDTO();
+                //cambios.NombreUsuario = HttpContext.Session.GetString("LogueadoAlias");
+                //cambios.IdEntidad = ecosistema.IdEcosistema;
+                //cambios.TipoEntidad = ecosistema.Tipo();
+                //this.AddChangeTrackingUC.AddChangeTracking(cambios);
 
                 return Created("api/Ecosistemas", ecosistema);
             }
